@@ -19,13 +19,15 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   const linkClass = (href: string) =>
-    `text-sm tracking-wide transition-colors hover:text-gold ${
+    `nav-link text-sm tracking-wide transition-colors hover:text-gold ${
       pathname === href
         ? "text-gold"
         : pathname.startsWith(href) && href !== "/"
           ? "text-gold"
           : "text-cream/80"
     }`;
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/" && pathname.startsWith(href));
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-navy/95 backdrop-blur supports-[backdrop-filter]:bg-navy/90">
@@ -36,7 +38,7 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Main navigation">
           {nav.map((item) => (
-            <Link key={item.href} href={item.href} className={linkClass(item.href)}>
+            <Link key={item.href} href={item.href} className={linkClass(item.href)} data-active={isActive(item.href)}>
               {item.label}
             </Link>
           ))}
