@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { LogoWordmark } from "@/components/logo";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,15 @@ import { nav } from "@/lib/site-content";
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Transparent over the navy hero at the top of every page; solid navy bar once scrolled.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const linkClass = (href: string) =>
     `nav-link text-sm tracking-wide transition-colors hover:text-gold ${
@@ -30,7 +39,13 @@ export function SiteHeader() {
     pathname === href || (href !== "/" && pathname.startsWith(href));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-navy/95 backdrop-blur supports-[backdrop-filter]:bg-navy/90">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
+        scrolled
+          ? "border-b border-white/10 bg-navy/95 shadow-[0_10px_30px_rgba(0,0,0,0.25)] backdrop-blur supports-[backdrop-filter]:bg-navy/90"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
         <Link href="/" aria-label="Medius Unus — home" className="shrink-0">
           <LogoWordmark />
