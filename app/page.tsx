@@ -207,7 +207,7 @@ export default function HomePage() {
               <Reveal key={s.slug} delay={Math.min(i * 0.04, 0.2)}>
                 <Link
                   href={`/services#${s.slug}`}
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-navy/10 py-6 transition-colors hover:bg-white/70 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
+                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 rounded-md border-b border-navy/10 py-6 transition-all duration-300 hover:-translate-y-1 hover:z-10 hover:scale-[1.01] hover:shadow-[0_14px_36px_rgba(20,33,61,0.14)] active:translate-y-0 active:scale-[0.995] active:shadow-none sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
                 >
                   <span className="font-heading text-2xl font-semibold text-gold/70 transition-colors group-hover:text-gold sm:text-3xl">
                     {String(i + 1).padStart(2, "0")}
