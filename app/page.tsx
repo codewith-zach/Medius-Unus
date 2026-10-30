@@ -318,18 +318,20 @@ export default function HomePage() {
 
       {/* ── Stats band (sourced figures only) ────────────────── */}
       <section className="grain relative overflow-hidden bg-ink-gradient">
-        <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-16 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-4 py-14 sm:grid-cols-2 sm:gap-y-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
-                className={`text-center lg:text-left ${i > 0 ? "lg:border-l lg:border-white/15 lg:pl-10" : ""}`}
+                className={`flex items-baseline justify-between gap-4 border-white/10 pb-5 sm:block sm:border-0 sm:pb-0 sm:text-center lg:text-left ${
+                  i < stats.length - 1 ? "border-b sm:border-0" : ""
+                } ${i > 0 ? "lg:border-l lg:border-white/15 lg:pl-10" : ""}`}
               >
                 <StatCounter
                   value={s.value}
                   suffix={s.suffix}
-                  className="font-heading text-5xl font-semibold text-gold sm:text-6xl"
+                  className="font-heading text-4xl font-semibold text-gold sm:text-5xl lg:text-6xl"
                 />
-                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-cream/70">
+                <p className="text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-cream/70 sm:mt-3 sm:text-xs">
                   {s.label}
                 </p>
               </div>

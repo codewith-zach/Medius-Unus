@@ -104,7 +104,7 @@ function ContactFormInner() {
             id="fullName"
             autoComplete="name"
             aria-invalid={!!errors.fullName}
-            className="mt-1.5 bg-white"
+            className="mt-1.5 h-11 bg-white"
             {...register("fullName")}
           />
           {err(errors.fullName?.message)}
@@ -114,7 +114,7 @@ function ContactFormInner() {
           <Input
             id="organisation"
             autoComplete="organization"
-            className="mt-1.5 bg-white"
+            className="mt-1.5 h-11 bg-white"
             {...register("organisation")}
           />
         </div>
@@ -125,7 +125,7 @@ function ContactFormInner() {
             type="email"
             autoComplete="email"
             aria-invalid={!!errors.email}
-            className="mt-1.5 bg-white"
+            className="mt-1.5 h-11 bg-white"
             {...register("email")}
           />
           {err(errors.email?.message)}
@@ -136,7 +136,7 @@ function ContactFormInner() {
             id="telephone"
             type="tel"
             autoComplete="tel"
-            className="mt-1.5 bg-white"
+            className="mt-1.5 h-11 bg-white"
             {...register("telephone")}
           />
         </div>
@@ -149,7 +149,7 @@ function ContactFormInner() {
           aria-invalid={!!errors.enquiryType}
           defaultValue=""
           {...register("enquiryType")}
-          className="mt-1.5 h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-foreground shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="mt-1.5 h-11 w-full rounded-md border border-input bg-white px-3 text-sm text-foreground shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <option value="" disabled>
             Select an enquiry type
@@ -169,7 +169,7 @@ function ContactFormInner() {
           id="message"
           rows={5}
           aria-invalid={!!errors.message}
-          className="mt-1.5 bg-white"
+          className="mt-1.5 h-11 bg-white"
           {...register("message")}
         />
         {err(errors.message?.message)}
