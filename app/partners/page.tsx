@@ -7,7 +7,7 @@ import { partnerCategories } from "@/lib/site-content";
 export const metadata: Metadata = {
   title: "Partners & Affiliations",
   description:
-    "Organisations connected to Medius Unus, grouped under their source categories: Strategic & Technology Partners, International Business Relationships, Local Corporate & Institutional Partners, and Representation Mandates.",
+    "Organisations connected to Medius Unus: strategic and technology partners, international business relationships, local corporate and institutional partners, and representation mandates.",
 };
 
 export default function PartnersPage() {
@@ -16,7 +16,7 @@ export default function PartnersPage() {
       <PageHero
         eyebrow="Partners & Affiliations"
         title="Partners & Affiliations"
-        description="The organisations below are grouped under the categories provided in the firm's source information. Names are shown without descriptions of individual relationships."
+        description="Organisations connected to Medius Unus across four kinds of relationship — strategic and technology partners, international business relationships, local corporate and institutional partners, and representation mandates."
       />
 
       <section className="bg-cream">
