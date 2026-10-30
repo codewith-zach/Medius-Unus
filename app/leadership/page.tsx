@@ -55,13 +55,13 @@ export default function LeadershipPage() {
                 <article className="rounded border border-sand bg-white p-6 sm:p-10">
                   <div className="flex items-center gap-5">
                     <div
-                      className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-2xl font-semibold text-deepgold"
+                      className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold sm:h-20 sm:w-20 sm:text-2xl"
                       aria-hidden
                     >
                       {p.initials}
                     </div>
                     <div>
-                      <h2 className="font-heading text-3xl font-semibold text-navy">
+                      <h2 className="font-heading text-2xl font-semibold text-navy sm:text-3xl">
                         {p.name}
                       </h2>
                       <div className="gold-rule mt-3 w-14" aria-hidden />

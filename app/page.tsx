@@ -318,18 +318,20 @@ export default function HomePage() {
 
       {/* ── Stats band (sourced figures only) ────────────────── */}
       <section className="border-y border-navy/10 bg-sand/40">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-4 py-14 sm:grid-cols-2 sm:gap-y-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
-                className={`text-center lg:text-left ${i > 0 ? "lg:border-l lg:border-navy/10 lg:pl-10" : ""}`}
+                className={`flex items-baseline justify-between gap-4 border-navy/10 pb-5 sm:block sm:border-0 sm:pb-0 sm:text-center lg:text-left ${
+                  i < stats.length - 1 ? "border-b sm:border-0" : ""
+                } ${i > 0 ? "lg:border-l lg:border-navy/10 lg:pl-10" : ""}`}
               >
                 <StatCounter
                   value={s.value}
                   suffix={s.suffix}
-                  className="font-heading text-5xl font-semibold text-deepgold sm:text-6xl"
+                  className="font-heading text-4xl font-semibold text-deepgold sm:text-5xl lg:text-6xl"
                 />
-                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                <p className="text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-muted-foreground sm:mt-3 sm:text-xs">
                   {s.label}
                 </p>
               </div>
