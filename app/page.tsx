@@ -274,7 +274,7 @@ export default function HomePage() {
                 >
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute -right-2 -top-6 select-none font-heading text-[5.5rem] font-semibold text-sand transition-colors duration-300 group-hover:text-gold/25"
+                    className="pointer-events-none absolute right-7 top-0 translate-x-0 translate-y-[-0.32em] select-none font-heading text-[5.5rem] font-semibold leading-none text-sand transition-colors duration-300 group-hover:text-gold/25 sm:right-8"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
