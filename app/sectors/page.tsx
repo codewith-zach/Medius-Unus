@@ -4,7 +4,7 @@ import { ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
-import { sectors } from "@/lib/site-content";
+import { sectors, oilGasPartnerships } from "@/lib/site-content";
 
 export const metadata: Metadata = {
   title: "Sectors",
@@ -42,6 +42,35 @@ export default function SectorsPage() {
                   <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                     {s.description}
                   </p>
+                  {s.slug === "oil-gas" && (
+                    <div className="mt-10">
+                      <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-deepgold">
+                        <span
+                          aria-hidden
+                          className="inline-block h-px w-8 bg-current opacity-60"
+                        />
+                        Partnerships &amp; mandates
+                      </p>
+                      <div className="mt-6 grid gap-5 md:grid-cols-3">
+                        {oilGasPartnerships.map((p, i) => (
+                          <Reveal key={p.name} delay={i * 0.08}>
+                            <div className="flex h-full flex-col rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(20,33,61,0.10)]">
+                              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+                                {p.location}
+                              </p>
+                              <h3 className="mt-2 font-heading text-xl font-semibold text-navy">
+                                {p.name}
+                              </h3>
+                              <div className="gold-rule mt-3 w-10" aria-hidden />
+                              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                                {p.description}
+                              </p>
+                            </div>
+                          </Reveal>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {s.slug === "solid-minerals" && (
                     <p className="mt-5 flex items-start gap-3 rounded border border-gold/40 bg-sand/40 p-4 text-sm leading-relaxed text-foreground">
                       <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-deepgold" strokeWidth={1.25} />
@@ -56,23 +85,6 @@ export default function SectorsPage() {
               </Reveal>
             ))}
           </div>
-
-          <Reveal className="mt-12">
-            <div className="rounded border border-sand bg-sand/40 p-6 sm:p-8">
-              <h2 className="font-heading text-2xl font-semibold text-navy">
-                Investment opportunities
-              </h2>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">
-                Medius Unus helps bring businesses, investors and opportunity owners
-                into relevant conversations. Where authorised, the firm supports the
-                exploration of investment, acquisition, divestment and
-                technology-commercialisation opportunities by coordinating stakeholders
-                and helping parties understand the next steps. Specific opportunities
-                are shared only through an authorised enquiry process, following
-                internal review and any required confidentiality arrangements.
-              </p>
-            </div>
-          </Reveal>
         </div>
       </section>
 

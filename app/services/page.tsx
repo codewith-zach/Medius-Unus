@@ -1,6 +1,5 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { Check, ArrowRight } from "lucide-react";
+import { Check } from "lucide-react";
 import { PageHero } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
@@ -62,19 +61,6 @@ export default function ServicesPage() {
               </Reveal>
             ))}
           </div>
-
-          <Reveal className="mt-12">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Nothing on this page implies regulated financial services, legal services
-              or guaranteed outcomes. If you have an objective that spans several of
-              these areas,{" "}
-              <Link href="/contact" className="font-medium text-deepgold underline-offset-4 hover:underline">
-                start a conversation
-                <ArrowRight className="ml-1 inline h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>{" "}
-              and we will help define the right route forward.
-            </p>
-          </Reveal>
         </div>
       </section>
 

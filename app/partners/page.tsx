@@ -47,15 +47,6 @@ export default function PartnersPage() {
               </Reveal>
             ))}
           </div>
-
-          <Reveal className="mt-12">
-            <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
-              Category headings do not imply endorsement, exclusivity or formal
-              partnership beyond what the firm&apos;s owner has confirmed. Organisation
-              names and styling are shown as provided in the source information and
-              will be confirmed before launch.
-            </p>
-          </Reveal>
         </div>
       </section>
 
