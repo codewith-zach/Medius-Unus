@@ -54,7 +54,7 @@ export default function SectorsPage() {
                       <div className="mt-6 grid gap-5 md:grid-cols-3">
                         {oilGasPartnerships.map((p, i) => (
                           <Reveal key={p.name} delay={i * 0.08}>
-                            <div className="flex h-full flex-col rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(20,33,61,0.10)]">
+                            <div className="flex h-full flex-col rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)]">
                               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                                 {p.location}
                               </p>

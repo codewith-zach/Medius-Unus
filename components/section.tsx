@@ -62,7 +62,7 @@ export function PageHero({
   description?: string;
 }) {
   return (
-    <section className="grain relative overflow-hidden bg-navy pt-36 pb-16 sm:pt-44 sm:pb-20">
+    <section className="grain relative overflow-hidden bg-ink-gradient pt-36 pb-16 sm:pt-44 sm:pb-20">
       <div aria-hidden className="hairline-grid absolute inset-0" />
       <ContourLines className="absolute -right-40 top-0 h-[130%] w-[70%] opacity-80" opacity={0.1} />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

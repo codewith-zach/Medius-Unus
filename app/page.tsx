@@ -64,7 +64,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="grain relative overflow-hidden bg-navy">
+      <section className="grain relative overflow-hidden bg-ink-gradient">
         <div aria-hidden className="hairline-grid absolute inset-0" />
         <div
           aria-hidden
@@ -207,7 +207,7 @@ export default function HomePage() {
               <Reveal key={s.slug} delay={Math.min(i * 0.04, 0.2)}>
                 <Link
                   href={`/services#${s.slug}`}
-                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 rounded-md border-b border-navy/10 py-6 transition-all duration-300 hover:-translate-y-1 hover:z-10 hover:scale-[1.01] hover:shadow-[0_14px_36px_rgba(20,33,61,0.14)] active:translate-y-0 active:scale-[0.995] active:shadow-none sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
+                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 rounded-md border-b border-navy/10 py-6 transition-all duration-300 hover:-translate-y-1 hover:z-10 hover:scale-[1.01] hover:shadow-[0_14px_36px_rgba(13,43,31,0.16)] active:translate-y-0 active:scale-[0.995] active:shadow-none sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
                 >
                   <span className="font-heading text-2xl font-semibold text-gold/70 transition-colors group-hover:text-gold sm:text-3xl">
                     {String(i + 1).padStart(2, "0")}
@@ -232,7 +232,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Statement band ───────────────────────────────────── */}
-      <section className="grain relative overflow-hidden bg-navy">
+      <section className="grain relative overflow-hidden bg-ink-gradient">
         <div aria-hidden className="hairline-grid absolute inset-0" />
         <ContourLines className="absolute right-[-10%] top-1/2 h-[170%] w-[75%] -translate-y-1/2" opacity={0.12} />
         <div className="relative mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
@@ -270,7 +270,7 @@ export default function HomePage() {
               >
                 <Link
                   href={`/sectors#${s.slug}`}
-                  className="group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(20,33,61,0.10)] sm:p-8"
+                  className="group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)] sm:p-8"
                 >
                   <span
                     aria-hidden
@@ -302,19 +302,19 @@ export default function HomePage() {
       </section>
 
       {/* ── Stats band (sourced figures only) ────────────────── */}
-      <section className="border-y border-navy/10 bg-sand/40">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
+      <section className="grain relative overflow-hidden bg-ink-gradient">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-16 sm:px-6 lg:grid-cols-4 lg:px-8">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
-                className={`text-center lg:text-left ${i > 0 ? "lg:border-l lg:border-navy/10 lg:pl-10" : ""}`}
+                className={`text-center lg:text-left ${i > 0 ? "lg:border-l lg:border-white/15 lg:pl-10" : ""}`}
               >
                 <StatCounter
                   value={s.value}
                   suffix={s.suffix}
-                  className="font-heading text-5xl font-semibold text-deepgold sm:text-6xl"
+                  className="font-heading text-5xl font-semibold text-gold sm:text-6xl"
                 />
-                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-cream/70">
                   {s.label}
                 </p>
               </div>
@@ -333,7 +333,7 @@ export default function HomePage() {
           <div className="mt-14 grid gap-8 md:grid-cols-2">
             {leadershipPreview.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.1}>
-                <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(20,33,61,0.08)]">
+                <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
                   <div className="flex items-center gap-5">
                     <div
                       className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold transition-transform duration-300 group-hover:scale-105"
