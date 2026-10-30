@@ -145,8 +145,13 @@ export default function HomePage() {
       </div>
 
       {/* ── A practical partner ──────────────────────────────── */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-24 h-80 w-[62%]"
+          stroke="#14213D"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <SectionHeading
             eyebrow="Who we are"
             title="A practical partner for complex objectives"
@@ -184,8 +189,13 @@ export default function HomePage() {
       </section>
 
       {/* ── What we do — editorial numbered list ─────────────── */}
-      <section className="bg-sand/40">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <section className="relative overflow-hidden bg-sand/40">
+        <ContourLines
+          className="pointer-events-none absolute -left-28 -bottom-28 h-80 w-[55%]"
+          stroke="#14213D"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               eyebrow="What we do"
@@ -254,8 +264,13 @@ export default function HomePage() {
       </section>
 
       {/* ── Sectors — asymmetric grid with ghost numerals ────── */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-16 h-72 w-[55%]"
+          stroke="#14213D"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <SectionHeading
             eyebrow="Sectors"
             title="Where our knowledge is relevant"
@@ -370,8 +385,13 @@ export default function HomePage() {
       </section>
 
       {/* ── Partners & Affiliations preview ──────────────────── */}
-      <section className="bg-sand/40">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <section className="relative overflow-hidden bg-sand/40">
+        <ContourLines
+          className="pointer-events-none absolute -bottom-20 -right-24 h-64 w-[50%]"
+          stroke="#14213D"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <SectionHeading
             eyebrow="Partners & Affiliations"
             title="Relationships across sectors and borders"

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/section";
+import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 import { sectors, oilGasPartnerships } from "@/lib/site-content";
@@ -21,8 +22,13 @@ export default function SectorsPage() {
         description="Where the firm's knowledge, leadership experience and confirmed mandates are most relevant — across energy, financial services, industry and the public sector."
       />
 
-      <section className="bg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -left-28 -bottom-24 h-80 w-[55%]"
+          stroke="#14213D"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="space-y-8">
             {sectors.map((s, i) => (
               <Reveal key={s.slug}>
