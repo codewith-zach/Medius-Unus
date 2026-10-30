@@ -18,7 +18,7 @@ export default function SectorsPage() {
       <PageHero
         eyebrow="Sectors"
         title="Sectors & industries"
-        description="Relevant sector knowledge, leadership experience, capabilities and confirmed mandates — without presenting a project portfolio."
+        description="Where the firm's knowledge, leadership experience and confirmed mandates are most relevant — across energy, financial services, industry and the public sector."
       />
 
       <section className="bg-cream">

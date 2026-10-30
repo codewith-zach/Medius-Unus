@@ -190,7 +190,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="What we do"
               title="Eight areas of focused expertise"
-              description="Each written around client needs and possible deliverables — from strategic direction through to implementation support."
+              description="From strategic direction and transaction support through to implementation and capacity building."
             />
             <Reveal delay={0.1}>
               <Link
@@ -259,7 +259,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Sectors"
             title="Where our knowledge is relevant"
-            description="Relevant sector knowledge, leadership experience and confirmed mandates — presented without a project portfolio."
+            description="Leadership experience and confirmed mandates across energy, financial services, industry and the public sector."
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {sectors.map((s, i) => (
@@ -375,7 +375,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Partners & Affiliations"
             title="Relationships across sectors and borders"
-            description="Organisation names grouped under their source categories. No individual relationship descriptions are provided."
+            description="Partner and affiliated organisations spanning technology, international business, local institutions and representation mandates."
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {partnerCategories.map((c, i) => (

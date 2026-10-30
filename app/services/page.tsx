@@ -17,7 +17,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="What Medius Unus does"
-        description="Eight clear service areas, each written around client needs and possible deliverables. The scope of each engagement is defined according to the firm's authorisation, mandate and the relevant professional specialists."
+        description="Eight clear service areas, from strategic direction and transaction support through to implementation and capacity building. The scope of each engagement is defined according to the firm's authorisation, mandate and the relevant professional specialists."
       />
 
       <section className="bg-cream">

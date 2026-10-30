@@ -155,7 +155,7 @@ export const sectors: Sector[] = [
     title: "Oil & Gas",
     summary: "Cross-border business facilitation and technology-related opportunities.",
     description:
-      "Medius Unus engages with opportunities in the oil-and-gas sector, including cross-border business facilitation and technology-related opportunities. Any public description of a specific technology or provider is based only on approved materials and distinguishes supplier claims from independently validated results.",
+      "Medius Unus engages with opportunities in the oil-and-gas sector, including cross-border business facilitation and technology-related opportunities — supported by representation mandates for international service and engineering companies.",
   },
   {
     slug: "solid-minerals",
