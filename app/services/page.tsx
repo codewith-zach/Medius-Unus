@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { PageHero } from "@/components/section";
+import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 import { services } from "@/lib/site-content";
@@ -20,8 +21,13 @@ export default function ServicesPage() {
         description="Eight clear service areas, from strategic direction and transaction support through to implementation and capacity building. The scope of each engagement is defined according to the firm's authorisation, mandate and the relevant professional specialists."
       />
 
-      <section className="bg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
+          stroke="#0D2B1F"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="space-y-10">
             {services.map((s, i) => (
               <Reveal key={s.slug}>

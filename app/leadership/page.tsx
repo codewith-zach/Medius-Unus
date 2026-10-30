@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero, SectionHeading } from "@/components/section";
+import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 
@@ -41,8 +42,13 @@ export default function LeadershipPage() {
         description="International financial-services, regulatory and IT-delivery experience, combined with Nigerian public-sector leadership."
       />
 
-      <section className="bg-cream">
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
+          stroke="#0D2B1F"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="space-y-16">
             {profiles.map((p) => (
               <Reveal key={p.name}>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Phone, Mail, CalendarDays } from "lucide-react";
 import { PageHero, SectionHeading } from "@/components/section";
+import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/contact-form";
 import { site } from "@/lib/site-content";
@@ -20,8 +21,13 @@ export default function ContactPage() {
         description="Whether you are exploring the Nigerian market, considering a strategic transaction or seeking support for a complex programme, we welcome an initial conversation about your objectives."
       />
 
-      <section className="bg-cream">
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -left-28 -bottom-24 h-72 w-[45%]"
+          stroke="#0D2B1F"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
           <div>
             <SectionHeading eyebrow="Direct contact" title="Reach us directly" />
             <Reveal className="mt-8 space-y-6">

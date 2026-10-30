@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CircleCheck } from "lucide-react";
 import { PageHero, SectionHeading } from "@/components/section";
 import { Reveal } from "@/components/reveal";
+import { ContourLines } from "@/components/contour-lines";
 import { CtaSection } from "@/components/cta-section";
 import { values, howWeWork } from "@/lib/site-content";
 
@@ -21,8 +22,13 @@ export default function AboutPage() {
       />
 
       {/* Overview */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
+          stroke="#0D2B1F"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <SectionHeading eyebrow="Company overview" title="Strategy, business development and delivery" />
           <Reveal className="mt-6 max-w-3xl space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
             <p>

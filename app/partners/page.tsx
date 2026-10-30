@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
 import { PageHero, SectionHeading } from "@/components/section";
+import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 import { partnerCategories } from "@/lib/site-content";
@@ -20,8 +21,13 @@ export default function PartnersPage() {
         description="Organisations connected to Medius Unus across four kinds of relationship — strategic and technology partners, international business relationships, local corporate and institutional partners, and representation mandates."
       />
 
-      <section className="bg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
+          stroke="#0D2B1F"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <SectionHeading
             eyebrow="Categories"
             title="Four categories of relationship"
