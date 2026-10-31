@@ -4,8 +4,8 @@ import { nav, site, services } from "@/lib/site-content";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-navy text-cream">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+    <footer className="grain relative overflow-hidden bg-ink-gradient text-cream">
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <LogoEmblem className="h-20 w-20" />
           <p className="mt-5 font-heading text-2xl font-semibold tracking-[0.06em] text-cream">

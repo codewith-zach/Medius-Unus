@@ -64,7 +64,7 @@ export default function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="grain relative overflow-hidden bg-navy">
+      <section className="grain relative overflow-hidden bg-ink-gradient">
         <div aria-hidden className="hairline-grid absolute inset-0" />
         <div
           aria-hidden
@@ -148,7 +148,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-24 h-80 w-[62%]"
-          stroke="#14213D"
+          stroke="#0D2B1F"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -192,7 +192,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-sand/40">
         <ContourLines
           className="pointer-events-none absolute -left-28 -bottom-28 h-80 w-[55%]"
-          stroke="#14213D"
+          stroke="#0D2B1F"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -217,7 +217,7 @@ export default function HomePage() {
               <Reveal key={s.slug} delay={Math.min(i * 0.04, 0.2)}>
                 <Link
                   href={`/services#${s.slug}`}
-                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 rounded-md border-b border-navy/10 py-6 transition-all duration-300 hover:-translate-y-1 hover:z-10 hover:scale-[1.01] hover:shadow-[0_14px_36px_rgba(20,33,61,0.14)] active:translate-y-0 active:scale-[0.995] active:shadow-none sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
+                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 rounded-md border-b border-navy/10 py-6 transition-all duration-300 hover:-translate-y-1 hover:z-10 hover:scale-[1.01] hover:shadow-[0_14px_36px_rgba(13,43,31,0.16)] active:translate-y-0 active:scale-[0.995] active:shadow-none sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
                 >
                   <span className="font-heading text-2xl font-semibold text-gold/70 transition-colors group-hover:text-gold sm:text-3xl">
                     {String(i + 1).padStart(2, "0")}
@@ -242,7 +242,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Statement band ───────────────────────────────────── */}
-      <section className="grain relative overflow-hidden bg-navy">
+      <section className="grain relative overflow-hidden bg-ink-gradient">
         <div aria-hidden className="hairline-grid absolute inset-0" />
         <ContourLines className="absolute right-[-10%] top-1/2 h-[170%] w-[75%] -translate-y-1/2" opacity={0.12} />
         <div className="relative mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
@@ -267,7 +267,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-16 h-72 w-[55%]"
-          stroke="#14213D"
+          stroke="#0D2B1F"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -285,7 +285,7 @@ export default function HomePage() {
               >
                 <Link
                   href={`/sectors#${s.slug}`}
-                  className="group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(20,33,61,0.10)] sm:p-8"
+                  className="group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)] sm:p-8"
                 >
                   <span
                     aria-hidden
@@ -317,21 +317,21 @@ export default function HomePage() {
       </section>
 
       {/* ── Stats band (sourced figures only) ────────────────── */}
-      <section className="border-y border-navy/10 bg-sand/40">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-4 py-14 sm:grid-cols-2 sm:gap-y-12 sm:px-6 lg:grid-cols-4 lg:px-8">
+      <section className="grain relative overflow-hidden bg-ink-gradient">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-4 py-14 sm:grid-cols-2 sm:gap-y-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
-                className={`flex items-baseline justify-between gap-4 border-navy/10 pb-5 sm:block sm:border-0 sm:pb-0 sm:text-center lg:text-left ${
+                className={`flex items-baseline justify-between gap-4 border-white/10 pb-5 sm:block sm:border-0 sm:pb-0 sm:text-center lg:text-left ${
                   i < stats.length - 1 ? "border-b sm:border-0" : ""
-                } ${i > 0 ? "lg:border-l lg:border-navy/10 lg:pl-10" : ""}`}
+                } ${i > 0 ? "lg:border-l lg:border-white/15 lg:pl-10" : ""}`}
               >
                 <StatCounter
                   value={s.value}
                   suffix={s.suffix}
-                  className="font-heading text-4xl font-semibold text-deepgold sm:text-5xl lg:text-6xl"
+                  className="font-heading text-4xl font-semibold text-gold sm:text-5xl lg:text-6xl"
                 />
-                <p className="text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-muted-foreground sm:mt-3 sm:text-xs">
+                <p className="text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-cream/70 sm:mt-3 sm:text-xs">
                   {s.label}
                 </p>
               </div>
@@ -350,7 +350,7 @@ export default function HomePage() {
           <div className="mt-14 grid gap-8 md:grid-cols-2">
             {leadershipPreview.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.1}>
-                <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(20,33,61,0.08)]">
+                <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
                   <div className="flex items-center gap-5">
                     <div
                       className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold transition-transform duration-300 group-hover:scale-105"
@@ -390,7 +390,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-sand/40">
         <ContourLines
           className="pointer-events-none absolute -bottom-20 -right-24 h-64 w-[50%]"
-          stroke="#14213D"
+          stroke="#0D2B1F"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">

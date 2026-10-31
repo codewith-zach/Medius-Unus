@@ -24,7 +24,7 @@ export default function ContactPage() {
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -left-28 -bottom-24 h-72 w-[45%]"
-          stroke="#14213D"
+          stroke="#0D2B1F"
           opacity={0.05}
         />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">

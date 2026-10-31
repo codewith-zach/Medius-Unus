@@ -25,7 +25,7 @@ export default function SectorsPage() {
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -left-28 -bottom-24 h-80 w-[55%]"
-          stroke="#14213D"
+          stroke="#0D2B1F"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
@@ -60,7 +60,7 @@ export default function SectorsPage() {
                       <div className="mt-6 grid gap-5 md:grid-cols-3">
                         {oilGasPartnerships.map((p, i) => (
                           <Reveal key={p.name} delay={i * 0.08}>
-                            <div className="flex h-full flex-col rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(20,33,61,0.10)]">
+                            <div className="flex h-full flex-col rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)]">
                               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                                 {p.location}
                               </p>
