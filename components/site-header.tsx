@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
-import { LogoWordmark } from "@/components/logo";
+import { LogoEmblem, LogoWordmark } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { nav } from "@/lib/site-content";
+import { nav, site } from "@/lib/site-content";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -40,7 +40,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
+      className={`fixed inset-x-0 top-0 z-40 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
         scrolled
           ? "border-b border-white/10 bg-navy/95 shadow-[0_10px_30px_rgba(0,0,0,0.25)] backdrop-blur supports-[backdrop-filter]:bg-navy/90"
           : "border-b border-transparent bg-transparent"
@@ -82,32 +82,75 @@ export function SiteHeader() {
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="w-72 border-sand bg-navy text-cream [&>button]:text-cream"
+            className="flex w-[300px] flex-col border-l border-white/10 bg-navy p-0 text-cream [&>button]:text-cream [&>button]:hover:bg-white/10"
           >
-            <SheetTitle className="sr-only">Navigation</SheetTitle>
-            <nav className="mt-6 flex flex-col gap-1" aria-label="Mobile navigation">
-              {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded px-3 py-3 text-base ${
-                    pathname === item.href
-                      ? "bg-white/10 text-gold"
-                      : "text-cream/85 hover:bg-white/5 hover:text-gold"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <SheetTitle className="sr-only">Menu</SheetTitle>
+
+            {/* Brand */}
+            <div className="flex items-center gap-3.5 border-b border-white/10 px-6 pb-6 pt-7">
+              <LogoEmblem className="h-11 w-11 shrink-0" />
+              <span className="flex flex-col leading-tight">
+                <span className="font-heading text-base font-semibold tracking-[0.14em] text-cream">
+                  MEDIUS UNUS
+                </span>
+                <span className="mt-1 text-[0.55rem] uppercase tracking-[0.3em] text-gold">
+                  Nigeria Limited
+                </span>
+              </span>
+            </div>
+
+            {/* Links */}
+            <nav className="px-3 py-4" aria-label="Mobile navigation">
+              {nav.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`group flex items-center gap-3.5 rounded-md px-3 py-3.5 text-[0.95rem] tracking-wide transition-colors ${
+                      active
+                        ? "text-gold"
+                        : "text-cream/85 hover:bg-white/5 hover:text-gold"
+                    }`}
+                  >
+                    <span
+                      aria-hidden
+                      className={`h-1 w-1 rotate-45 transition-colors ${
+                        active ? "bg-gold" : "bg-cream/30 group-hover:bg-gold"
+                      }`}
+                    />
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* CTA + contact */}
+            <div className="mt-auto space-y-5 border-t border-white/10 px-6 pb-8 pt-6">
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="mt-4 rounded border border-gold/60 px-3 py-3 text-center text-base text-gold hover:bg-gold hover:text-navy"
+                className="flex items-center justify-center gap-2 rounded bg-gold px-6 py-3.5 text-sm font-semibold text-navy transition-colors hover:bg-[#d8ac58]"
               >
                 Start a Conversation
               </Link>
-            </nav>
+              <div className="space-y-1.5 text-center text-xs text-cream/60">
+                <a
+                  href={`tel:${site.phone.replace(/\s/g, "")}`}
+                  className="block transition-colors hover:text-gold"
+                >
+                  {site.phone}
+                </a>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="block transition-colors hover:text-gold"
+                >
+                  {site.email}
+                </a>
+              </div>
+            </div>
           </SheetContent>
         </Sheet>
       </div>
