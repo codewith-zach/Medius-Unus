@@ -4,12 +4,14 @@ import { ContourLines } from "@/components/contour-lines";
 export function SectionHeading({
   eyebrow,
   title,
+  titleAccent,
   description,
   dark = false,
   align = "left",
 }: {
   eyebrow?: string;
   title: string;
+  titleAccent?: string;
   description?: string;
   dark?: boolean;
   align?: "left" | "center";
@@ -34,6 +36,12 @@ export function SectionHeading({
         }`}
       >
         {title}
+        {titleAccent ? (
+          <>
+            {" "}
+            <em className="font-medium italic text-gold">{titleAccent}</em>
+          </>
+        ) : null}
       </h2>
       <div
         className={`gold-rule rule-grow mt-6 w-16 ${align === "center" ? "mx-auto" : ""}`}

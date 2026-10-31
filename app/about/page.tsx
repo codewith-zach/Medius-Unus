@@ -97,14 +97,23 @@ export default function AboutPage() {
       <section className="bg-sand/40">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <SectionHeading eyebrow="How we work" title="A structured, practical approach" />
-          <ol className="mt-10 space-y-5">
+          {/* Connected timeline: numbered nodes on a rail */}
+          <ol className="relative mt-12 space-y-9 before:absolute before:bottom-6 before:left-[1.1875rem] before:top-2 before:w-px before:bg-gold/40 sm:before:left-[1.4375rem]">
             {howWeWork.map((step, i) => (
               <Reveal key={step} delay={i * 0.05}>
-                <li className="flex items-start gap-4 rounded border border-sand bg-white p-5">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold/50 font-heading text-sm font-semibold text-deepgold">
+                <li className="relative flex items-start gap-5 sm:gap-6">
+                  <span
+                    className={`z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border font-heading text-base font-semibold sm:h-12 sm:w-12 ${
+                      i === 0
+                        ? "border-gold bg-gold text-navy"
+                        : "border-gold/60 bg-cream text-deepgold"
+                    }`}
+                  >
                     {i + 1}
                   </span>
-                  <span className="text-base leading-relaxed text-foreground">{step}</span>
+                  <span className="pt-1.5 text-base leading-relaxed text-foreground sm:text-lg">
+                    {step}
+                  </span>
                 </li>
               </Reveal>
             ))}

@@ -4,10 +4,12 @@ import { Reveal } from "@/components/reveal";
 import { ContourLines } from "@/components/contour-lines";
 
 export function CtaSection({
-  title = "Have a project, partnership or opportunity to discuss?",
+  title = "Have a project, partnership",
+  titleAccent = "or opportunity to discuss?",
   description = "Whether you are exploring the Nigerian market, considering a strategic transaction, seeking support for a complex programme or looking to connect with relevant expertise, Medius Unus welcomes an initial conversation about your objectives and possible next steps.",
 }: {
   title?: string;
+  titleAccent?: string;
   description?: string;
 }) {
   return (
@@ -18,6 +20,12 @@ export function CtaSection({
         <Reveal>
           <h2 className="font-heading text-3xl font-semibold leading-[1.15] tracking-[-0.01em] text-cream sm:text-4xl lg:text-5xl">
             {title}
+            {titleAccent ? (
+              <>
+                <br />
+                <em className="font-medium italic text-gold">{titleAccent}</em>
+              </>
+            ) : null}
           </h2>
           <div className="gold-rule rule-grow mx-auto mt-7 w-16" aria-hidden />
           <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-cream/80 sm:text-lg">
