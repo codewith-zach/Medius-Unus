@@ -139,8 +139,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Partner band: marquee on wide screens, static link on mobile ── */}
-      <PartnerMarquee />
+      {/* ── Partner marquee band ─────────────────────────────── */}
+      <div className="bg-navy">
+        <PartnerMarquee />
+      </div>
 
       {/* ── A practical partner ──────────────────────────────── */}
       <section className="relative overflow-hidden bg-cream">
