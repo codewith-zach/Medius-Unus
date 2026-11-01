@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Compass, LineChart, Handshake, Landmark } from "lucide-react";
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 const leadershipPreview = [
   {
     name: "Helen Miner",
-    initials: "HM",
+    photo: "/helen-miner.jpeg",
     role: "Leadership",
     bio: "A senior financial-services leader with extensive experience translating complex regulatory requirements into practical governance, controls and operational change — shaped primarily in the United Kingdom, with additional professional experience in Belgium and Luxembourg, alongside first-hand knowledge of Nigeria's institutional and economic environment.",
   },
@@ -353,12 +354,22 @@ export default function HomePage() {
               <Reveal key={p.name} delay={i * 0.1}>
                 <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
                   <div className="flex items-center gap-5">
-                    <div
-                      className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold transition-transform duration-300 group-hover:scale-105"
-                      aria-hidden
-                    >
-                      {p.initials}
-                    </div>
+                    {p.photo ? (
+                      <Image
+                        src={p.photo}
+                        alt={`Portrait of ${p.name}`}
+                        width={160}
+                        height={160}
+                        className="h-16 w-16 shrink-0 rounded-full border border-gold/50 object-cover transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20"
+                      />
+                    ) : (
+                      <div
+                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold transition-transform duration-300 group-hover:scale-105"
+                        aria-hidden
+                      >
+                        {p.initials}
+                      </div>
+                    )}
                     <div>
                       <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-deepgold">
                         {p.role}

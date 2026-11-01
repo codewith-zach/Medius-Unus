@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { PageHero, SectionHeading } from "@/components/section";
 import { ContourLines } from "@/components/contour-lines";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 const profiles = [
   {
     name: "Helen Miner",
-    initials: "HM",
+    photo: "/helen-miner.jpeg",
     paragraphs: [
       "Helen Miner is a senior financial-services leader with extensive experience translating complex regulatory requirements into practical governance, controls and operational change. Her career has been shaped primarily in the United Kingdom, with additional professional experience in Belgium and Luxembourg, alongside first-hand knowledge of Nigeria's institutional and economic environment.",
       "Her experience spans international banking and asset management, regulatory change, financial-services operations, cross-border compliance and multi-country transformation programmes. Her professional history includes senior assignments involving Northern Trust Asset Management, Royal Bank of Canada, Barclays and J.P. Morgan. At Fortis Merchant Banque, she managed product-risk responsibilities, supported cross-border compliance and led group-wide MiFID implementation in Belgium and the United Kingdom.",
@@ -54,12 +55,22 @@ export default function LeadershipPage() {
               <Reveal key={p.name}>
                 <article className="rounded border border-sand bg-white p-6 sm:p-10">
                   <div className="flex items-center gap-5">
-                    <div
-                      className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold sm:h-20 sm:w-20 sm:text-2xl"
-                      aria-hidden
-                    >
-                      {p.initials}
-                    </div>
+                    {p.photo ? (
+                      <Image
+                        src={p.photo}
+                        alt={`Portrait of ${p.name}`}
+                        width={160}
+                        height={160}
+                        className="h-16 w-16 shrink-0 rounded-full border border-gold/50 object-cover sm:h-20 sm:w-20"
+                      />
+                    ) : (
+                      <div
+                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold sm:h-20 sm:w-20 sm:text-2xl"
+                        aria-hidden
+                      >
+                        {p.initials}
+                      </div>
+                    )}
                     <div>
                       <h2 className="font-heading text-2xl font-semibold text-navy sm:text-3xl">
                         {p.name}
