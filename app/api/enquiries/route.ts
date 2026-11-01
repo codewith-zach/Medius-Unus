@@ -1,3 +1,5 @@
+import { readFile } from "fs/promises";
+import { join } from "path";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
@@ -63,14 +65,33 @@ function escapeHtml(s: string): string {
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://medius-unus.vercel.app";
 
-function renderEmail(d: {
-  fullName: string;
-  organisation?: string;
-  email: string;
-  telephone?: string;
-  enquiryType: string;
-  message: string;
-}): string {
+/**
+ * Embedded logo (cid: attachment) so the brand renders even in mail clients
+ * that block remote images (Apple Mail default). Falls back to the hosted
+ * URL if the file can't be read from the deployment.
+ */
+async function resolveLogo(): Promise<
+  { src: string; attach?: { filename: string; content: Buffer } }
+> {
+  try {
+    const buf = await readFile(join(process.cwd(), "public", "medius-unus-logo.png"));
+    return { src: "cid:medius-unus-logo.png", attach: { filename: "medius-unus-logo.png", content: buf } };
+  } catch {
+    return { src: `${SITE_URL}/medius-unus-logo.png` };
+  }
+}
+
+function renderEmail(
+  d: {
+    fullName: string;
+    organisation?: string;
+    email: string;
+    telephone?: string;
+    enquiryType: string;
+    message: string;
+  },
+  logoSrc: string
+): string {
   const label = "color:#7a5a1a;font:700 10px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;";
   const value = "margin:0;color:#14213d;font:400 15px/1.5 Arial,sans-serif;";
   const cell = (l: string, v: string) => `
@@ -87,7 +108,7 @@ function renderEmail(d: {
     <tr><td style="padding:34px 32px 26px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
         <td style="vertical-align:middle;width:190px;">
-          <img src="${SITE_URL}/medius-unus-logo.png" alt="Medius Unus Nigeria Limited" width="190" height="156" style="width:190px;height:156px;display:block;border:0;" />
+          <img src="${logoSrc}" alt="Medius Unus Nigeria Limited" width="190" height="156" style="width:190px;height:156px;display:block;border:0;" />
         </td>
         <td style="vertical-align:middle;text-align:right;">
           <p style="margin:0 0 8px;${label}">Website enquiry</p>
@@ -178,12 +199,14 @@ export async function POST(req: Request) {
     process.env.ENQUIRY_FROM ?? "Medius Unus Website <enquiries@mediusunus.com>";
 
   const resend = new Resend(apiKey);
+  const logo = await resolveLogo();
   const { error } = await resend.emails.send({
     from,
     to: [to],
     replyTo: d.email,
     subject: `Website enquiry: ${enquiryLabels[d.enquiryType] ?? d.enquiryType} — ${d.fullName}`,
-    html: renderEmail(d),
+    html: renderEmail(d, logo.src),
+    ...(logo.attach ? { attachments: [logo.attach] } : {}),
   });
 
   if (error) {
