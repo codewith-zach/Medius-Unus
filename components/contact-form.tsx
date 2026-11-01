@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,6 +30,7 @@ const formSchema = z.object({
   privacy: z.literal(true, {
     message: "Please acknowledge the privacy notice to continue.",
   }),
+  companyWebsite: z.string().max(200).optional(), // honeypot — humans never see it
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -46,11 +47,14 @@ function ContactFormInner() {
   const searchParams = useSearchParams();
   const defaultIntent = searchParams.get("intent");
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const mountedAt = useRef(Date.now());
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
+    mode: "onBlur",
     resolver: zodResolver(formSchema),
     defaultValues: {
       enquiryType:
@@ -63,10 +67,25 @@ function ContactFormInner() {
   });
 
 
-  const onSubmit = async (_values: FormValues) => {
-    // Form delivery endpoint to be configured by the site owner before launch.
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitted(true);
+  const onSubmit = async (values: FormValues) => {
+    setServerError(null);
+    try {
+      const res = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, startedAt: mountedAt.current }),
+      });
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) {
+        setServerError(data.error ?? "The enquiry could not be delivered. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setServerError(
+        "A network error occurred. Please check your connection and try again."
+      );
+    }
   };
 
   if (submitted) {
@@ -97,6 +116,20 @@ function ContactFormInner() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      {serverError && (
+        <div role="alert" className="rounded border border-destructive/40 bg-destructive/5 p-4 text-sm text-destructive">
+          {serverError}
+        </div>
+      )}
+      {/* Honeypot: invisible to humans; bots that fill it are discarded server-side */}
+      <input
+        type="text"
+        {...register("companyWebsite")}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <Label htmlFor="fullName">Full name *</Label>
