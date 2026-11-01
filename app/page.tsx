@@ -131,28 +131,9 @@ export default function HomePage() {
             <HeroArtwork />
           </Reveal>
         </div>
-        {/* Credibility strip at the hero's foot */}
-        <div className="relative border-t border-white/10">
-          <dl className="mx-auto grid max-w-7xl grid-cols-3 divide-x divide-white/10 px-4 sm:px-6 lg:px-8">
-            {[
-              { n: "8", label: "Service areas" },
-              { n: "5", label: "Sectors of focus" },
-              { n: "4", label: "Partnership categories" },
-            ].map((s2) => (
-              <div key={s2.label} className="flex flex-col items-center gap-1 py-5">
-                <dt className="order-2 text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-cream/60">
-                  {s2.label}
-                </dt>
-                <dd className="order-1 font-heading text-2xl font-semibold text-gold sm:text-3xl">
-                  {s2.n}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
         <div
           aria-hidden
-          className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 xl:block"
+          className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:block"
         >
           <div className="scroll-cue" />
         </div>
