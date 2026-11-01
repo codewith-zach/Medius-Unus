@@ -78,6 +78,7 @@ async function resolveLogo(): Promise<
 > {
   try {
     const buf = await readFile(join(process.cwd(), "public", "medius-unus-logo.png"));
+    console.log("[enquiry] logo embedded via cid attachment");
     return {
       src: "cid:medius-unus-logo",
       attach: {
@@ -86,7 +87,8 @@ async function resolveLogo(): Promise<
         contentId: "medius-unus-logo",
       },
     };
-  } catch {
+  } catch (e) {
+    console.log("[enquiry] logo fallback to hosted URL:", e instanceof Error ? e.message : e);
     return { src: `${SITE_URL}/medius-unus-logo.png` };
   }
 }
