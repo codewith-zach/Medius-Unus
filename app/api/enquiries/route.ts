@@ -71,40 +71,51 @@ function renderEmail(d: {
   enquiryType: string;
   message: string;
 }): string {
-  const field = (label: string, value: string) => `
-      <tr><td style="padding:0 32px 20px;">
-        <p style="margin:0 0 4px;color:#7a5a1a;font:700 11px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;">${label}</p>
-        <p style="margin:0;color:#14213d;font:400 15px/1.55 Arial,sans-serif;">${escapeHtml(value)}</p>
-      </td></tr>`;
+  const label = "color:#7a5a1a;font:700 10px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;";
+  const value = "margin:0;color:#14213d;font:400 15px/1.5 Arial,sans-serif;";
+  const cell = (l: string, v: string) => `
+        <td width="50%" style="padding:0 0 18px;vertical-align:top;">
+          <p style="margin:0 0 5px;${label}">${l}</p>
+          <p style="${value}">${escapeHtml(v)}</p>
+        </td>`;
 
   return `<!DOCTYPE html>
 <html><body style="margin:0;padding:32px 16px;background:#f8f5ee;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e7e2d6;">
 
-    <!-- Brand -->
-    <tr><td style="padding:36px 32px 0;text-align:center;">
-      <img src="${SITE_URL}/medius-unus-logo.png" alt="Medius Unus Nigeria Limited" width="168" height="138" style="width:168px;height:138px;display:block;margin:0 auto;border:0;" />
-      <p style="margin:22px auto 0;width:56px;border-top:2px solid #c79d4b;font-size:0;line-height:0;">&nbsp;</p>
-      <h1 style="margin:18px 0 0;color:#0d2b1f;font:600 26px/1.2 Georgia,'Times New Roman',serif;">Website enquiry</h1>
-      <p style="margin:8px 0 0;color:#8a938c;font:400 13px/1.4 Arial,sans-serif;">Received ${new Date().toUTCString()}</p>
+    <!-- Letterhead: logo left, enquiry headline right -->
+    <tr><td style="padding:34px 32px 26px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td style="vertical-align:middle;width:190px;">
+          <img src="${SITE_URL}/medius-unus-logo.png" alt="Medius Unus Nigeria Limited" width="190" height="156" style="width:190px;height:156px;display:block;border:0;" />
+        </td>
+        <td style="vertical-align:middle;text-align:right;">
+          <p style="margin:0 0 8px;${label}">Website enquiry</p>
+          <p style="margin:0 0 10px;display:inline-block;padding:6px 14px;border:1px solid #c79d4b;color:#7a5a1a;font:600 12px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;">${enquiryLabels[d.enquiryType] ?? d.enquiryType}</p>
+          <p style="margin:0;color:#8a938c;font:400 12px/1.4 Arial,sans-serif;">${new Date().toUTCString()}</p>
+        </td>
+      </tr></table>
+      <p style="margin:26px 0 0;border-top:2px solid #c79d4b;font-size:0;line-height:0;">&nbsp;</p>
     </td></tr>
 
-    <!-- Fields -->
-    <tr><td style="padding:32px 0 8px;">
+    <!-- From whom -->
+    <tr><td style="padding:24px 32px 6px;">
+      <p style="margin:0 0 5px;${label}">From</p>
+      <p style="margin:0;color:#0d2b1f;font:600 20px/1.3 Georgia,'Times New Roman',serif;">${escapeHtml(d.fullName)}${d.organisation ? ` <span style="font-weight:400;color:#8a938c;">&middot; ${escapeHtml(d.organisation)}</span>` : ""}</p>
+    </td></tr>
+
+    <!-- Contact details: two-column grid -->
+    <tr><td style="padding:18px 32px 8px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-        ${field("Name", d.fullName)}
-        ${field("Organisation", d.organisation || "—")}
-        ${field("Email", d.email)}
-        ${field("Telephone", d.telephone || "—")}
-        ${field("Enquiry type", enquiryLabels[d.enquiryType] ?? d.enquiryType)}
+        <tr>${cell("Email", d.email)}${cell("Telephone", d.telephone || "—")}</tr>
       </table>
     </td></tr>
 
     <!-- Message -->
-    <tr><td style="padding:0 32px 32px;">
-      <p style="margin:0 0 4px;color:#7a5a1a;font:700 11px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;">Message</p>
+    <tr><td style="padding:14px 32px 32px;">
+      <p style="margin:0 0 8px;${label}">Message</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td style="background:#f8f5ee;border-left:3px solid #c79d4b;padding:16px 18px;color:#14213d;font:400 15px/1.65 Arial,sans-serif;white-space:pre-line;">${escapeHtml(d.message)}</td>
+        <td style="background:#f8f5ee;border-left:3px solid #c79d4b;padding:18px 20px;color:#14213d;font:400 16px/1.65 Georgia,'Times New Roman',serif;white-space:pre-line;">${escapeHtml(d.message)}</td>
       </tr></table>
     </td></tr>
 
