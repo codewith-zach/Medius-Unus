@@ -71,11 +71,21 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://medius-unus.vercel
  * URL if the file can't be read from the deployment.
  */
 async function resolveLogo(): Promise<
-  { src: string; attach?: { filename: string; content: Buffer } }
+  {
+    src: string;
+    attach?: { filename: string; content: string; contentId: string };
+  }
 > {
   try {
     const buf = await readFile(join(process.cwd(), "public", "medius-unus-logo.png"));
-    return { src: "cid:medius-unus-logo.png", attach: { filename: "medius-unus-logo.png", content: buf } };
+    return {
+      src: "cid:medius-unus-logo",
+      attach: {
+        filename: "medius-unus-logo.png",
+        content: buf.toString("base64"),
+        contentId: "medius-unus-logo",
+      },
+    };
   } catch {
     return { src: `${SITE_URL}/medius-unus-logo.png` };
   }
