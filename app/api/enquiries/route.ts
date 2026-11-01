@@ -148,7 +148,7 @@ function renderEmail(
     }
   </style>
 </head>
-<body class="body-bg" style="margin:0;padding:32px 16px;background:#f8f5ee;">
+<body class="body-bg" style="margin:0;padding:32px 16px;background:#ffffff;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="card" style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e7e2d6;">
 
     <!-- Letterhead: logo left, enquiry headline right -->
@@ -184,7 +184,7 @@ function renderEmail(
     <tr><td style="padding:14px 32px 32px;">
       <p class="lbl" style="margin:0 0 8px;${label}">Message</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-        <td class="msg-panel" style="background:#f8f5ee;border-left:3px solid #c79d4b;padding:18px 20px;color:#14213d;font:400 16px/1.65 Georgia,'Times New Roman',serif;white-space:pre-line;">${escapeHtml(d.message)}</td>
+        <td class="msg-panel" style="background:#f4f5f4;border-left:3px solid #c79d4b;padding:18px 20px;color:#14213d;font:400 16px/1.65 Georgia,'Times New Roman',serif;white-space:pre-line;">${escapeHtml(d.message)}</td>
       </tr></table>
     </td></tr>
 
