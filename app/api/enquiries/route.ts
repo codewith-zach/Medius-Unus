@@ -120,9 +120,9 @@ function renderEmail(
   const label = "color:#7a5a1a;font:700 10px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;";
   const value = "margin:0;color:#14213d;font:400 15px/1.5 Arial,sans-serif;";
   const cell = (l: string, v: string) => `
-        <td width="50%" style="padding:0 0 18px;vertical-align:top;">
+        <td style="display:block;width:100%;padding:0 0 18px;vertical-align:top;">
           <p class="lbl" style="margin:0 0 5px;${label}">${l}</p>
-          <p class="val" style="${value}">${escapeHtml(v)}</p>
+          <p class="val" style="${value}word-break:break-word;">${escapeHtml(v)}</p>
         </td>`;
 
   return `<!DOCTYPE html>
@@ -173,10 +173,11 @@ function renderEmail(
       <p class="serif" style="margin:0;color:#0d2b1f;font:600 20px/1.3 Georgia,'Times New Roman',serif;">${escapeHtml(d.fullName)}${d.organisation ? ` <span class="serif-dim" style="font-weight:400;color:#8a938c;">&middot; ${escapeHtml(d.organisation)}</span>` : ""}</p>
     </td></tr>
 
-    <!-- Contact details: two-column grid -->
+    <!-- Contact details: stacked full-width rows -->
     <tr><td style="padding:18px 32px 8px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-        <tr>${cell("Email", d.email)}${cell("Telephone", d.telephone || "—")}</tr>
+        <tr>${cell("Email", d.email)}</tr>
+        <tr>${cell("Telephone", d.telephone || "—")}</tr>
       </table>
     </td></tr>
 
