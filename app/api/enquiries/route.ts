@@ -61,6 +61,8 @@ function escapeHtml(s: string): string {
     .replace(/"/g, "&quot;");
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://medius-unus.vercel.app";
+
 function renderEmail(d: {
   fullName: string;
   organisation?: string;
@@ -69,39 +71,51 @@ function renderEmail(d: {
   enquiryType: string;
   message: string;
 }): string {
-  const row = (label: string, value: string) => `
-    <tr>
-      <td style="padding:10px 16px;color:#5c6b62;font:600 12px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;width:150px;border-bottom:1px solid #e7e2d6;vertical-align:top;">${label}</td>
-      <td style="padding:10px 16px;color:#14213d;font:400 15px/1.55 Arial,sans-serif;border-bottom:1px solid #e7e2d6;">${escapeHtml(value)}</td>
-    </tr>`;
+  const field = (label: string, value: string) => `
+      <tr><td style="padding:0 32px 20px;">
+        <p style="margin:0 0 4px;color:#7a5a1a;font:700 11px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;">${label}</p>
+        <p style="margin:0;color:#14213d;font:400 15px/1.55 Arial,sans-serif;">${escapeHtml(value)}</p>
+      </td></tr>`;
 
   return `<!DOCTYPE html>
-<html><body style="margin:0;padding:24px;background:#f8f5ee;">
+<html><body style="margin:0;padding:32px 16px;background:#f8f5ee;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e7e2d6;">
-    <tr>
-      <td style="background:#0d2b1f;padding:24px 28px;">
-        <p style="margin:0;color:#c79d4b;font:600 11px/1 Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;">Medius Unus Nigeria Limited</p>
-        <p style="margin:8px 0 0;color:#f8f5ee;font:600 22px/1.2 Georgia,serif;">Website enquiry</p>
-      </td>
-    </tr>
-    <tr><td style="padding:8px 0 0;">
+
+    <!-- Brand -->
+    <tr><td style="padding:36px 32px 0;text-align:center;">
+      <img src="${SITE_URL}/medius-unus-logo.png" alt="Medius Unus Nigeria Limited" width="168" height="138" style="width:168px;height:138px;display:block;margin:0 auto;border:0;" />
+      <p style="margin:22px auto 0;width:56px;border-top:2px solid #c79d4b;font-size:0;line-height:0;">&nbsp;</p>
+      <h1 style="margin:18px 0 0;color:#0d2b1f;font:600 26px/1.2 Georgia,'Times New Roman',serif;">Website enquiry</h1>
+      <p style="margin:8px 0 0;color:#8a938c;font:400 13px/1.4 Arial,sans-serif;">Received ${new Date().toUTCString()}</p>
+    </td></tr>
+
+    <!-- Fields -->
+    <tr><td style="padding:32px 0 8px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-        ${row("Name", d.fullName)}
-        ${row("Organisation", d.organisation || "—")}
-        ${row("Email", d.email)}
-        ${row("Telephone", d.telephone || "—")}
-        ${row("Enquiry type", enquiryLabels[d.enquiryType] ?? d.enquiryType)}
-        ${row("Message", d.message)}
+        ${field("Name", d.fullName)}
+        ${field("Organisation", d.organisation || "—")}
+        ${field("Email", d.email)}
+        ${field("Telephone", d.telephone || "—")}
+        ${field("Enquiry type", enquiryLabels[d.enquiryType] ?? d.enquiryType)}
       </table>
     </td></tr>
-    <tr>
-      <td style="padding:18px 28px 24px;">
-        <p style="margin:0;color:#8a938c;font:400 12px/1.5 Arial,sans-serif;">
-          Reply directly to this email to respond to ${escapeHtml(d.fullName)} (reply-to is set to their address).
-          Submitted ${new Date().toUTCString()}.
-        </p>
-      </td>
-    </tr>
+
+    <!-- Message -->
+    <tr><td style="padding:0 32px 32px;">
+      <p style="margin:0 0 4px;color:#7a5a1a;font:700 11px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;">Message</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td style="background:#f8f5ee;border-left:3px solid #c79d4b;padding:16px 18px;color:#14213d;font:400 15px/1.65 Arial,sans-serif;white-space:pre-line;">${escapeHtml(d.message)}</td>
+      </tr></table>
+    </td></tr>
+
+    <!-- Footer -->
+    <tr><td style="background:#0d2b1f;padding:22px 32px;text-align:center;">
+      <p style="margin:0;color:#c79d4b;font:700 10px/1 Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;">Medius Unus Nigeria Limited</p>
+      <p style="margin:8px 0 0;color:#f8f5ee;font:400 13px/1.5 Arial,sans-serif;">
+        Reply directly to this email to respond to ${escapeHtml(d.fullName)} &mdash; reply-to is set to their address.
+      </p>
+    </td></tr>
+
   </table>
 </body></html>`;
 }
