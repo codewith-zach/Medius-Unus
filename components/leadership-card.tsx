@@ -44,29 +44,26 @@ export function LeadershipCard({ leader, index }: { leader: Leader; index: numbe
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
           </DialogTrigger>
-          <DialogContent className="max-h-[82vh]! w-[calc(100%-2.5rem)]! max-w-3xl overflow-y-auto rounded-2xl border-sand bg-white p-0 [&>button]:rounded-full [&>button]:text-navy hover:[&>button]:bg-sand/60">
-            <div className="border-b border-gold/40 p-7 sm:p-10">
-              <div className="flex items-center gap-6">
-                <Image
-                  src={leader.photo}
-                  alt={`Portrait of ${leader.name}`}
-                  width={256}
-                  height={256}
-                  className="h-24 w-24 shrink-0 rounded-full border border-gold/50 object-cover sm:h-28 sm:w-28"
-                />
-                <div>
-                  <DialogTitle className="font-heading text-2xl font-semibold uppercase leading-tight tracking-[0.06em] text-navy sm:text-3xl">
-                    {leader.name}
-                  </DialogTitle>
-                  <DialogDescription className="mt-3 text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.14em] text-deepgold sm:text-xs">
-                    {leader.title}
-                  </DialogDescription>
-                </div>
-              </div>
+          <DialogContent className="max-h-[82vh]! w-[calc(100%-2.5rem)]! max-w-4xl! overflow-y-auto rounded-2xl border-sand bg-white p-0 [&>button]:rounded-full [&>button]:text-navy hover:[&>button]:bg-sand/60">
+            {/* Centered portrait-first header: photo → title → name */}
+            <div className="border-b border-gold/40 px-7 pb-8 pt-10 text-center sm:px-12 sm:pb-10 sm:pt-12">
+              <Image
+                src={leader.photo}
+                alt={`Portrait of ${leader.name}`}
+                width={320}
+                height={320}
+                className="mx-auto h-28 w-28 rounded-full border-2 border-gold/60 object-cover sm:h-36 sm:w-36"
+              />
+              <DialogDescription className="mx-auto mt-6 max-w-md text-[0.68rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-deepgold sm:text-xs">
+                {leader.title}
+              </DialogDescription>
+              <DialogTitle className="mt-3 font-heading text-3xl font-semibold uppercase leading-tight tracking-[0.06em] text-navy sm:text-4xl">
+                {leader.name}
+              </DialogTitle>
             </div>
-            <div className="space-y-6 p-7 sm:p-10">
+            <div className="space-y-6 px-7 py-8 sm:px-12 sm:py-10">
               {leader.full.map((para, i) => (
-                <p key={i} className="text-base leading-relaxed text-foreground sm:text-[1.05rem]">
+                <p key={i} className="text-base leading-relaxed text-foreground sm:text-[1.05rem] sm:leading-[1.75]">
                   {para}
                 </p>
               ))}
