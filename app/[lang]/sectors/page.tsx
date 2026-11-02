@@ -1,26 +1,25 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import { ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
-import { sectors, oilGasPartnerships } from "@/lib/site-content";
+import { ContourLines } from "@/components/contour-lines";
+import { getContent, hrefFor, isLang, defaultLang } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Sectors",
-  description:
-    "Sector knowledge and leadership experience across Oil & Gas, Solid Minerals & Mining, Banking & Financial Services, Manufacturing and Public Sector & Institutional Development.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return { title: getContent(lang).sectorsPage.hero.title };
+}
 
-export default function SectorsPage() {
+export default async function SectorsPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang: raw } = await params;
+  const lang = isLang(raw) ? raw : defaultLang;
+  const t = getContent(lang).sectorsPage;
+  const cta = getContent(lang).cta;
+
   return (
     <>
-      <PageHero
-        eyebrow="Sectors"
-        title="Sectors & industries"
-        description="Where the firm's knowledge, leadership experience and confirmed mandates are most relevant — across energy, financial services, industry and the public sector."
-      />
+      <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} description={t.hero.description} />
 
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
@@ -30,7 +29,7 @@ export default function SectorsPage() {
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="space-y-8">
-            {sectors.map((s, i) => (
+            {t.sectors.map((s, i) => (
               <Reveal key={s.slug}>
                 <article
                   id={s.slug}
@@ -55,11 +54,11 @@ export default function SectorsPage() {
                           aria-hidden
                           className="inline-block h-px w-8 bg-current opacity-60"
                         />
-                        Partnerships &amp; mandates
+                        {t.partnershipsEyebrow}
                       </p>
                       <div className="mt-6 grid gap-5 md:grid-cols-3">
-                        {oilGasPartnerships.map((p, i) => (
-                          <Reveal key={p.name} delay={i * 0.08}>
+                        {t.oilGasPartnerships.map((p, pi) => (
+                          <Reveal key={p.name} delay={pi * 0.08}>
                             <div className="flex h-full flex-col rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)]">
                               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                                 {p.location}
@@ -80,9 +79,12 @@ export default function SectorsPage() {
                   {s.slug === "solid-minerals" && (
                     <p className="mt-5 flex items-start gap-3 rounded border border-gold/40 bg-sand/40 p-4 text-sm leading-relaxed text-foreground">
                       <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-deepgold" strokeWidth={1.25} />
-                      Further details about this mandate are shared only through an{" "}
-                      <Link href="/contact?intent=investment" className="font-medium text-deepgold underline-offset-4 hover:underline">
-                        authorised enquiry process
+                      {t.solidMineralsNote.text}
+                      <Link
+                        href={hrefFor(lang, "/contact?intent=investment")}
+                        className="font-medium text-deepgold underline-offset-4 hover:underline"
+                      >
+                        {t.solidMineralsNote.link}
                       </Link>
                       .
                     </p>
@@ -95,8 +97,12 @@ export default function SectorsPage() {
       </section>
 
       <CtaSection
-        title="Exploring an opportunity in one of these sectors?"
-        description="For sensitive or mandate-based opportunities, please use the enquiry form rather than sending confidential documents at the initial stage. We will respond after internal review."
+        lang={lang}
+        title={cta.title}
+        titleAccent={cta.titleAccent}
+        description={cta.description}
+        primary={cta.primary}
+        secondary={cta.secondary}
       />
     </>
   );

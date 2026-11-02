@@ -1,25 +1,23 @@
 import { Fragment } from "react";
-import type { Metadata } from "next";
 import { PageHero, SectionHeading } from "@/components/section";
-import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
-import { partnerCategories } from "@/lib/site-content";
+import { ContourLines } from "@/components/contour-lines";
+import { getContent, isLang, defaultLang } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Partners & Affiliations",
-  description:
-    "Organisations connected to Medius Unus: strategic and technology partners, international business relationships, local corporate and institutional partners, and representation mandates.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return { title: getContent(lang).partnersPage.hero.title };
+}
 
-export default function PartnersPage() {
+export default async function PartnersPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang: raw } = await params;
+  const lang = isLang(raw) ? raw : defaultLang;
+  const t = getContent(lang).partnersPage;
+
   return (
     <>
-      <PageHero
-        eyebrow="Partners & Affiliations"
-        title="Partners & Affiliations"
-        description="Organisations connected to Medius Unus across four kinds of relationship — strategic and technology partners, international business relationships, local corporate and institutional partners, and representation mandates."
-      />
+      <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} description={t.hero.description} />
 
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
@@ -28,12 +26,9 @@ export default function PartnersPage() {
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <SectionHeading
-            eyebrow="Categories"
-            title="Four categories of relationship"
-          />
+          <SectionHeading eyebrow={t.eyebrow} title={t.title} />
           <div className="mt-14 border-t border-navy/10">
-            {partnerCategories.map((c, i) => (
+            {t.categories.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.06}>
                 <div className="grid gap-4 border-b border-navy/10 py-8 sm:grid-cols-[4rem_1fr_auto] sm:gap-8 sm:py-10">
                   <span
@@ -63,8 +58,7 @@ export default function PartnersPage() {
                     </ul>
                   </div>
                   <span className="hidden self-start pt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:block">
-                    {c.orgs.length}{" "}
-                    {c.orgs.length === 1 ? "organisation" : "organisations"}
+                    {(c.orgs.length === 1 ? t.orgCountOne : t.orgCountMany).replace("{n}", String(c.orgs.length))}
                   </span>
                 </div>
               </Reveal>
@@ -74,8 +68,12 @@ export default function PartnersPage() {
       </section>
 
       <CtaSection
-        title="Interested in a partnership with Medius Unus?"
-        description="If your organisation shares relevant objectives — commercial, institutional or technological — we welcome an initial conversation about possible collaboration."
+        lang={lang}
+        title={t.cta.title}
+        titleAccent={t.cta.titleAccent}
+        description={t.cta.description}
+        primary={t.cta.primary}
+        secondary={t.cta.secondary}
       />
     </>
   );

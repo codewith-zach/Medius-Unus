@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { LogoEmblem } from "@/components/logo";
-import { nav, site, services } from "@/lib/site-content";
+import { hrefFor, type Content, type Lang } from "@/lib/content";
 
-export function SiteFooter() {
+export function SiteFooter({ lang, content }: { lang: Lang; content: Content }) {
   return (
     <footer className="grain relative overflow-hidden bg-ink-gradient text-cream">
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
@@ -14,17 +14,20 @@ export function SiteFooter() {
           <p className="mt-1 text-xs uppercase tracking-[0.3em] text-gold">
             Nigeria Limited
           </p>
-          <p className="mt-4 max-w-xs text-sm text-cream/70">{site.tagline}</p>
+          <p className="mt-4 max-w-xs text-sm text-cream/70">{content.site.tagline}</p>
         </div>
 
         <nav aria-label="Footer navigation">
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-            Navigate
+            {content.footer.navigate}
           </h2>
           <ul className="mt-4 space-y-2 text-sm">
-            {nav.map((item) => (
+            {content.nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-cream/80 hover:text-gold">
+                <Link
+                  href={hrefFor(lang, item.href)}
+                  className="text-cream/80 transition-colors hover:text-gold"
+                >
                   {item.label}
                 </Link>
               </li>
@@ -34,14 +37,14 @@ export function SiteFooter() {
 
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-            Services
+            {content.footer.services}
           </h2>
           <ul className="mt-4 space-y-2 text-sm">
-            {services.slice(0, 5).map((s) => (
+            {content.services.items.slice(0, 5).map((s) => (
               <li key={s.slug}>
                 <Link
-                  href={`/services#${s.slug}`}
-                  className="text-cream/80 hover:text-gold"
+                  href={hrefFor(lang, `/services#${s.slug}`)}
+                  className="text-cream/80 transition-colors hover:text-gold"
                 >
                   {s.title}
                 </Link>
@@ -52,34 +55,40 @@ export function SiteFooter() {
 
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-            Contact
+            {content.footer.contact}
           </h2>
           <ul className="mt-4 space-y-2 text-sm text-cream/80">
             <li>
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-gold">
-                {site.phone}
+              <a
+                href={`tel:${content.site.phone.replace(/\s/g, "")}`}
+                className="transition-colors hover:text-gold"
+              >
+                {content.site.phone}
               </a>
             </li>
             <li>
-              <a href={`mailto:${site.email}`} className="hover:text-gold">
-                {site.email}
+              <a
+                href={`mailto:${content.site.email}`}
+                className="transition-colors hover:text-gold"
+              >
+                {content.site.email}
               </a>
             </li>
             <li className="pt-2">
               <Link
-                href="/contact"
-                className="inline-block rounded border border-gold/60 px-4 py-2 text-gold hover:bg-gold hover:text-navy"
+                href={hrefFor(lang, "/contact")}
+                className="inline-block rounded border border-gold/60 px-4 py-2 text-gold transition-colors hover:bg-gold hover:text-navy"
               >
-                Make an Enquiry
+                {content.footer.enquiry}
               </Link>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/10">
         <p className="mx-auto max-w-7xl px-4 py-6 text-xs text-cream/60 sm:px-6 lg:px-8">
-          © 2026 Medius Unus Nigeria Limited. All rights reserved.
+          © 2026 {content.footer.copyright}
         </p>
       </div>
     </footer>

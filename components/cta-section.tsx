@@ -2,15 +2,22 @@ import Link from "next/link";
 import { ArrowRight, Handshake } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { ContourLines } from "@/components/contour-lines";
+import { hrefFor } from "@/lib/content";
 
 export function CtaSection({
-  title = "Have a project, partnership",
-  titleAccent = "or opportunity to discuss?",
-  description = "Whether you are exploring the Nigerian market, considering a strategic transaction, seeking support for a complex programme or looking to connect with relevant expertise, Medius Unus welcomes an initial conversation about your objectives and possible next steps.",
+  lang,
+  title,
+  titleAccent,
+  description,
+  primary,
+  secondary,
 }: {
-  title?: string;
-  titleAccent?: string;
-  description?: string;
+  lang: string;
+  title: string;
+  titleAccent: string;
+  description: string;
+  primary: string;
+  secondary: string;
 }) {
   return (
     <section className="grain relative overflow-hidden bg-ink-gradient">
@@ -33,21 +40,21 @@ export function CtaSection({
           </p>
           <div className="mt-11 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href="/contact"
+              href={hrefFor(lang, "/contact")}
               className="group inline-flex items-center gap-2.5 rounded bg-gold px-7 py-3.5 text-sm font-semibold text-navy transition-all hover:bg-[#d8ac58] hover:shadow-[0_8px_30px_rgba(199,157,75,0.35)] active:scale-[0.98]"
             >
-              Make an Enquiry
+              {primary}
               <ArrowRight
                 className="h-4 w-4 transition-transform group-hover:translate-x-1"
                 strokeWidth={1.5}
               />
             </Link>
             <Link
-              href="/contact?intent=partnership"
+              href={hrefFor(lang, "/contact?intent=partnership")}
               className="inline-flex items-center gap-2.5 rounded border border-gold/60 px-7 py-3.5 text-sm font-semibold text-gold transition-all hover:bg-gold hover:text-navy active:scale-[0.98]"
             >
               <Handshake className="h-4 w-4" strokeWidth={1.5} />
-              Discuss a Partnership
+              {secondary}
             </Link>
           </div>
         </Reveal>

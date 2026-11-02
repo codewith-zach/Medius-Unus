@@ -10,9 +10,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Reveal } from "@/components/reveal";
-import type { Leader } from "@/lib/site-content";
+import type { Leader } from "@/lib/content";
 
-export function LeadershipCard({ leader, index }: { leader: Leader; index: number }) {
+export function LeadershipCard({
+  leader,
+  index,
+  readLabel,
+}: {
+  leader: Leader;
+  index: number;
+  readLabel: string;
+}) {
   return (
     <Reveal delay={index * 0.1}>
       <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
@@ -40,7 +48,7 @@ export function LeadershipCard({ leader, index }: { leader: Leader; index: numbe
         <Dialog>
           <DialogTrigger asChild>
             <button className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-medium text-deepgold transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-              Read Profile
+              {readLabel}
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
           </DialogTrigger>

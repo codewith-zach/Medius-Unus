@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Compass, LineChart, Handshake, Landmark } from "lucide-react";
@@ -9,46 +8,36 @@ import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section";
 import { CtaSection } from "@/components/cta-section";
-import { services, sectors, partnerCategories, leadership } from "@/lib/site-content";
 import { LeadershipCard } from "@/components/leadership-card";
+import { getContent, hrefFor, isLang, defaultLang } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Medius Unus Nigeria Limited — Connecting expertise, opportunity and execution",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const c = getContent(lang);
+  return { title: `${c.site.name} — ${c.site.tagline}` };
+}
 
+const pillarIcons = {
+  compass: Compass,
+  chart: LineChart,
+  landmark: Landmark,
+  handshake: Handshake,
+} as const;
 
-// All figures below are stated in the brief — no invented impact metrics.
-const stats = [
-  { value: 8, suffix: "", label: "Service areas" },
-  { value: 5, suffix: "", label: "Sectors of focus" },
-  { value: 16, suffix: "+", label: "Years of IT project delivery" },
-  { value: 20, suffix: "+", label: "Years of UK board service" },
-];
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = isLang(raw) ? raw : defaultLang;
+  const c = getContent(lang);
+  const t = c.home;
 
-const pillars = [
-  {
-    icon: Compass,
-    title: "Strategic advisory",
-    text: "Helping organisations assess priorities and define direction with clarity.",
-  },
-  {
-    icon: LineChart,
-    title: "Transaction support",
-    text: "Financial and commercial coordination for complex transactions.",
-  },
-  {
-    icon: Landmark,
-    title: "Institutional insight",
-    text: "Understanding of Nigeria's institutional and regulatory environment.",
-  },
-  {
-    icon: Handshake,
-    title: "Delivery discipline",
-    text: "Programme and project management that turns plans into action.",
-  },
-];
-
-export default function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
@@ -67,50 +56,47 @@ export default function HomePage() {
             <Reveal>
               <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
                 <span aria-hidden className="inline-block h-px w-10 bg-gold/70" />
-                Medius Unus Nigeria Limited
+                {t.hero.eyebrow}
               </p>
             </Reveal>
             <h1 className="mt-7 font-heading text-[2.6rem] font-semibold leading-[1.06] tracking-[-0.015em] text-cream sm:text-6xl lg:text-[4.4rem]">
-              <Reveal delay={0.08}>
-                <span className="block">
-                  Connecting <em className="text-gold">expertise,</em>
-                </span>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <span className="block">opportunity</span>
-              </Reveal>
-              <Reveal delay={0.24}>
-                <span className="block">
-                  and <em className="text-gold">execution.</em>
-                </span>
-              </Reveal>
+              {t.hero.lines.map((line, i) => (
+                <Reveal key={i} delay={0.08 + i * 0.08}>
+                  <span className="block">
+                    {"pre" in line ? (
+                      <>
+                        {line.pre}
+                        <em className="text-gold">{line.accent}</em>
+                      </>
+                    ) : (
+                      line.text
+                    )}
+                  </span>
+                </Reveal>
+              ))}
             </h1>
             <Reveal delay={0.34}>
               <p className="mt-8 max-w-xl text-base leading-relaxed text-cream/80 sm:text-lg">
-                Medius Unus Nigeria Limited supports organisations pursuing growth,
-                transformation and cross-border opportunities — combining strategic
-                advisory, programme and project delivery, and an understanding of
-                Nigeria&apos;s institutional and commercial environment to turn complex
-                objectives into practical next steps.
+                {t.hero.support}
               </p>
             </Reveal>
             <Reveal delay={0.44}>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Link
-                  href="/services"
+                  href={hrefFor(lang, "/services")}
                   className="group inline-flex items-center justify-center gap-2.5 rounded bg-gold px-7 py-3.5 text-sm font-semibold text-navy transition-all hover:bg-[#d8ac58] hover:shadow-[0_8px_30px_rgba(199,157,75,0.35)] active:scale-[0.98]"
                 >
-                  Explore Our Services
+                  {t.hero.ctaPrimary}
                   <ArrowRight
                     className="h-4 w-4 transition-transform group-hover:translate-x-1"
                     strokeWidth={1.5}
                   />
                 </Link>
                 <Link
-                  href="/contact"
+                  href={hrefFor(lang, "/contact")}
                   className="inline-flex items-center justify-center gap-2 rounded border border-gold/60 px-7 py-3.5 text-sm font-semibold text-gold transition-all hover:bg-gold hover:text-navy active:scale-[0.98]"
                 >
-                  Start a Conversation
+                  {t.hero.ctaSecondary}
                 </Link>
               </div>
             </Reveal>
@@ -127,10 +113,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Partner marquee band ─────────────────────────────── */}
-      <div className="bg-navy">
-        <PartnerMarquee />
-      </div>
+      {/* ── Partner band ─────────────────────────────────────── */}
+      <PartnerMarquee lang={lang} content={c} />
 
       {/* ── A practical partner ──────────────────────────────── */}
       <section className="relative overflow-hidden bg-cream">
@@ -141,38 +125,34 @@ export default function HomePage() {
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <SectionHeading
-            eyebrow="Who we are"
-            title="A practical partner"
-            titleAccent="for complex objectives."
+            eyebrow={t.whoWeAre.eyebrow}
+            title={t.whoWeAre.title}
+            titleAccent={t.whoWeAre.titleAccent}
           />
           <Reveal className="mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            <p>
-              Medius Unus works at the intersection of strategy, business development
-              and delivery. The firm brings together international financial-services
-              experience, programme and project-management capability, public-sector
-              leadership and commercial engagement in Nigeria. Its approach is grounded
-              in understanding the context, aligning the right people and helping turn
-              objectives into coordinated action.
-            </p>
+            <p>{t.whoWeAre.body}</p>
           </Reveal>
           <div className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {pillars.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.08}>
-                <div className="group border-t border-navy/15 pt-6 transition-colors hover:border-gold">
-                  <item.icon
-                    className="h-7 w-7 text-gold transition-transform duration-300 group-hover:-translate-y-1"
-                    strokeWidth={1.25}
-                    aria-hidden
-                  />
-                  <h3 className="mt-5 font-heading text-xl font-semibold text-navy">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-                    {item.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+            {t.whoWeAre.pillars.map((item, i) => {
+              const Icon = pillarIcons[item.icon as keyof typeof pillarIcons];
+              return (
+                <Reveal key={item.title} delay={i * 0.08}>
+                  <div className="group border-t border-navy/15 pt-6 transition-colors hover:border-gold">
+                    <Icon
+                      className="h-7 w-7 text-gold transition-transform duration-300 group-hover:-translate-y-1"
+                      strokeWidth={1.25}
+                      aria-hidden
+                    />
+                    <h3 className="mt-5 font-heading text-xl font-semibold text-navy">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                      {item.text}
+                    </p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -187,25 +167,25 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
-              eyebrow="What we do"
-              title="Eight areas of focused expertise"
-              description="From strategic direction and transaction support through to implementation and capacity building."
+              eyebrow={t.whatWeDo.eyebrow}
+              title={t.whatWeDo.title}
+              description={t.whatWeDo.description}
             />
             <Reveal delay={0.1}>
               <Link
-                href="/services"
+                href={hrefFor(lang, "/services")}
                 className="link-arrow group inline-flex items-center gap-2 text-sm font-medium text-deepgold"
               >
-                All services in detail
+                {t.whatWeDo.viewAll}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </Link>
             </Reveal>
           </div>
           <div className="mt-14 border-t border-navy/10">
-            {services.map((s, i) => (
+            {c.services.items.map((s, i) => (
               <Reveal key={s.slug} delay={Math.min(i * 0.04, 0.2)}>
                 <Link
-                  href={`/services#${s.slug}`}
+                  href={hrefFor(lang, `/services#${s.slug}`)}
                   className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 rounded-md border-b border-navy/10 py-6 transition-all duration-300 hover:-translate-y-1 hover:z-10 hover:scale-[1.01] hover:shadow-[0_14px_36px_rgba(13,43,31,0.16)] active:translate-y-0 active:scale-[0.995] active:shadow-none sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
                 >
                   <span className="font-heading text-2xl font-semibold text-gold/70 transition-colors group-hover:text-gold sm:text-3xl">
@@ -237,22 +217,28 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <Reveal>
             <p className="font-heading text-2xl font-medium leading-[1.35] text-cream sm:text-3xl lg:text-[2.6rem] lg:leading-[1.3]">
-              <span className="text-gold">“</span>Opportunities become more valuable
-              when the right <em className="text-gold">expertise</em>, the right{" "}
-              <em className="text-gold">relationships</em> and disciplined{" "}
-              <em className="text-gold">implementation</em> are brought together.
-              <span className="text-gold">”</span>
+              <span className="text-gold">&ldquo;</span>
+              {t.statement.segments.map((seg, i) =>
+                "em" in seg ? (
+                  <em key={i} className="text-gold">
+                    {seg.em}
+                  </em>
+                ) : (
+                  <span key={i}>{seg.text}</span>
+                )
+              )}
+              <span className="text-gold">&rdquo;</span>
             </p>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="mt-8 text-xs font-semibold uppercase tracking-[0.3em] text-cream/50">
-              The belief that shapes our work
+              {t.statement.attribution}
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Sectors — asymmetric grid with ghost numerals ────── */}
+      {/* ── Sectors ──────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-16 h-72 w-[55%]"
@@ -261,24 +247,25 @@ export default function HomePage() {
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <SectionHeading
-            eyebrow="Sectors"
-            title="Where our knowledge is relevant"
-            description="Leadership experience and confirmed mandates across energy, financial services, industry and the public sector."
+            eyebrow={t.sectors.eyebrow}
+            title={t.sectors.title}
+            titleAccent={t.sectors.titleAccent}
+            description={t.sectors.description}
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {sectors.map((s, i) => (
+            {c.sectorsPage.sectors.map((s, i) => (
               <Reveal
                 key={s.slug}
                 delay={(i % 3) * 0.07}
                 className={i === 0 ? "lg:col-span-2" : ""}
               >
                 <Link
-                  href={`/sectors#${s.slug}`}
+                  href={hrefFor(lang, `/sectors#${s.slug}`)}
                   className="group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)] sm:p-8"
                 >
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute right-7 top-0 translate-x-0 translate-y-[-0.32em] select-none font-heading text-[5.5rem] font-semibold leading-none text-sand transition-colors duration-300 group-hover:text-gold/25 sm:right-8"
+                    className="pointer-events-none absolute right-7 top-0 translate-y-[-0.32em] select-none font-heading text-[5.5rem] font-semibold leading-none text-sand transition-colors duration-300 group-hover:text-gold/25 sm:right-8"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -291,7 +278,7 @@ export default function HomePage() {
                       {s.summary}
                     </p>
                     <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-deepgold">
-                      Sector detail
+                      {t.sectors.detail}
                       <ArrowRight
                         className="h-4 w-4 transition-transform group-hover:translate-x-1"
                         strokeWidth={1.5}
@@ -305,14 +292,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Stats band (sourced figures only) ────────────────── */}
+      {/* ── Stats band ───────────────────────────────────────── */}
       <section className="grain relative overflow-hidden bg-ink-gradient">
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-4 py-14 sm:grid-cols-2 sm:gap-y-12 sm:px-6 lg:grid-cols-4 lg:px-8">
-          {stats.map((s, i) => (
+          {t.stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
                 className={`flex items-baseline justify-between gap-4 border-white/10 pb-5 sm:block sm:border-0 sm:pb-0 sm:text-center lg:text-left ${
-                  i < stats.length - 1 ? "border-b sm:border-0" : ""
+                  i < t.stats.length - 1 ? "border-b sm:border-0" : ""
                 } ${i > 0 ? "lg:border-l lg:border-white/15 lg:pl-10" : ""}`}
               >
                 <StatCounter
@@ -330,15 +317,22 @@ export default function HomePage() {
       </section>
 
       {/* ── Leadership preview ───────────────────────────────── */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-          <SectionHeading
-            eyebrow="Leadership"
-            title="Experienced, delivery-oriented leadership"
-          />
+      <section className="relative overflow-hidden bg-cream">
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
+          stroke="#0D2B1F"
+          opacity={0.05}
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+          <SectionHeading eyebrow={t.leadership.eyebrow} title={t.leadership.title} />
           <div className="mt-14 grid gap-8 md:grid-cols-2">
-            {leadership.map((l, i) => (
-              <LeadershipCard key={l.name} leader={l} index={i} />
+            {c.leadership.map((l, i) => (
+              <LeadershipCard
+                key={l.name}
+                leader={l}
+                index={i}
+                readLabel={t.leadership.readProfile}
+              />
             ))}
           </div>
         </div>
@@ -353,20 +347,20 @@ export default function HomePage() {
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <SectionHeading
-            eyebrow="Partners & Affiliations"
-            title="Relationships across"
-            titleAccent="sectors and borders."
-            description="Partner and affiliated organisations spanning technology, international business, local institutions and representation mandates."
+            eyebrow={t.partners.eyebrow}
+            title={t.partners.title}
+            titleAccent={t.partners.titleAccent}
+            description={t.partners.description}
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {partnerCategories.map((c, i) => (
-              <Reveal key={c.title} delay={i * 0.06}>
+            {c.partnersPage.categories.map((cat, i) => (
+              <Reveal key={cat.title} delay={i * 0.06}>
                 <div className="h-full border-t border-navy/15 pt-6 transition-colors hover:border-gold">
                   <h3 className="font-heading text-base font-semibold text-navy">
-                    {c.title}
+                    {cat.title}
                   </h3>
                   <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                    {c.orgs.map((o) => (
+                    {cat.orgs.map((o) => (
                       <li key={o}>{o}</li>
                     ))}
                   </ul>
@@ -377,7 +371,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <CtaSection />
+      <CtaSection
+        lang={lang}
+        title={c.cta.title}
+        titleAccent={c.cta.titleAccent}
+        description={c.cta.description}
+        primary={c.cta.primary}
+        secondary={c.cta.secondary}
+      />
     </>
   );
 }

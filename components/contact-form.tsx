@@ -10,37 +10,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import type { Content, Lang } from "@/lib/content";
 
-const enquiryTypes = [
-  { value: "services", label: "Services" },
-  { value: "partnership", label: "Partnership" },
-  { value: "investment", label: "Investment opportunity" },
-  { value: "other", label: "Other" },
-] as const;
+type FormStrings = Content["form"];
 
 const formSchema = z.object({
-  fullName: z.string().min(2, "Please enter your full name."),
+  fullName: z.string().min(2),
   organisation: z.string().optional(),
-  email: z.string().email("Please enter a valid work email address."),
+  email: z.string().email(),
   telephone: z.string().optional(),
-  enquiryType: z.enum(["services", "partnership", "investment", "other"], {
-    message: "Please select an enquiry type.",
-  }),
-  message: z.string().min(20, "Please briefly describe your enquiry (at least 20 characters)."),
+  enquiryType: z.enum(["services", "partnership", "investment", "other"]),
+  message: z.string().min(20),
   companyWebsite: z.string().max(200).optional(), // honeypot — humans never see it
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function ContactForm() {
+export function ContactForm({ lang, strings }: { lang: Lang; strings: FormStrings }) {
   return (
     <Suspense fallback={null}>
-      <ContactFormInner />
+      <ContactFormInner lang={lang} strings={strings} />
     </Suspense>
   );
 }
 
-function ContactFormInner() {
+function ContactFormInner({ lang, strings }: { lang: Lang; strings: FormStrings }) {
   const searchParams = useSearchParams();
   const defaultIntent = searchParams.get("intent");
   const [submitted, setSubmitted] = useState(false);
@@ -81,8 +75,6 @@ function ContactFormInner() {
     },
   });
 
-
-
   const onSubmit = async (values: FormValues) => {
     setServerError(null);
     if (!consented) {
@@ -93,18 +85,21 @@ function ContactFormInner() {
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, privacy: true, startedAt: mountedAt.current }),
+        body: JSON.stringify({
+          ...values,
+          privacy: true,
+          lang,
+          startedAt: mountedAt.current,
+        }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok || !data.ok) {
-        setServerError(data.error ?? "The enquiry could not be delivered. Please try again.");
+        setServerError(data.error ?? strings.errors.server);
         return;
       }
       setSubmitted(true);
     } catch {
-      setServerError(
-        "A network error occurred. Please check your connection and try again."
-      );
+      setServerError(strings.errors.network);
     }
   };
 
@@ -117,11 +112,10 @@ function ContactFormInner() {
       >
         <CheckCircle2 className="mx-auto h-10 w-10 text-deepgold" strokeWidth={1.25} />
         <h3 className="mt-4 font-heading text-2xl font-semibold text-navy">
-          Thank you — your enquiry has been received.
+          {strings.successTitle}
         </h3>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-          A member of the Medius Unus team will review your message and respond in due
-          course. Please do not send confidential transaction documents at this stage.
+          {strings.successBody}
         </p>
       </div>
     );
@@ -129,7 +123,7 @@ function ContactFormInner() {
 
   const err = (msg?: string) =>
     msg ? (
-      <p id={`err-${msg.length}`} className="mt-1 text-sm text-destructive" role="alert">
+      <p className="mt-1 text-sm text-destructive" role="alert">
         {msg}
       </p>
     ) : null;
@@ -150,9 +144,10 @@ function ContactFormInner() {
         aria-hidden="true"
         className="pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0"
       />
+
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <Label htmlFor="fullName">Full name *</Label>
+          <Label htmlFor="fullName">{strings.fullName} *</Label>
           <Input
             id="fullName"
             autoComplete="name"
@@ -160,10 +155,10 @@ function ContactFormInner() {
             className="mt-1.5 h-11 bg-white"
             {...register("fullName")}
           />
-          {err(errors.fullName?.message)}
+          {err(errors.fullName ? strings.errors.fullName : undefined)}
         </div>
         <div>
-          <Label htmlFor="organisation">Organisation</Label>
+          <Label htmlFor="organisation">{strings.organisation}</Label>
           <Input
             id="organisation"
             autoComplete="organization"
@@ -172,7 +167,7 @@ function ContactFormInner() {
           />
         </div>
         <div>
-          <Label htmlFor="email">Work email *</Label>
+          <Label htmlFor="email">{strings.email} *</Label>
           <Input
             id="email"
             type="email"
@@ -181,10 +176,10 @@ function ContactFormInner() {
             className="mt-1.5 h-11 bg-white"
             {...register("email")}
           />
-          {err(errors.email?.message)}
+          {err(errors.email ? strings.errors.email : undefined)}
         </div>
         <div>
-          <Label htmlFor="telephone">Telephone</Label>
+          <Label htmlFor="telephone">{strings.telephone}</Label>
           <Input
             id="telephone"
             type="tel"
@@ -196,7 +191,7 @@ function ContactFormInner() {
       </div>
 
       <div>
-        <Label htmlFor="enquiryType">Enquiry type *</Label>
+        <Label htmlFor="enquiryType">{strings.enquiryType} *</Label>
         <select
           id="enquiryType"
           aria-invalid={!!errors.enquiryType}
@@ -205,27 +200,27 @@ function ContactFormInner() {
           className="mt-1.5 h-11 w-full rounded-md border border-input bg-white px-3 text-sm text-foreground shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <option value="" disabled>
-            Select an enquiry type
+            {strings.selectType}
           </option>
-          {enquiryTypes.map((t) => (
+          {strings.types.map((t) => (
             <option key={t.value} value={t.value}>
               {t.label}
             </option>
           ))}
         </select>
-        {err(errors.enquiryType?.message)}
+        {err(errors.enquiryType ? strings.errors.enquiryType : undefined)}
       </div>
 
       <div>
-        <Label htmlFor="message">Brief message *</Label>
+        <Label htmlFor="message">{strings.message} *</Label>
         <Textarea
           id="message"
           rows={5}
           aria-invalid={!!errors.message}
-          className="mt-1.5 h-11 bg-white"
+          className="mt-1.5 bg-white"
           {...register("message")}
         />
-        {err(errors.message?.message)}
+        {err(errors.message ? strings.errors.message : undefined)}
       </div>
 
       <div>
@@ -251,14 +246,12 @@ function ContactFormInner() {
             )}
           </button>
           <label htmlFor="privacyConsent" className="cursor-pointer">
-            I understand that Medius Unus will use the information I provide solely to
-            respond to this enquiry, in line with the company&apos;s privacy notice. I
-            will not submit confidential transaction documents at this stage. *
+            {strings.privacy} *
           </label>
         </div>
         {consentError && (
           <p className="mt-1 text-sm text-destructive" role="alert">
-            Please acknowledge the privacy notice to continue.
+            {strings.errors.privacy}
           </p>
         )}
       </div>
@@ -269,7 +262,7 @@ function ContactFormInner() {
         className="w-full bg-navy text-cream hover:bg-navy/90 sm:w-auto"
       >
         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" strokeWidth={1.5} />}
-        {isSubmitting ? "Sending…" : "Submit Enquiry"}
+        {isSubmitting ? strings.sending : strings.submit}
       </Button>
     </form>
   );

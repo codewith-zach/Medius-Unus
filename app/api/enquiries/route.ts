@@ -3,6 +3,7 @@ import { join } from "path";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
+import { getContent } from "@/lib/content";
 
 /**
  * Enquiry form delivery endpoint.
@@ -20,13 +21,6 @@ import { Resend } from "resend";
 // Note: this route reads files from disk (embedded logo), which requires
 // the Node.js runtime — the default for route handlers.
 
-const enquiryLabels: Record<string, string> = {
-  services: "Services",
-  partnership: "Partnership",
-  investment: "Investment opportunity",
-  other: "Other",
-};
-
 // free-text fields: collapse control characters so they can never leak
 // into the email subject or headers
 const clean = (v: string) => v.replace(/[\u0000-\u001f\u007f]+/g, " ").trim();
@@ -42,6 +36,7 @@ const schema = z.object({
   // anti-spam: honeypot must stay empty; startedAt records page-load time
   companyWebsite: z.string().max(200).optional(),
   startedAt: z.number().positive(),
+  lang: z.enum(["en", "fr"]).optional(),
 });
 
 // Best-effort in-memory rate limiting. Serverless instances are ephemeral,
@@ -128,7 +123,19 @@ function renderEmail(
     enquiryType: string;
     message: string;
   },
-  logos: { stdSrc: string; lightSrc: string }
+  logos: { stdSrc: string; lightSrc: string },
+  t: {
+    heading: string;
+    badge: string;
+    from: string;
+    email: string;
+    telephone: string;
+    type: string;
+    message: string;
+    footer: string;
+    received: string;
+    fullName: string;
+  }
 ): string {
   const label = "color:#7a5a1a;font:700 10px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;";
   const value = "margin:0;color:#14213d;font:400 15px/1.5 Arial,sans-serif;";
@@ -173,7 +180,7 @@ function renderEmail(
         </td>
         <td style="vertical-align:middle;text-align:right;">
           <p class="lbl" style="margin:0 0 8px;${label}">Website enquiry</p>
-          <p style="margin:0 0 10px;display:inline-block;padding:6px 14px;border:1px solid #c79d4b;color:#7a5a1a;font:600 12px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;">${enquiryLabels[d.enquiryType] ?? d.enquiryType}</p>
+          <p style="margin:0 0 10px;display:inline-block;padding:6px 14px;border:1px solid #c79d4b;color:#7a5a1a;font:600 12px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;">${t.badge}</p>
           <p class="meta" style="margin:0;color:#8a938c;font:400 12px/1.4 Arial,sans-serif;">${new Date().toUTCString()}</p>
         </td>
       </tr></table>
@@ -182,21 +189,21 @@ function renderEmail(
 
     <!-- From whom -->
     <tr><td style="padding:24px 32px 6px;">
-      <p class="lbl" style="margin:0 0 5px;${label}">From</p>
+      <p class="lbl" style="margin:0 0 5px;${label}">${t.from}</p>
       <p class="serif" style="margin:0;color:#0d2b1f;font:600 20px/1.3 Georgia,'Times New Roman',serif;">${escapeHtml(d.fullName)}${d.organisation ? ` <span class="serif-dim" style="font-weight:400;color:#8a938c;">&middot; ${escapeHtml(d.organisation)}</span>` : ""}</p>
     </td></tr>
 
     <!-- Contact details: stacked full-width rows -->
     <tr><td style="padding:18px 32px 8px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-        <tr>${cell("Email", d.email)}</tr>
-        <tr>${cell("Telephone", d.telephone || "—")}</tr>
+        <tr>${cell(t.email, d.email)}</tr>
+        <tr>${cell(t.telephone, d.telephone || "—")}</tr>
       </table>
     </td></tr>
 
     <!-- Message -->
     <tr><td style="padding:14px 32px 32px;">
-      <p class="lbl" style="margin:0 0 8px;${label}">Message</p>
+      <p class="lbl" style="margin:0 0 8px;${label}">${t.message}</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
         <td class="msg-panel" style="background:#f4f5f4;border-left:3px solid #c79d4b;padding:18px 20px;color:#14213d;font:400 16px/1.65 Georgia,'Times New Roman',serif;white-space:pre-line;">${escapeHtml(d.message)}</td>
       </tr></table>
@@ -206,7 +213,7 @@ function renderEmail(
     <tr><td class="footer-band" style="background:#0d2b1f;padding:22px 32px;text-align:center;">
       <p style="margin:0;color:#c79d4b;font:700 10px/1 Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;">Medius Unus Nigeria Limited</p>
       <p style="margin:8px 0 0;color:#f8f5ee;font:400 13px/1.5 Arial,sans-serif;">
-        Reply directly to this email to respond to ${escapeHtml(d.fullName)} &mdash; reply-to is set to their address.
+        ${t.footer} ${escapeHtml(d.fullName)} &mdash; reply-to is set to their address.
       </p>
     </td></tr>
 
@@ -256,9 +263,10 @@ export async function POST(req: Request) {
     );
   }
 
+  const lang = d.lang ?? "en";
+  const e = getContent(lang).email;
   const to = process.env.ENQUIRY_TO ?? "info@mediusunus.com";
-  const from =
-    process.env.ENQUIRY_FROM ?? "Medius Unus Website <enquiries@mediusunus.com>";
+  const from = process.env.ENQUIRY_FROM ?? `${e.senderName} <enquiries@mediusunus.com>`;
 
   const logos = await resolveLogos();
   const resend = new Resend(apiKey);
@@ -266,8 +274,19 @@ export async function POST(req: Request) {
     from,
     to: [to],
     replyTo: d.email,
-    subject: `Website enquiry: ${enquiryLabels[d.enquiryType] ?? d.enquiryType} — ${d.fullName}`,
-    html: renderEmail(d, logos),
+    subject: `${e.subjectPrefix} : ${e.badgeLabels[d.enquiryType]} — ${d.fullName}`,
+    html: renderEmail(d, logos, {
+      heading: e.heading,
+      badge: e.badgeLabels[d.enquiryType],
+      from: e.from,
+      email: e.email,
+      telephone: e.telephone,
+      type: e.type,
+      message: e.message,
+      footer: e.footer,
+      received: e.received,
+      fullName: d.fullName,
+    }),
     ...(logos.attachments.length ? { attachments: logos.attachments } : {}),
   });
 

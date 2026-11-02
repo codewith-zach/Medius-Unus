@@ -1,25 +1,24 @@
-import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { PageHero } from "@/components/section";
-import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
-import { services } from "@/lib/site-content";
+import { ContourLines } from "@/components/contour-lines";
+import { getContent, isLang, defaultLang } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Eight service areas spanning strategic advisory, corporate finance, transactions, programme delivery, process improvement, market entry, regulatory implementation and capacity building.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  return { title: getContent(lang).services.hero.title };
+}
 
-export default function ServicesPage() {
+export default async function ServicesPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang: raw } = await params;
+  const lang = isLang(raw) ? raw : defaultLang;
+  const t = getContent(lang).services;
+  const cta = getContent(lang).cta;
+
   return (
     <>
-      <PageHero
-        eyebrow="Services"
-        title="What Medius Unus does"
-        description="Eight clear service areas, from strategic direction and transaction support through to implementation and capacity building. The scope of each engagement is defined according to the firm's authorisation, mandate and the relevant professional specialists."
-      />
+      <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} description={t.hero.description} />
 
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
@@ -29,7 +28,7 @@ export default function ServicesPage() {
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="space-y-10">
-            {services.map((s, i) => (
+            {t.items.map((s, i) => (
               <Reveal key={s.slug}>
                 <article
                   id={s.slug}
@@ -70,7 +69,14 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <CtaSection />
+      <CtaSection
+        lang={lang}
+        title={cta.title}
+        titleAccent={cta.titleAccent}
+        description={cta.description}
+        primary={cta.primary}
+        secondary={cta.secondary}
+      />
     </>
   );
 }
