@@ -515,3 +515,10 @@
     scroll-behavior: auto;
   }
 }
+
+/* Marquee: slower drift on phones so names read comfortably */
+@media (max-width: 767px) {
+  .marquee-track {
+    animation-duration: 90s;
+  }
+}
