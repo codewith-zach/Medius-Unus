@@ -54,7 +54,7 @@ export function LeadershipCard({ leader, index }: { leader: Leader; index: numbe
                 height={320}
                 className="mx-auto h-28 w-28 rounded-full border-2 border-gold/60 object-cover sm:h-36 sm:w-36"
               />
-              <DialogDescription className="mx-auto mt-6 max-w-md text-[0.68rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-deepgold sm:text-xs">
+              <DialogDescription className="mx-auto mt-6 max-w-md text-[0.62rem] font-semibold uppercase leading-snug tracking-[0.18em] text-deepgold sm:text-[0.7rem]">
                 {leader.title}
               </DialogDescription>
               <DialogTitle className="mt-3 font-heading text-3xl font-semibold uppercase leading-tight tracking-[0.06em] text-navy sm:text-4xl">
