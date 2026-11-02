@@ -19,6 +19,11 @@ export function HeroArtwork({ className = "" }: { className?: string }) {
   });
   const drift = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
+  // Coordinates are rounded so Node (SSR) and the browser, whose Math.sin/
+  // Math.cos can differ in the last ulp, render identical attributes —
+  // otherwise React flags a hydration mismatch on the SVG lines.
+  const round = (v: number) => Math.round(v * 100) / 100;
+
   // Vertical bars across the middle band; heights follow the circle chord.
   const R = 252;
   const bars = Array.from({ length: 43 }, (_, i) => {
@@ -26,7 +31,7 @@ export function HeroArtwork({ className = "" }: { className?: string }) {
     const chord = 2 * Math.sqrt(Math.max(0, R * R - x * x));
     const h = Math.min(200, chord * 0.46);
     const t = 1 - Math.abs(x) / 172;
-    return { x, h, opacity: 0.22 + t * 0.5 };
+    return { x, h: round(h), opacity: round(0.22 + t * 0.5) };
   });
 
   // Fine tick marks around the outer ring, longer at each quarter.
@@ -35,10 +40,10 @@ export function HeroArtwork({ className = "" }: { className?: string }) {
     const quarter = i % 18 === 0;
     const inner = quarter ? 266 : 271;
     return {
-      x1: Math.cos(a) * inner,
-      y1: Math.sin(a) * inner,
-      x2: Math.cos(a) * 280,
-      y2: Math.sin(a) * 280,
+      x1: round(Math.cos(a) * inner),
+      y1: round(Math.sin(a) * inner),
+      x2: round(Math.cos(a) * 280),
+      y2: round(Math.sin(a) * 280),
       opacity: quarter ? 0.5 : 0.25,
     };
   });
