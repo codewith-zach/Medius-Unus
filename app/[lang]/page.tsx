@@ -62,7 +62,7 @@ export default async function HomePage({
         <div aria-hidden className="hairline-grid absolute inset-0" />
         <ContourLines
           className="pointer-events-none absolute -right-24 top-0 h-[125%] w-[70%]"
-          opacity={0.14}
+          opacity={0.11}
         />
         <div className="relative mx-auto grid max-w-7xl gap-16 px-5 pb-24 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12 lg:px-10 lg:pb-28">
           <div className="max-w-2xl">
@@ -320,7 +320,7 @@ export default async function HomePage({
                       <h3 className="mt-2 font-heading text-xl font-medium leading-tight tracking-[-0.01em] text-cream sm:text-[1.4rem]">
                         {s.title}
                       </h3>
-                      <p className="mt-2 max-w-md overflow-hidden text-[0.8rem] leading-relaxed text-cream/0 transition-all duration-500 group-hover:text-cream/75 sm:max-h-0 sm:group-hover:max-h-24">
+                      <p className="mt-2 max-w-md text-[0.8rem] leading-relaxed text-cream/75 transition-all duration-500 sm:max-h-0 sm:text-cream/0 sm:overflow-hidden sm:group-hover:max-h-24 sm:group-hover:text-cream/75 sm:group-focus-visible:max-h-24 sm:group-focus-visible:text-cream/75">
                         {s.summary}
                       </p>
                       <span className="mt-3 inline-flex items-center gap-2 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-gold">
@@ -343,8 +343,8 @@ export default async function HomePage({
           {t.stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
-                className={`flex items-baseline justify-between gap-4 border-white/10 pb-6 sm:block sm:pb-0 lg:pl-10 ${
-                  i < t.stats.length - 1 ? "border-b sm:border-0 lg:border-l" : "lg:pl-10"
+                className={`flex items-baseline justify-between gap-4 pb-6 sm:block sm:pb-0 lg:pl-10 ${
+                  i < t.stats.length - 1 ? "border-b border-white/10 sm:border-0" : ""
                 } ${i > 0 ? "lg:border-l lg:border-white/15" : "lg:pl-0"}`}
               >
                 <StatCounter

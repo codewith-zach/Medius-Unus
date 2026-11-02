@@ -54,7 +54,7 @@ export function SiteHeader({ lang, content }: { lang: Lang; content: Content }) 
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-7 xl:flex" aria-label="Main navigation">
           {content.nav.map((item) => (
             <Link
               key={item.href}
@@ -69,7 +69,7 @@ export function SiteHeader({ lang, content }: { lang: Lang; content: Content }) 
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 lg:flex">
+        <div className="hidden items-center gap-5 xl:flex">
           <LanguageToggle lang={lang} variant="dark" />
           <Link
             href={fullPath("/contact")}
@@ -83,10 +83,10 @@ export function SiteHeader({ lang, content }: { lang: Lang; content: Content }) 
           </Link>
         </div>
 
-        <div className="flex items-center gap-3 lg:hidden">
+        <div className="flex items-center gap-3 xl:hidden">
           <LanguageToggle lang={lang} variant="dark" />
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild className="lg:hidden">
+            <SheetTrigger asChild className="xl:hidden">
               <button
                 aria-label={content.header.openMenu}
                 className="flex h-10 w-10 shrink-0 items-center justify-center border border-white/15 text-cream transition-colors hover:border-gold/60 hover:text-gold sm:h-11 sm:w-11"
