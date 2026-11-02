@@ -10,6 +10,7 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section";
 import { CtaSection } from "@/components/cta-section";
 import { services, sectors, partnerCategories, leadership } from "@/lib/site-content";
+import { LeadershipCard } from "@/components/leadership-card";
 
 export const metadata: Metadata = {
   title: "Medius Unus Nigeria Limited — Connecting expertise, opportunity and execution",
@@ -336,42 +337,10 @@ export default function HomePage() {
             title="Experienced, delivery-oriented leadership"
           />
           <div className="mt-14 grid gap-8 md:grid-cols-2">
-            {leadership.map((p, i) => (
-              <Reveal key={p.name} delay={i * 0.1}>
-                <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
-                  <div className="flex items-center gap-6">
-                    <Image
-                      src={p.photo}
-                      alt={`Portrait of ${p.name}`}
-                      width={192}
-                      height={192}
-                      className="h-20 w-20 shrink-0 rounded-full border border-gold/50 object-cover transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24"
-                    />
-                    <div>
-                      <h3 className="font-heading text-2xl font-semibold uppercase tracking-[0.06em] text-navy">
-                        {p.name}
-                      </h3>
-                      <p className="mt-2 text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.14em] text-deepgold">
-                        {p.title}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {p.short}
-                  </p>
-                </div>
-              </Reveal>
+            {leadership.map((l, i) => (
+              <LeadershipCard key={l.name} leader={l} index={i} />
             ))}
           </div>
-          <Reveal className="mt-10">
-            <Link
-              href="/leadership"
-              className="link-arrow group inline-flex items-center gap-2 text-sm font-medium text-deepgold"
-            >
-              Read the full leadership profiles
-              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-            </Link>
-          </Reveal>
         </div>
       </section>
 
