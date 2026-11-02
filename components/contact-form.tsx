@@ -1,11 +1,11 @@
 "use client";
 
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { Check, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,9 +27,6 @@ const formSchema = z.object({
     message: "Please select an enquiry type.",
   }),
   message: z.string().min(20, "Please briefly describe your enquiry (at least 20 characters)."),
-  privacy: z.literal(true, {
-    message: "Please acknowledge the privacy notice to continue.",
-  }),
   companyWebsite: z.string().max(200).optional(), // honeypot — humans never see it
 });
 
@@ -48,6 +45,20 @@ function ContactFormInner() {
   const defaultIntent = searchParams.get("intent");
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [consented, setConsented] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+  const consentRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const el = consentRef.current;
+    if (!el) return;
+    const toggle = () => {
+      setConsented((c) => !c);
+      setConsentError(false);
+    };
+    el.addEventListener("click", toggle);
+    return () => el.removeEventListener("click", toggle);
+  }, []);
   const mountedAt = useRef(Date.now());
   const {
     register,
@@ -67,13 +78,18 @@ function ContactFormInner() {
   });
 
 
+
   const onSubmit = async (values: FormValues) => {
     setServerError(null);
+    if (!consented) {
+      setConsentError(true);
+      return;
+    }
     try {
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, startedAt: mountedAt.current }),
+        body: JSON.stringify({ ...values, privacy: true, startedAt: mountedAt.current }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok || !data.ok) {
@@ -210,20 +226,37 @@ function ContactFormInner() {
 
       <div>
         <div className="flex items-start gap-3 text-sm text-muted-foreground">
-          <input
-            type="checkbox"
+          <button
+            type="button"
             id="privacyConsent"
-            className="mt-1 h-4 w-4 accent-[#7A5A1A]"
-            aria-invalid={!!errors.privacy}
-            {...register("privacy")}
-          />
-          <label htmlFor="privacyConsent">
+            ref={consentRef}
+            role="checkbox"
+            aria-checked={consented}
+            aria-required="true"
+            aria-invalid={consentError}
+            className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] border transition-colors ${
+              consented
+                ? "border-deepgold bg-deepgold text-cream"
+                : consentError
+                  ? "border-destructive bg-white"
+                  : "border-input bg-white"
+            } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring`}
+          >
+            {consented && (
+              <Check className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden />
+            )}
+          </button>
+          <label htmlFor="privacyConsent" className="cursor-pointer">
             I understand that Medius Unus will use the information I provide solely to
             respond to this enquiry, in line with the company&apos;s privacy notice. I
             will not submit confidential transaction documents at this stage. *
           </label>
         </div>
-        {err(errors.privacy?.message)}
+        {consentError && (
+          <p className="mt-1 text-sm text-destructive" role="alert">
+            Please acknowledge the privacy notice to continue.
+          </p>
+        )}
       </div>
 
       <Button
