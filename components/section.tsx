@@ -22,7 +22,7 @@ export function SectionHeading({
     >
       {eyebrow && (
         <p
-          className={`flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] ${
+          className={`flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.28em] ${
             dark ? "text-gold" : "text-deepgold"
           } ${align === "center" ? "justify-center" : ""}`}
         >
@@ -34,7 +34,7 @@ export function SectionHeading({
         </p>
       )}
       <h2
-        className={`mt-5 font-heading text-3xl font-semibold leading-[1.12] tracking-[-0.015em] text-balance sm:text-4xl lg:text-[2.9rem] ${
+        className={`mt-5 font-heading text-[1.9rem] font-medium leading-[1.12] tracking-[-0.015em] text-balance sm:text-4xl lg:text-[2.9rem] ${
           dark ? "text-cream" : "text-navy"
         }`}
       >
@@ -42,7 +42,7 @@ export function SectionHeading({
         {titleAccent ? (
           <>
             {" "}
-            <em className="font-medium italic text-gold">{titleAccent}</em>
+            <em className="font-light italic text-gold">{titleAccent}</em>
           </>
         ) : null}
       </h2>
@@ -52,8 +52,8 @@ export function SectionHeading({
       />
       {description && (
         <p
-          className={`mt-6 text-base leading-relaxed text-pretty sm:text-lg ${
-            dark ? "text-cream/80" : "text-muted-foreground"
+          className={`mt-6 max-w-2xl text-[0.95rem] leading-[1.75] text-pretty sm:text-base ${
+            dark ? "text-cream/75" : "text-muted-foreground"
           }`}
         >
           {description}
@@ -83,7 +83,7 @@ export function PageHero({
       {/* Ghost echo of the eyebrow, cropped by the band */}
       <span
         aria-hidden
-        className="quote-glyph pointer-events-none absolute -bottom-[0.23em] left-1/2 w-full -translate-x-1/2 select-none text-center font-heading text-[22vw] font-semibold leading-none tracking-[0.08em] text-outline-cream opacity-60"
+        className="quote-glyph pointer-events-none absolute -bottom-[0.23em] left-1/2 w-full -translate-x-1/2 select-none text-center font-heading text-[22vw] font-medium leading-none tracking-[0.08em] text-outline-cream opacity-60"
       >
         {eyebrow}
       </span>

@@ -24,7 +24,7 @@ export default async function SectorsPage({ params }: { params: Promise<{ lang: 
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -left-28 -bottom-24 h-80 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -33,7 +33,7 @@ export default async function SectorsPage({ params }: { params: Promise<{ lang: 
               <Reveal key={s.slug}>
                 <article
                   id={s.slug}
-                  className="corner-marks group scroll-mt-28 rounded border border-sand bg-white p-6 transition-all duration-300 hover:border-gold/50 hover:shadow-[0_20px_48px_rgba(13,43,31,0.10)] sm:p-10"
+                  className="corner-marks group scroll-mt-28 rounded border border-sand bg-white p-6 transition-all duration-300 hover:border-gold/50 hover:shadow-[0_20px_48px_rgba(12,42,30,0.10)] sm:p-10"
                 >
                   <div className="flex items-baseline gap-4">
                     <span
@@ -59,7 +59,7 @@ export default async function SectorsPage({ params }: { params: Promise<{ lang: 
                       <div className="mt-6 grid gap-5 md:grid-cols-3">
                         {t.oilGasPartnerships.map((p, pi) => (
                           <Reveal key={p.name} delay={pi * 0.08}>
-                            <div className="relative flex h-full flex-col rounded border border-sand bg-white p-6 pt-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)]">
+                            <div className="relative flex h-full flex-col rounded border border-sand bg-white p-6 pt-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(12,42,30,0.12)]">
                               <span
                                 aria-hidden
                                 className="pointer-events-none absolute right-5 top-4 select-none font-heading text-4xl font-semibold leading-none text-outline-navy opacity-40"

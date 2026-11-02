@@ -47,7 +47,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -left-28 -bottom-24 h-72 w-[45%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
@@ -59,7 +59,7 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
                   <a
                     href={ch.href}
                     {...(ch.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group flex items-center gap-5 rounded border border-sand bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:shadow-[0_14px_36px_rgba(13,43,31,0.10)]"
+                    className="group flex items-center gap-5 rounded border border-sand bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:shadow-[0_14px_36px_rgba(12,42,30,0.10)]"
                   >
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-cream transition-all duration-300 group-hover:border-gold group-hover:bg-gold/10">
                       <ch.icon className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />

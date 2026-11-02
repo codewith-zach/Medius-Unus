@@ -22,7 +22,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ lang:
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -31,7 +31,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ lang:
               <Reveal key={s.slug}>
                 <article
                   id={s.slug}
-                  className="group scroll-mt-28 rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_20px_48px_rgba(13,43,31,0.10)] sm:p-10"
+                  className="group scroll-mt-28 rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_20px_48px_rgba(12,42,30,0.10)] sm:p-10"
                 >
                   <div className="flex flex-col gap-6 lg:flex-row lg:gap-0">
                     <div className="shrink-0 lg:w-1/3 lg:pr-10">

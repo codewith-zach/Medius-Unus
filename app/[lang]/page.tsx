@@ -51,22 +51,32 @@ export default async function HomePage({
               "radial-gradient(circle at 20% 20%, #C79D4B 0, transparent 55%), radial-gradient(circle at 85% 80%, #C79D4B 0, transparent 45%)",
           }}
         />
+        {/* contour linework strokes across the upper right (from premium-editorial) */}
+        <ContourLines
+          className="pointer-events-none absolute -right-24 top-0 h-[125%] w-[70%]"
+          opacity={0.11}
+        />
         <div className="relative mx-auto grid max-w-7xl gap-14 px-4 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8">
-          <div>
+          <div className="max-w-2xl">
             <Reveal>
-              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-                <span aria-hidden className="diamond h-1.5 w-1.5" />
+              <p className="flex items-center gap-4 text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-gold">
+                <span
+                  aria-hidden
+                  className="h-10 w-px bg-gradient-to-r from-transparent to-gold"
+                />
                 {t.hero.eyebrow}
               </p>
             </Reveal>
-            <h1 className="mt-7 font-heading text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-balance text-cream sm:text-6xl lg:text-[4.75rem]">
+            <h1 className="mt-8 font-heading text-[2.6rem] font-light leading-[1.06] tracking-[-0.02em] text-balance text-cream sm:text-6xl lg:text-[4.1rem]">
               {t.hero.lines.map((line, i) => (
-                <Reveal key={i} delay={0.08 + i * 0.08}>
-                  <span className="block">
+                <Reveal key={i} delay={0.1 + i * 0.1}>
+                  <span
+                    className={`block ${i === 1 ? "pl-10 italic sm:pl-16 lg:pl-20" : ""}`}
+                  >
                     {"pre" in line ? (
                       <>
                         {line.pre}
-                        <em className="text-gold-gradient">{line.accent}</em>
+                        <em className="text-gold-gradient italic">{line.accent}</em>
                       </>
                     ) : (
                       line.text
@@ -75,33 +85,33 @@ export default async function HomePage({
                 </Reveal>
               ))}
             </h1>
-            <Reveal delay={0.34}>
-              <p className="mt-8 max-w-xl text-base leading-relaxed text-pretty text-cream/80 sm:text-lg">
+            <Reveal delay={0.44}>
+              <p className="mt-7 max-w-lg text-[0.92rem] leading-[1.8] text-pretty text-cream/70 sm:text-[0.95rem]">
                 {t.hero.support}
               </p>
             </Reveal>
-            <Reveal delay={0.44}>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <Reveal delay={0.56}>
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <Link
                   href={hrefFor(lang, "/services")}
-                  className="btn-sheen group inline-flex items-center justify-center gap-2.5 rounded bg-gold px-8 py-4 text-sm font-semibold text-navy transition-all hover:bg-[#d8ac58] hover:shadow-[0_8px_30px_rgba(199,157,75,0.35)] active:scale-[0.98]"
+                  className="btn-sheen group inline-flex items-center justify-center gap-2.5 bg-gold px-8 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-navy transition-all hover:bg-[#d8ac58] hover:shadow-[0_8px_30px_rgba(199,157,75,0.35)] active:translate-y-px"
                 >
                   {t.hero.ctaPrimary}
                   <ArrowRight
-                    className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                    className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
                     strokeWidth={1.5}
                   />
                 </Link>
                 <Link
                   href={hrefFor(lang, "/contact")}
-                  className="inline-flex items-center justify-center gap-2 rounded border border-gold/60 px-8 py-4 text-sm font-semibold text-gold transition-all hover:bg-gold hover:text-navy active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 border border-gold/60 px-8 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold transition-all hover:bg-gold hover:text-navy active:translate-y-px"
                 >
                   {t.hero.ctaSecondary}
                 </Link>
               </div>
             </Reveal>
           </div>
-          <Reveal delay={0.2} className="hidden justify-center lg:flex">
+          <Reveal delay={0.25} className="hidden justify-center lg:flex">
             <HeroArtwork />
           </Reveal>
         </div>
@@ -120,7 +130,7 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-24 h-80 w-[62%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -169,7 +179,7 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-sand/40">
         <ContourLines
           className="pointer-events-none absolute -left-28 -bottom-28 h-80 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -194,7 +204,7 @@ export default async function HomePage({
               <Reveal key={s.slug} delay={Math.min(i * 0.04, 0.2)}>
                 <Link
                   href={hrefFor(lang, `/services#${s.slug}`)}
-                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-navy/10 py-6 pl-3 transition-all duration-300 before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:origin-top before:scale-y-0 before:bg-gold before:transition-transform before:duration-300 hover:z-10 hover:-translate-y-0.5 hover:bg-white/70 hover:before:scale-y-100 hover:shadow-[0_14px_36px_rgba(13,43,31,0.14)] active:translate-y-0 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
+                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-navy/10 py-6 pl-3 transition-all duration-300 before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:origin-top before:scale-y-0 before:bg-gold before:transition-transform before:duration-300 hover:z-10 hover:-translate-y-0.5 hover:bg-white/70 hover:before:scale-y-100 hover:shadow-[0_14px_36px_rgba(12,42,30,0.14)] active:translate-y-0 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
                 >
                   <span
                     aria-hidden
@@ -228,12 +238,12 @@ export default async function HomePage({
         <div className="relative mx-auto max-w-5xl px-4 py-24 text-center sm:px-6 sm:py-32 lg:px-8">
           <span
             aria-hidden
-            className="quote-glyph pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 select-none font-heading text-[11rem] font-semibold text-gold/12 sm:text-[15rem]"
+            className="quote-glyph pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 select-none font-heading text-[11rem] font-light text-gold/12 sm:text-[15rem]"
           >
             &ldquo;
           </span>
           <Reveal>
-            <p className="relative font-heading text-2xl font-medium leading-[1.35] text-balance text-cream sm:text-3xl lg:text-[2.6rem] lg:leading-[1.3]">
+            <p className="relative font-heading text-[1.7rem] font-light leading-[1.35] text-balance text-cream sm:text-3xl lg:text-[2.4rem] lg:leading-[1.3]">
               {t.statement.segments.map((seg, i) =>
                 "em" in seg ? (
                   <em key={i} className="text-gold-gradient">
@@ -262,7 +272,7 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-16 h-72 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -281,7 +291,7 @@ export default async function HomePage({
               >
                 <Link
                   href={hrefFor(lang, `/sectors#${s.slug}`)}
-                  className="corner-marks group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)] sm:p-8"
+                  className="corner-marks group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(12,42,30,0.12)] sm:p-8"
                 >
                   <span
                     aria-hidden
@@ -344,7 +354,7 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -366,7 +376,7 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-sand/40">
         <ContourLines
           className="pointer-events-none absolute -bottom-20 -right-24 h-64 w-[50%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">

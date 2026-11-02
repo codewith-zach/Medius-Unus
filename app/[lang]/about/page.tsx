@@ -22,7 +22,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -77,7 +77,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -85,7 +85,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {t.values.items.map((v, i) => (
               <Reveal key={v.title} delay={(i % 3) * 0.06}>
-                <div className="corner-marks group relative h-full rounded border border-sand bg-white p-6 pt-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
+                <div className="corner-marks group relative h-full rounded border border-sand bg-white p-6 pt-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_16px_40px_rgba(12,42,30,0.10)]">
                   <span
                     aria-hidden
                     className="pointer-events-none absolute right-5 top-4 select-none font-heading text-5xl font-semibold leading-none text-outline-navy opacity-50"
@@ -105,7 +105,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
       <section className="relative overflow-hidden bg-sand/40">
         <ContourLines
           className="pointer-events-none absolute -left-28 -bottom-24 h-72 w-[45%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">

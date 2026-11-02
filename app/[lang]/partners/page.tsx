@@ -22,7 +22,7 @@ export default async function PartnersPage({ params }: { params: Promise<{ lang:
       <section className="relative overflow-hidden bg-cream">
         <ContourLines
           className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
-          stroke="#0D2B1F"
+          stroke="#0C2A1E"
           opacity={0.05}
         />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">

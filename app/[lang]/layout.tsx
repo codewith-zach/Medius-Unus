@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { BackToTop } from "@/components/back-to-top";
@@ -11,9 +11,10 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   variable: "--font-heading",
 });
 
@@ -77,7 +78,7 @@ export default async function RootLayout({
   const c = getContent(lang);
 
   return (
-    <html lang={lang} className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang={lang} className={`${inter.variable} ${fraunces.variable}`}>
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <a
           href="#main"
