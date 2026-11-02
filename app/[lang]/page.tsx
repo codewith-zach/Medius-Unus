@@ -43,19 +43,6 @@ export default async function HomePage({
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="grain relative overflow-hidden bg-ink-gradient">
         <div aria-hidden className="hairline-grid absolute inset-0" />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 20%, #C79D4B 0, transparent 55%), radial-gradient(circle at 85% 80%, #C79D4B 0, transparent 45%)",
-          }}
-        />
-        {/* contour linework strokes across the upper right (from premium-editorial) */}
-        <ContourLines
-          className="pointer-events-none absolute -right-24 top-0 h-[125%] w-[70%]"
-          opacity={0.11}
-        />
         <div className="relative mx-auto grid max-w-7xl gap-14 px-4 pt-36 pb-24 sm:px-6 sm:pt-44 sm:pb-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8">
           <div className="max-w-2xl">
             <Reveal>
