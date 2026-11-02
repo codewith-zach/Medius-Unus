@@ -277,3 +277,42 @@ export const howWeWork = [
   "Support coordination and implementation where this is within the agreed engagement.",
   "Review progress and help translate lessons into practical improvements.",
 ];
+
+export type Leader = {
+  name: string;
+  photo: string;
+  title: string;
+  short: string;
+  full: string[];
+};
+
+export const leadership: Leader[] = [
+  {
+    name: "Helen Miner",
+    photo: "/helen-miner.jpeg",
+    title: "Founder · Programme Director · Governance · Financial Services · Partnership Development",
+    short:
+      "Helen Miner combines international financial-services experience with corporate governance, economic development and public-sector leadership in Nigeria. Her background brings financial and institutional perspectives to Medius Unus's industrial and energy activities, supporting opportunity assessment, partnership development and the coordination of stakeholders around clear priorities and structured decisions.",
+    full: [
+      "Helen Miner combines international financial-services experience with a background in corporate governance, economic development and public-sector leadership in Nigeria.",
+      "Her experience includes board service with NESCO (UK) in Nigeria's electricity sector, providing a relevant governance perspective for Medius Unus's energy activities. She previously served as Plateau State Commissioner for Commerce and Industry and Senior Economic Adviser to the Governor, and held chairmanship responsibilities for government-owned assets. These roles developed her understanding of industrial development, public institutions and stakeholder coordination.",
+      "Her international financial-services and consulting career spans private equity, asset management, institutional funds and trading-floor environments in the United Kingdom, Belgium and Luxembourg. Her assignments have involved Northern Trust Asset Management, Royal Bank of Canada, Barclays, J.P. Morgan Chase, Boston Consulting and Baringa. At Fortis Merchant Banque, her responsibilities included product risk, branch openings, cross-border MiFID compliance, EMIR implementation and data migration.",
+      "This background brings together regulatory change, operational transformation, reorganisation, restructuring, risk oversight and executive governance.",
+      "At Medius Unus, Helen contributes to opportunity assessment, partnership development and stakeholder coordination. She brings a financial and institutional perspective to industrial and energy opportunities, helping translate complex requirements into practical priorities, clear responsibilities and structured decisions.",
+    ],
+  },
+  {
+    name: "Nordine Djeddi",
+    photo: "/nordine-djeddi.jpg",
+    title: "Programme Director · Quality · Business Development",
+    short:
+      "A Director of Medius Unus Nigeria Limited, Nordine Djeddi combines scientific and industrial experience with an international career in programme leadership, quality assurance and entrepreneurship. He develops international partnerships and helps structure opportunities and coordinate projects across banking, industry and energy, including oil and gas.",
+    full: [
+      "A Director of Medius Unus Nigeria Limited, Nordine Djeddi combines a scientific and industrial background with an international career in programme leadership, quality assurance and business development. His training in chemistry, agri-food studies and computer engineering gives him a broad understanding of technical and operational challenges.",
+      "His international experience spans the chemical and pharmaceutical industries, IT services, banking, telecommunications and the automotive sector. His career includes experience with Elf Atochem, consulting work with Steria, CGI and Sogeti, and assignments involving BNP Paribas, Royal Bank of Canada, La Banque Postale Financement, Orange, SFR, Bouygues, Renault and Mercedes.",
+      "These experiences have developed his analytical rigour, attention to procedures and command of quality requirements in both industrial and software environments. His responsibilities have included data integrity, data centre migrations and production readiness. At BNP Paribas, he coordinated more than fifty business and technical contributors.",
+      "An entrepreneur, he has also led businesses in transport, commercial vehicle trading and real estate, building practical experience in management, client relationships and operational coordination.",
+      "At Medius Unus, he applies this experience to international partnership development, opportunity assessment and project delivery. He brings together international companies, local stakeholders and technical specialists to structure collaborations, particularly in industry and energy, including oil and gas.",
+    ],
+  },
+];

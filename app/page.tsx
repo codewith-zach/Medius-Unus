@@ -9,26 +9,12 @@ import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section";
 import { CtaSection } from "@/components/cta-section";
-import { services, sectors, partnerCategories } from "@/lib/site-content";
+import { services, sectors, partnerCategories, leadership } from "@/lib/site-content";
 
 export const metadata: Metadata = {
   title: "Medius Unus Nigeria Limited — Connecting expertise, opportunity and execution",
 };
 
-const leadershipPreview = [
-  {
-    name: "Helen Miner",
-    photo: "/helen-miner.jpeg",
-    role: "Leadership",
-    bio: "A senior financial-services leader with extensive experience translating complex regulatory requirements into practical governance, controls and operational change — shaped primarily in the United Kingdom, with additional professional experience in Belgium and Luxembourg, alongside first-hand knowledge of Nigeria's institutional and economic environment.",
-  },
-  {
-    name: "Nordine Djeddi",
-    initials: "ND",
-    role: "Leadership",
-    bio: "An IT delivery professional with a double bachelor's degree in IT and a 16-year record of supporting quality IT project implementation, including IT testing, transition into production and data-centre migration projects across several countries.",
-  },
-];
 
 // All figures below are stated in the brief — no invented impact metrics.
 const stats = [
@@ -350,37 +336,28 @@ export default function HomePage() {
             title="Experienced, delivery-oriented leadership"
           />
           <div className="mt-14 grid gap-8 md:grid-cols-2">
-            {leadershipPreview.map((p, i) => (
+            {leadership.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.1}>
                 <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
-                  <div className="flex items-center gap-5">
-                    {p.photo ? (
-                      <Image
-                        src={p.photo}
-                        alt={`Portrait of ${p.name}`}
-                        width={160}
-                        height={160}
-                        className="h-16 w-16 shrink-0 rounded-full border border-gold/50 object-cover transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20"
-                      />
-                    ) : (
-                      <div
-                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold transition-transform duration-300 group-hover:scale-105"
-                        aria-hidden
-                      >
-                        {p.initials}
-                      </div>
-                    )}
+                  <div className="flex items-center gap-6">
+                    <Image
+                      src={p.photo}
+                      alt={`Portrait of ${p.name}`}
+                      width={192}
+                      height={192}
+                      className="h-20 w-20 shrink-0 rounded-full border border-gold/50 object-cover transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24"
+                    />
                     <div>
-                      <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-deepgold">
-                        {p.role}
-                      </span>
-                      <h3 className="mt-1 font-heading text-2xl font-semibold text-navy">
+                      <h3 className="font-heading text-2xl font-semibold uppercase tracking-[0.06em] text-navy">
                         {p.name}
                       </h3>
+                      <p className="mt-2 text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.14em] text-deepgold">
+                        {p.title}
+                      </p>
                     </div>
                   </div>
                   <p className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {p.bio}
+                    {p.short}
                   </p>
                 </div>
               </Reveal>

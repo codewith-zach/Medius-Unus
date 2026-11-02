@@ -1,38 +1,16 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { PageHero, SectionHeading } from "@/components/section";
+import { PageHero } from "@/components/section";
 import { ContourLines } from "@/components/contour-lines";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
+import { leadership } from "@/lib/site-content";
 
 export const metadata: Metadata = {
   title: "Leadership",
   description:
     "Helen Miner and Nordine Djeddi — the leadership of Medius Unus Nigeria Limited.",
 };
-
-const profiles = [
-  {
-    name: "Helen Miner",
-    photo: "/helen-miner.jpeg",
-    paragraphs: [
-      "Helen Miner is a senior financial-services leader with extensive experience translating complex regulatory requirements into practical governance, controls and operational change. Her career has been shaped primarily in the United Kingdom, with additional professional experience in Belgium and Luxembourg, alongside first-hand knowledge of Nigeria's institutional and economic environment.",
-      "Her experience spans international banking and asset management, regulatory change, financial-services operations, cross-border compliance and multi-country transformation programmes. Her professional history includes senior assignments involving Northern Trust Asset Management, Royal Bank of Canada, Barclays and J.P. Morgan. At Fortis Merchant Banque, she managed product-risk responsibilities, supported cross-border compliance and led group-wide MiFID implementation in Belgium and the United Kingdom.",
-      "Her experience also includes institutional-fund operations, financial reporting, reconciliation, client onboarding, migrations, mergers and multi-country change programmes. Her regulatory background includes MiFID, MiFIR, Sarbanes–Oxley and GDPR.",
-      "In Nigeria, Helen served as Plateau State Commissioner for Commerce and Industry, Senior Economic Adviser to the Governor and Chairman of PIPC, leading policy, investment and multi-stakeholder initiatives. She also served for more than two decades on the UK Board of the Nigerian Electricity Services Company (NESCO), with responsibilities relating to corporate governance, regulatory compliance, risk management and issue resolution.",
-      "For financial institutions and other organisations, her experience may be relevant to the design and implementation of risk-based compliance frameworks, governance and supervisory controls, stakeholder coordination, operational processes, reporting and implementation roadmaps. Her profile combines regulatory, operational, technology-enabled change and executive-governance perspectives.",
-    ],
-  },
-  {
-    name: "Nordine Djeddi",
-    initials: "ND",
-    paragraphs: [
-      "Nordine Djeddi has a double bachelor's degree in IT and a stated 16-year record of supporting quality IT project implementation. His experience includes IT testing, transition from development into production, and data-centre migration projects across several countries.",
-      "His work has included project delivery, team management and training in demanding, international and multicultural environments. His professional background also includes establishing two business start-ups, providing exposure to operational management and sales and commercial management.",
-      "His stated strengths include coordinating multiple IT projects, working under time and quality constraints, relationship management, collaboration and an adaptable, delivery-focused approach. His background includes GDPR training in 2018 and NDPR training in 2019, and experience delivering training in French.",
-    ],
-  },
-];
 
 export default function LeadershipPage() {
   return (
@@ -51,35 +29,29 @@ export default function LeadershipPage() {
         />
         <div className="relative mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="space-y-16">
-            {profiles.map((p) => (
+            {leadership.map((p) => (
               <Reveal key={p.name}>
                 <article className="rounded border border-sand bg-white p-6 sm:p-10">
-                  <div className="flex items-center gap-5">
-                    {p.photo ? (
-                      <Image
-                        src={p.photo}
-                        alt={`Portrait of ${p.name}`}
-                        width={160}
-                        height={160}
-                        className="h-16 w-16 shrink-0 rounded-full border border-gold/50 object-cover sm:h-20 sm:w-20"
-                      />
-                    ) : (
-                      <div
-                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-sand font-heading text-xl font-semibold text-deepgold sm:h-20 sm:w-20 sm:text-2xl"
-                        aria-hidden
-                      >
-                        {p.initials}
-                      </div>
-                    )}
+                  <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+                    <Image
+                      src={p.photo}
+                      alt={`Portrait of ${p.name}`}
+                      width={256}
+                      height={256}
+                      className="h-24 w-24 shrink-0 rounded-full border border-gold/50 object-cover sm:h-28 sm:w-28"
+                    />
                     <div>
-                      <h2 className="font-heading text-2xl font-semibold text-navy sm:text-3xl">
+                      <h2 className="font-heading text-2xl font-semibold uppercase tracking-[0.06em] text-navy sm:text-3xl">
                         {p.name}
                       </h2>
-                      <div className="gold-rule mt-3 w-14" aria-hidden />
+                      <p className="mt-3 text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.14em] text-deepgold sm:text-xs">
+                        {p.title}
+                      </p>
+                      <div className="gold-rule mt-4 w-14" aria-hidden />
                     </div>
                   </div>
                   <div className="mt-6 space-y-5">
-                    {p.paragraphs.map((para, i) => (
+                    {p.full.map((para, i) => (
                       <p
                         key={i}
                         className={
