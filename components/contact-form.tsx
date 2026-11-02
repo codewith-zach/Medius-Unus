@@ -49,6 +49,10 @@ function ContactFormInner() {
   const [consentError, setConsentError] = useState(false);
   const consentRef = useRef<HTMLButtonElement>(null);
 
+  // Deliberate deviation from idiomatic React: this listener is attached
+  // natively rather than via onClick because some embedded webviews never
+  // deliver element clicks to React's delegated root listener, which left
+  // the consent control unusable there. Behavior is identical elsewhere.
   useEffect(() => {
     const el = consentRef.current;
     if (!el) return;

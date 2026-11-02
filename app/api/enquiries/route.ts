@@ -17,6 +17,9 @@ import { Resend } from "resend";
  *   ENQUIRY_FROM    — verified sender     (default: Medius Unus Website <enquiries@mediusunus.com>)
  */
 
+// Note: this route reads files from disk (embedded logo), which requires
+// the Node.js runtime — the default for route handlers.
+
 const enquiryLabels: Record<string, string> = {
   services: "Services",
   partnership: "Partnership",
@@ -24,11 +27,15 @@ const enquiryLabels: Record<string, string> = {
   other: "Other",
 };
 
+// free-text fields: collapse control characters so they can never leak
+// into the email subject or headers
+const clean = (v: string) => v.replace(/[\u0000-\u001f\u007f]+/g, " ").trim();
+
 const schema = z.object({
-  fullName: z.string().min(2).max(120),
-  organisation: z.string().max(160).optional(),
+  fullName: z.string().min(2).max(120).transform(clean),
+  organisation: z.string().max(160).optional().transform((v) => (v ? clean(v) : v)),
   email: z.string().email().max(160),
-  telephone: z.string().max(60).optional(),
+  telephone: z.string().max(60).optional().transform((v) => (v ? clean(v) : v)),
   enquiryType: z.enum(["services", "partnership", "investment", "other"]),
   message: z.string().min(20).max(5000),
   privacy: z.literal(true),
@@ -45,6 +52,12 @@ const hits = new Map<string, number[]>();
 
 function rateLimited(ip: string): boolean {
   const now = Date.now();
+  // occasional pruning keeps the map bounded on long-lived instances
+  if (hits.size > 500) {
+    for (const [k, v] of hits) {
+      if (!v.some((t) => now - t < WINDOW_MS)) hits.delete(k);
+    }
+  }
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   if (recent.length >= MAX_PER_WINDOW) {
     hits.set(ip, recent);
@@ -247,8 +260,8 @@ export async function POST(req: Request) {
   const from =
     process.env.ENQUIRY_FROM ?? "Medius Unus Website <enquiries@mediusunus.com>";
 
-  const resend = new Resend(apiKey);
   const logos = await resolveLogos();
+  const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({
     from,
     to: [to],
