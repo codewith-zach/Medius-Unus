@@ -292,18 +292,28 @@ export const en = {
       },
     ],
     oilGasPartnerships: [
+      // T.V.A Engineering — removed pending finalisation; exact approved wording
+      // retained below for restoration. (FR translation provided for parity.)
+      // {
+      //   name: "T.V.A Engineering",
+      //   location: "France",
+      //   description:
+      //     "T.V.A Engineering, France is an oil and gas engineering solutions company that provides optimal, innovative and sustainable solutions according to the field constraints of its clients. Medius Unus is proud to be a partner and affiliate of T.V.A Engineering, who have signed an agreement with Medius Unus to work as their sole representative in Nigeria starting from October 2026."
+      // },
       {
         name: "Poweltec",
         location: "France",
         description:
           "Poweltec, France is an independent service company dedicated to the improvement of oil and gas field production. Medius Unus is proud to be a partner and affiliate of Poweltec, who have entrusted Medius Unus with a mandate to act as their sole representative in Nigeria starting from September 2026.",
       },
-      {
-        name: "Greenville LNG",
-        location: "Nigeria",
-        description:
-          "Greenville LNG, Nigeria is a well-renowned producer and distributor of Liquified Natural Gas in Africa with its head hub in Nigeria. Medius Unus is honoured to be in partnership with Greenville to explore new expansion opportunities starting from October 2026.",
-      },
+      // Disabled pending owner confirmation — restore when re-approved:
+      //       {
+      //         name: "Greenville LNG",
+      //         location: "Nigeria",
+      //         description:
+      //           "Greenville LNG, Nigeria is a well-renowned producer and distributor of Liquified Natural Gas in Africa with its head hub in Nigeria. Medius Unus is honoured to be in partnership with Greenville to explore new expansion opportunities starting from October 2026.",
+      //       },
+
     ],
     solidMineralsNote: {
       text: "Further details about this mandate are shared only through an ",
@@ -324,7 +334,8 @@ export const en = {
         title: "Strategic & Technology Partners",
         orgs: [
           "POWELTEC",
-          "Greenville LNG",
+          // "T.V.A Engineering",  // removed pending finalisation
+          // "Greenville LNG",  // disabled pending owner confirmation
           "VLISCO",
           "NERC",
           "Johan Consults",
@@ -349,6 +360,7 @@ export const en = {
         title: "Representation Mandates",
         orgs: [
           "POWELTEC — France",
+          // "T.V.A Engineering — France",  // removed pending finalisation
           "Plateau State Government",
           "Bauchi State Government",
         ],

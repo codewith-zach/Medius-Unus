@@ -294,18 +294,28 @@ export const fr: Content = {
       },
     ],
     oilGasPartnerships: [
+      // T.V.A Engineering — removed pending finalisation; exact approved wording
+      // retained below for restoration. (FR translation provided for parity.)
+      // {
+      //   name: "T.V.A Engineering",
+      //   location: "France",
+      //   description:
+      //     "T.V.A Engineering, France, est une société d'ingénierie pétrolière et gazière qui fournit des solutions optimales, innovantes et durables adaptées aux contraintes de terrain de ses clients. Medius Unus est fière d'être partenaire et affiliée de T.V.A Engineering, qui a signé un accord avec Medius Unus l'établissant comme son représentant exclusif au Nigeria à compter d'octobre 2026."
+      // },
       {
         name: "Poweltec",
         location: "France",
         description:
           "Poweltec, France, est une société de services indépendante dédiée à l'amélioration de la production des champs pétroliers et gaziers. Medius Unus est fière d'être partenaire et affiliée de Poweltec, qui lui a confié un mandat de représentant exclusif au Nigeria à compter de septembre 2026.",
       },
-      {
-        name: "Greenville LNG",
-        location: "Nigéria",
-        description:
-          "Greenville LNG, au Nigéria, est un producteur et distributeur de gaz naturel liquéfié de renom en Afrique, dont le principal centre opérationnel se trouve au Nigéria. Medius Unus est honorée d'être partenaire de Greenville pour explorer de nouvelles opportunités d'expansion à compter d'octobre 2026.",
-      },
+      // Disabled pending owner confirmation — restore when re-approved:
+      //       {
+      //         name: "Greenville LNG",
+      //         location: "Nigéria",
+      //         description:
+      //           "Greenville LNG, au Nigéria, est un producteur et distributeur de gaz naturel liquéfié de renom en Afrique, dont le principal centre opérationnel se trouve au Nigéria. Medius Unus est honorée d'être partenaire de Greenville pour explorer de nouvelles opportunités d'expansion à compter d'octobre 2026.",
+      //       },
+
     ],
     solidMineralsNote: {
       text: "De plus amples détails sur ce mandat sont partagés uniquement via un ",
@@ -326,7 +336,8 @@ export const fr: Content = {
         title: "Partenaires stratégiques et technologiques",
         orgs: [
           "POWELTEC",
-          "Greenville LNG",
+          // "T.V.A Engineering",  // removed pending finalisation
+          // "Greenville LNG",  // disabled pending owner confirmation
           "VLISCO",
           "NERC",
           "Johan Consults",
@@ -351,6 +362,7 @@ export const fr: Content = {
         title: "Mandats de représentation",
         orgs: [
           "POWELTEC — France",
+          // "T.V.A Engineering — France",  // removed pending finalisation
           "Plateau State Government",
           "Bauchi State Government",
         ],
