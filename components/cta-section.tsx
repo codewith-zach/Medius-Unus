@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Handshake } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { ContourLines } from "@/components/contour-lines";
 import { hrefFor } from "@/lib/content";
@@ -22,39 +22,48 @@ export function CtaSection({
   return (
     <section className="grain relative overflow-hidden bg-ink-gradient">
       <div aria-hidden className="hairline-grid absolute inset-0" />
-      <ContourLines className="absolute left-1/2 top-1/2 h-[160%] w-[90%] -translate-x-1/2 -translate-y-1/2" opacity={0.1} />
-      <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 sm:py-28">
+      <ContourLines
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[170%] w-[95%] -translate-x-1/2 -translate-y-1/2"
+        opacity={0.12}
+      />
+      <div className="relative mx-auto max-w-4xl px-5 py-24 text-center sm:px-8 sm:py-32">
         <Reveal>
-          <h2 className="font-heading text-3xl font-semibold leading-[1.15] tracking-[-0.01em] text-cream sm:text-4xl lg:text-5xl">
+          <span
+            aria-hidden
+            className="mx-auto block h-10 w-px bg-gradient-to-b from-transparent to-gold"
+          />
+          <h2 className="mt-2 text-balance font-heading text-[2rem] font-light leading-[1.14] tracking-[-0.01em] text-cream sm:text-5xl">
             {title}
             {titleAccent ? (
               <>
                 <br />
-                <em className="font-medium italic text-gold">{titleAccent}</em>
+                <em className="italic text-gold">{titleAccent}</em>
               </>
             ) : null}
           </h2>
-          <div className="gold-rule rule-grow mx-auto mt-7 w-16" aria-hidden />
-          <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-cream/80 sm:text-lg">
+          <p className="mx-auto mt-8 max-w-2xl text-[0.95rem] leading-[1.8] text-cream/70 sm:text-base">
             {description}
           </p>
-          <div className="mt-11 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href={hrefFor(lang, "/contact")}
-              className="group inline-flex items-center gap-2.5 rounded bg-gold px-7 py-3.5 text-sm font-semibold text-navy transition-all hover:bg-[#d8ac58] hover:shadow-[0_8px_30px_rgba(199,157,75,0.35)] active:scale-[0.98]"
+              className="btn-gold group inline-flex items-center gap-2.5 px-8 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em]"
             >
               {primary}
               <ArrowRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
                 strokeWidth={1.5}
               />
             </Link>
             <Link
               href={hrefFor(lang, "/contact?intent=partnership")}
-              className="inline-flex items-center gap-2.5 rounded border border-gold/60 px-7 py-3.5 text-sm font-semibold text-gold transition-all hover:bg-gold hover:text-navy active:scale-[0.98]"
+              className="btn-line-light group inline-flex items-center gap-2.5 px-8 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em]"
             >
-              <Handshake className="h-4 w-4" strokeWidth={1.5} />
               {secondary}
+              <ArrowUpRight
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                strokeWidth={1.5}
+              />
             </Link>
           </div>
         </Reveal>

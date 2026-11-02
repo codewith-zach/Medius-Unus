@@ -35,7 +35,7 @@ export function LanguageToggle({
 
   return (
     <div
-      className={`flex items-center overflow-hidden rounded-full border ${base} text-[0.65rem] font-semibold uppercase tracking-[0.12em]`}
+      className={`flex shrink-0 items-center overflow-hidden rounded-full border ${base} text-[0.6rem] font-semibold uppercase tracking-[0.12em] sm:text-[0.65rem]`}
       role="group"
       aria-label="Language / Langue"
     >
@@ -47,10 +47,10 @@ export function LanguageToggle({
           aria-current={lang === l ? "true" : undefined}
           className={
             lang === l
-              ? "bg-gold px-3 py-1.5 text-navy"
+              ? "bg-gold px-2.5 py-1.5 text-navy sm:px-3"
               : variant === "dark"
-                ? "px-3 py-1.5 text-cream/70 transition-colors hover:text-gold"
-                : "px-3 py-1.5 text-muted-foreground transition-colors hover:text-deepgold"
+                ? "px-2.5 py-1.5 text-cream/70 transition-colors hover:text-gold sm:px-3"
+                : "px-2.5 py-1.5 text-muted-foreground transition-colors hover:text-deepgold sm:px-3"
           }
         >
           {l}

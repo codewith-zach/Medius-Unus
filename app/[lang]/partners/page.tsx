@@ -1,8 +1,6 @@
-import { Fragment } from "react";
-import { PageHero, SectionHeading } from "@/components/section";
+import { PageHero } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
-import { ContourLines } from "@/components/contour-lines";
 import { getContent, isLang, defaultLang } from "@/lib/content";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
@@ -17,53 +15,74 @@ export default async function PartnersPage({ params }: { params: Promise<{ lang:
 
   return (
     <>
-      <PageHero eyebrow={t.hero.eyebrow} title={t.hero.title} description={t.hero.description} />
+      <PageHero
+        eyebrow={t.hero.eyebrow}
+        title={t.hero.title}
+        description={t.hero.description}
+      />
 
       <section className="relative overflow-hidden bg-cream">
-        <ContourLines
-          className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
-          stroke="#0D2B1F"
-          opacity={0.05}
-        />
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-          <SectionHeading eyebrow={t.eyebrow} title={t.title} />
-          <div className="mt-14 border-t border-navy/10">
-            {t.categories.map((c, i) => (
-              <Reveal key={c.title} delay={i * 0.06}>
-                <div className="grid gap-4 border-b border-navy/10 py-8 sm:grid-cols-[4rem_1fr_auto] sm:gap-8 sm:py-10">
-                  <span
-                    aria-hidden
-                    className="font-heading text-2xl font-semibold text-gold/70 sm:text-3xl"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h2 className="font-heading text-xl font-semibold text-navy sm:text-2xl">
-                      {c.title}
-                    </h2>
-                    <ul className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2.5">
-                      {c.orgs.map((o, oi) => (
-                        <Fragment key={o}>
-                          {oi > 0 && (
-                            <li
-                              aria-hidden
-                              className="h-1 w-1 rotate-45 bg-gold/70"
-                            />
-                          )}
-                          <li className="text-sm font-medium leading-relaxed text-navy/75 sm:text-[0.95rem]">
-                            {o}
-                          </li>
-                        </Fragment>
-                      ))}
-                    </ul>
-                  </div>
-                  <span className="hidden self-start pt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:block">
-                    {(c.orgs.length === 1 ? t.orgCountOne : t.orgCountMany).replace("{n}", String(c.orgs.length))}
+        <div aria-hidden className="hairline-grid-ink absolute inset-0 opacity-50" />
+        <div className="relative mx-auto max-w-7xl space-y-20 px-5 py-20 sm:px-8 sm:py-28 lg:px-10">
+          <Reveal>
+            <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-navy/15 pb-6">
+              <h2 className="font-heading text-2xl font-medium tracking-[-0.01em] text-navy sm:text-[1.8rem]">
+                {t.title}
+              </h2>
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.26em] text-deepgold">
+                {t.eyebrow}
+              </p>
+            </div>
+          </Reveal>
+
+          {t.categories.map((cat, i) => (
+            <div key={cat.title}>
+              <Reveal>
+                <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3">
+                  <p className="flex items-baseline gap-5">
+                    <span className="font-heading text-sm font-light italic text-gold">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-heading text-xl font-medium tracking-[-0.01em] text-navy sm:text-2xl">
+                      {cat.title}
+                    </span>
+                  </p>
+                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                    {(cat.orgs.length === 1 ? t.orgCountOne : t.orgCountMany).replace(
+                      "{n}",
+                      String(cat.orgs.length)
+                    )}
                   </span>
                 </div>
               </Reveal>
-            ))}
-          </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {cat.orgs.map((o, oi) => {
+                  const [name, location] = o.split(" — ");
+                  return (
+                    <Reveal key={o} delay={Math.min(oi * 0.05, 0.2)}>
+                      <div className="group flex h-full flex-col items-center justify-center border border-navy/15 bg-card px-6 py-8 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/70 hover:shadow-[0_18px_40px_-18px_rgba(12,42,30,0.25)]">
+                        <span
+                          aria-hidden
+                          className="mb-4 h-1.5 w-1.5 rotate-45 bg-gold/80 transition-transform duration-300 group-hover:scale-125"
+                        />
+                        <p className="font-heading text-lg font-medium leading-snug tracking-[0.02em] text-navy">
+                          {name}
+                        </p>
+                        {location && (
+                          <p className="mt-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+                            {location}
+                          </p>
+                        )}
+                      </div>
+                    </Reveal>
+                  );
+                })}
+              </div>
+              {i < t.categories.length - 1 && (
+                <div aria-hidden className="mt-20 border-t border-navy/10" />
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
