@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Menu } from "lucide-react";
 import { LogoEmblem, LogoWordmark } from "@/components/logo";
 import { LanguageToggle } from "@/components/language-toggle";
@@ -19,10 +19,16 @@ export function SiteHeader({ lang, content }: { lang: Lang; content: Content }) 
   const pathname = usePathname() || `/${lang}`;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  // Transparent over the hero at the top of every page; solid bar once scrolled.
+  // Transparent over the hero at the top of every page; solid bar once
+  // scrolled. Also tracks reading progress for the gold indicator line.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -40,6 +46,12 @@ export function SiteHeader({ lang, content }: { lang: Lang; content: Content }) 
           : "border-b border-transparent bg-transparent"
       }`}
     >
+      <div aria-hidden className="top-gild absolute inset-x-0 top-0" />
+      <div
+        aria-hidden
+        className="scroll-progress"
+        style={{ "--progress": progress } as CSSProperties}
+      />
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
         <Link href={fullPath("")} aria-label="Medius Unus — home" className="shrink-0">
           <LogoWordmark />

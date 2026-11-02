@@ -27,47 +27,53 @@ export default async function SectorsPage({ params }: { params: Promise<{ lang: 
           stroke="#0D2B1F"
           opacity={0.05}
         />
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
           <div className="space-y-8">
             {t.sectors.map((s, i) => (
               <Reveal key={s.slug}>
                 <article
                   id={s.slug}
-                  className="scroll-mt-28 rounded border border-sand bg-white p-6 sm:p-10"
+                  className="corner-marks group scroll-mt-28 rounded border border-sand bg-white p-6 transition-all duration-300 hover:border-gold/50 hover:shadow-[0_20px_48px_rgba(13,43,31,0.10)] sm:p-10"
                 >
                   <div className="flex items-baseline gap-4">
-                    <span className="font-heading text-2xl font-semibold text-gold">
+                    <span
+                      aria-hidden
+                      className="font-heading text-4xl font-semibold leading-none text-outline-gold sm:text-5xl"
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h2 className="font-heading text-2xl font-semibold text-navy sm:text-3xl">
+                    <h2 className="font-heading text-2xl font-semibold text-balance text-navy sm:text-3xl">
                       {s.title}
                     </h2>
                   </div>
-                  <div className="gold-rule mt-4 w-14" aria-hidden />
-                  <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  <div className="gold-rule mt-4 h-px w-14 transition-all duration-300 group-hover:w-20" aria-hidden />
+                  <p className="mt-5 max-w-3xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
                     {s.description}
                   </p>
                   {s.slug === "oil-gas" && (
                     <div className="mt-10">
                       <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-deepgold">
-                        <span
-                          aria-hidden
-                          className="inline-block h-px w-8 bg-current opacity-60"
-                        />
+                        <span aria-hidden className="diamond h-1.5 w-1.5" />
                         {t.partnershipsEyebrow}
                       </p>
                       <div className="mt-6 grid gap-5 md:grid-cols-3">
                         {t.oilGasPartnerships.map((p, pi) => (
                           <Reveal key={p.name} delay={pi * 0.08}>
-                            <div className="flex h-full flex-col rounded border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)]">
-                              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+                            <div className="relative flex h-full flex-col rounded border border-sand bg-white p-6 pt-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)]">
+                              <span
+                                aria-hidden
+                                className="pointer-events-none absolute right-5 top-4 select-none font-heading text-4xl font-semibold leading-none text-outline-navy opacity-40"
+                              >
+                                {String(pi + 1).padStart(2, "0")}
+                              </span>
+                              <p className="relative text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                                 {p.location}
                               </p>
-                              <h3 className="mt-2 font-heading text-xl font-semibold text-navy">
+                              <h3 className="relative mt-2 font-heading text-xl font-semibold text-navy">
                                 {p.name}
                               </h3>
-                              <div className="gold-rule mt-3 w-10" aria-hidden />
-                              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                              <div className="gold-rule relative mt-3 h-px w-10" aria-hidden />
+                              <p className="relative mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                                 {p.description}
                               </p>
                             </div>
@@ -77,7 +83,7 @@ export default async function SectorsPage({ params }: { params: Promise<{ lang: 
                     </div>
                   )}
                   {s.slug === "solid-minerals" && (
-                    <p className="mt-5 flex items-start gap-3 rounded border border-gold/40 bg-sand/40 p-4 text-sm leading-relaxed text-foreground">
+                    <p className="relative mt-5 flex items-start gap-3 rounded border border-gold/40 bg-sand/40 p-4 text-sm leading-relaxed text-foreground">
                       <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-deepgold" strokeWidth={1.25} />
                       {t.solidMineralsNote.text}
                       <Link

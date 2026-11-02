@@ -26,12 +26,15 @@ export function SectionHeading({
             dark ? "text-gold" : "text-deepgold"
           } ${align === "center" ? "justify-center" : ""}`}
         >
-          <span aria-hidden className="inline-block h-px w-8 bg-current opacity-60" />
+          <span aria-hidden className="diamond h-1.5 w-1.5 opacity-80" />
           {eyebrow}
+          {align === "center" && (
+            <span aria-hidden className="diamond h-1.5 w-1.5 opacity-80" />
+          )}
         </p>
       )}
       <h2
-        className={`mt-4 font-heading text-3xl font-semibold leading-[1.15] tracking-[-0.01em] sm:text-4xl lg:text-[2.75rem] ${
+        className={`mt-5 font-heading text-3xl font-semibold leading-[1.12] tracking-[-0.015em] text-balance sm:text-4xl lg:text-[2.9rem] ${
           dark ? "text-cream" : "text-navy"
         }`}
       >
@@ -44,12 +47,12 @@ export function SectionHeading({
         ) : null}
       </h2>
       <div
-        className={`gold-rule rule-grow mt-6 w-16 ${align === "center" ? "mx-auto" : ""}`}
+        className={`gold-rule rule-grow mt-6 h-px w-16 ${align === "center" ? "mx-auto" : ""}`}
         aria-hidden
       />
       {description && (
         <p
-          className={`mt-6 text-base leading-relaxed sm:text-lg ${
+          className={`mt-6 text-base leading-relaxed text-pretty sm:text-lg ${
             dark ? "text-cream/80" : "text-muted-foreground"
           }`}
         >
@@ -60,6 +63,10 @@ export function SectionHeading({
   );
 }
 
+/**
+ * Dark band that opens every inner page. The eyebrow is echoed as a huge
+ * ghost wordmark behind the heading for editorial drama.
+ */
 export function PageHero({
   eyebrow,
   title,
@@ -70,9 +77,16 @@ export function PageHero({
   description?: string;
 }) {
   return (
-    <section className="grain relative overflow-hidden bg-ink-gradient pt-36 pb-16 sm:pt-44 sm:pb-20">
+    <section className="grain relative overflow-hidden bg-ink-gradient pt-36 pb-20 sm:pt-48 sm:pb-24">
       <div aria-hidden className="hairline-grid absolute inset-0" />
       <ContourLines className="absolute -right-40 top-0 h-[130%] w-[70%] opacity-80" opacity={0.1} />
+      {/* Ghost echo of the eyebrow, cropped by the band */}
+      <span
+        aria-hidden
+        className="quote-glyph pointer-events-none absolute -bottom-[0.23em] left-1/2 w-full -translate-x-1/2 select-none text-center font-heading text-[22vw] font-semibold leading-none tracking-[0.08em] text-outline-cream opacity-60"
+      >
+        {eyebrow}
+      </span>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading eyebrow={eyebrow} title={title} description={description} dark />
       </div>

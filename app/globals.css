@@ -118,11 +118,8 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
-}
-
-@layer base {
-  body { @apply bg-background text-foreground; }
 }
 
 @theme inline {
@@ -137,18 +134,224 @@
   font-family: var(--font-heading), serif;
 }
 
-/* Subtle gold rule used under section headings */
+/* ---- Gilded editorial utilities ---- */
+
+/* Subtle gold rule used under section headings, ending in a small diamond */
 .gold-rule {
-  background: linear-gradient(90deg, #C79D4B, #C79D4B33);
+  position: relative;
+  background: linear-gradient(90deg, #C79D4B 0%, #E3C078 45%, #C79D4B33 100%);
   height: 1px;
 }
 
-/* Rich emerald gradient for large dark sections */
+/* Rich emerald gradient for large dark sections — deeper, vignette included */
 .bg-ink-gradient {
   background:
-    radial-gradient(1100px 500px at 85% -10%, rgba(199, 157, 75, 0.10), transparent 60%),
-    radial-gradient(900px 480px at -10% 110%, rgba(30, 96, 66, 0.35), transparent 55%),
-    linear-gradient(165deg, #081F15 0%, #0F3423 58%, #081F15 100%);
+    radial-gradient(1100px 520px at 85% -10%, rgba(199, 157, 75, 0.12), transparent 60%),
+    radial-gradient(900px 480px at -10% 110%, rgba(30, 96, 66, 0.38), transparent 55%),
+    radial-gradient(1400px 900px at 50% 50%, transparent 55%, rgba(3, 15, 10, 0.55) 100%),
+    linear-gradient(165deg, #071D13 0%, #10382A 55%, #071D13 100%);
+}
+
+/* Shimmering gold gradient text for accent words (dark backgrounds) */
+.text-gold-gradient {
+  background: linear-gradient(
+    100deg,
+    #A87F33 0%,
+    #C79D4B 25%,
+    #F0D391 50%,
+    #C79D4B 75%,
+    #A87F33 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-shimmer 7s ease-in-out infinite;
+}
+/* Same, tuned for legibility on cream backgrounds */
+.text-deepgold-gradient {
+  background: linear-gradient(
+    100deg,
+    #7A5A1A 0%,
+    #A87F33 30%,
+    #C79D4B 50%,
+    #A87F33 70%,
+    #7A5A1A 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-shimmer 7s ease-in-out infinite;
+}
+@keyframes gold-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Ghost outlined numerals / wordmarks (decorative indexes) */
+.text-outline-gold {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(199, 157, 75, 0.55);
+}
+.text-outline-navy {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(13, 43, 31, 0.28);
+}
+.text-outline-cream {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(247, 241, 230, 0.22);
+}
+
+/* Light sweep across primary gold buttons */
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 250, 235, 0.45) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  pointer-events: none;
+}
+.btn-sheen:hover::after,
+.btn-sheen:focus-visible::after {
+  transform: translateX(120%);
+}
+
+/* Chronometer-style corner marks for cards & panels (thin gold right angles) */
+.corner-marks {
+  position: relative;
+}
+.corner-marks::before,
+.corner-marks::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+.corner-marks::before {
+  top: 10px;
+  left: 10px;
+  border-top: 1px solid rgba(199, 157, 75, 0.6);
+  border-left: 1px solid rgba(199, 157, 75, 0.6);
+}
+.corner-marks::after {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1px solid rgba(199, 157, 75, 0.6);
+  border-right: 1px solid rgba(199, 157, 75, 0.6);
+}
+.corner-marks:hover::before,
+.corner-marks:hover::after {
+  width: 22px;
+  height: 22px;
+  border-color: rgba(199, 157, 75, 0.95);
+}
+
+/* Editorial drop cap for long-form ledes */
+.dropcap::first-letter {
+  font-family: var(--font-heading), serif;
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.82;
+  font-weight: 600;
+  padding-right: 0.12em;
+  padding-top: 0.06em;
+  color: var(--brand-deep-gold);
+}
+
+/* Gold hairline that frames the very top of the viewport */
+.top-gild {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #C79D4B66 18%,
+    #E3C078 50%,
+    #C79D4B66 82%,
+    transparent
+  );
+  height: 1px;
+}
+
+/* Scroll progress indicator (header) */
+.scroll-progress {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7A5A1A, #C79D4B 40%, #F0D391 70%, #C79D4B);
+  transform-origin: left;
+  transform: scaleX(var(--progress, 0));
+  transition: transform 0.12s linear;
+}
+
+/* Soft radial gold halo (behind hero artwork, CTAs) */
+.gold-halo {
+  background: radial-gradient(
+    closest-side,
+    rgba(199, 157, 75, 0.22),
+    rgba(199, 157, 75, 0.07) 55%,
+    transparent 75%
+  );
+}
+
+/* Gold diamond bullet (decorative separator) */
+.diamond {
+  display: inline-block;
+  height: 0.375rem;
+  width: 0.375rem;
+  rotate: 45deg;
+  background: #C79D4B;
+}
+
+/* Oversized decorative serif quote glyph */
+.quote-glyph {
+  font-family: var(--font-heading), serif;
+  line-height: 0.6;
+  user-select: none;
+}
+
+/* Back-to-top floating control */
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(199, 157, 75, 0.55);
+  border-radius: 9999px;
+  background: rgba(8, 31, 21, 0.92);
+  color: #C79D4B;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(3, 15, 10, 0.35);
+  transition: transform 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98), opacity 0.3s ease,
+    border-color 0.3s ease;
+}
+.back-to-top:hover {
+  transform: translateY(-3px);
+  border-color: #C79D4B;
+}
+.back-to-top[data-hidden="true"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
 }
 
 /* ---- Editorial texture & interaction utilities ---- */
@@ -232,6 +435,15 @@
   to { transform: scaleX(1); }
 }
 
+/* Slow drift for floating decorative elements */
+.drift {
+  animation: drift 9s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { transform: translateY(-8px); }
+  to { transform: translateY(10px); }
+}
+
 /* Infinite marquee (partners band) */
 .marquee {
   overflow: hidden;
@@ -283,7 +495,10 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .scroll-cue::after,
-  .rule-grow {
+  .rule-grow,
+  .text-gold-gradient,
+  .text-deepgold-gradient,
+  .drift {
     animation: none !important;
   }
   .marquee-track {
@@ -295,5 +510,8 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-right: 0;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

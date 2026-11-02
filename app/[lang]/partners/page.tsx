@@ -25,15 +25,15 @@ export default async function PartnersPage({ params }: { params: Promise<{ lang:
           stroke="#0D2B1F"
           opacity={0.05}
         />
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
           <SectionHeading eyebrow={t.eyebrow} title={t.title} />
           <div className="mt-14 border-t border-navy/10">
             {t.categories.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.06}>
-                <div className="grid gap-4 border-b border-navy/10 py-8 sm:grid-cols-[4rem_1fr_auto] sm:gap-8 sm:py-10">
+                <div className="group relative grid gap-4 border-b border-navy/10 py-8 pl-3 transition-colors duration-300 hover:bg-white/70 sm:grid-cols-[4rem_1fr_auto] sm:gap-8 sm:py-10">
                   <span
                     aria-hidden
-                    className="font-heading text-2xl font-semibold text-gold/70 sm:text-3xl"
+                    className="font-heading text-2xl font-semibold leading-none text-outline-gold transition-all duration-300 group-hover:tracking-wider sm:text-3xl"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -57,7 +57,7 @@ export default async function PartnersPage({ params }: { params: Promise<{ lang:
                       ))}
                     </ul>
                   </div>
-                  <span className="hidden self-start pt-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:block">
+                  <span className="hidden self-start rounded-full border border-navy/15 px-3.5 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground transition-colors duration-300 group-hover:border-gold/50 group-hover:text-deepgold sm:block">
                     {(c.orgs.length === 1 ? t.orgCountOne : t.orgCountMany).replace("{n}", String(c.orgs.length))}
                   </span>
                 </div>

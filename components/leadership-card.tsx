@@ -23,15 +23,29 @@ export function LeadershipCard({
 }) {
   return (
     <Reveal delay={index * 0.1}>
-      <div className="group flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.10)]">
+      <div className="corner-marks group relative flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_20px_48px_rgba(13,43,31,0.12)]">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute right-6 top-4 select-none font-heading text-6xl font-semibold leading-none text-outline-navy opacity-60"
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
         <div className="flex items-center gap-6">
-          <Image
-            src={leader.photo}
-            alt={`Portrait of ${leader.name}`}
-            width={192}
-            height={192}
-            className="h-20 w-20 shrink-0 rounded-full border border-gold/50 object-cover transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24"
-          />
+          <span className="relative shrink-0">
+            <Image
+              src={leader.photo}
+              alt={`Portrait of ${leader.name}`}
+              width={192}
+              height={192}
+              className="h-20 w-20 rounded-full border border-gold/50 object-cover grayscale-[45%] transition-all duration-500 group-hover:scale-[1.04] group-hover:grayscale-0 sm:h-24 sm:w-24"
+            />
+            <span
+              aria-hidden
+              className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-gold"
+            >
+              <span className="h-1.5 w-1.5 rotate-45 bg-navy" />
+            </span>
+          </span>
           <div>
             <h3 className="font-heading text-2xl font-semibold uppercase tracking-[0.06em] text-navy">
               {leader.name}

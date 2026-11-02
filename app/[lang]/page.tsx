@@ -55,18 +55,18 @@ export default async function HomePage({
           <div>
             <Reveal>
               <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-                <span aria-hidden className="inline-block h-px w-10 bg-gold/70" />
+                <span aria-hidden className="diamond h-1.5 w-1.5" />
                 {t.hero.eyebrow}
               </p>
             </Reveal>
-            <h1 className="mt-7 font-heading text-[2.6rem] font-semibold leading-[1.06] tracking-[-0.015em] text-cream sm:text-6xl lg:text-[4.4rem]">
+            <h1 className="mt-7 font-heading text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-balance text-cream sm:text-6xl lg:text-[4.75rem]">
               {t.hero.lines.map((line, i) => (
                 <Reveal key={i} delay={0.08 + i * 0.08}>
                   <span className="block">
                     {"pre" in line ? (
                       <>
                         {line.pre}
-                        <em className="text-gold">{line.accent}</em>
+                        <em className="text-gold-gradient">{line.accent}</em>
                       </>
                     ) : (
                       line.text
@@ -76,7 +76,7 @@ export default async function HomePage({
               ))}
             </h1>
             <Reveal delay={0.34}>
-              <p className="mt-8 max-w-xl text-base leading-relaxed text-cream/80 sm:text-lg">
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-pretty text-cream/80 sm:text-lg">
                 {t.hero.support}
               </p>
             </Reveal>
@@ -84,7 +84,7 @@ export default async function HomePage({
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Link
                   href={hrefFor(lang, "/services")}
-                  className="group inline-flex items-center justify-center gap-2.5 rounded bg-gold px-7 py-3.5 text-sm font-semibold text-navy transition-all hover:bg-[#d8ac58] hover:shadow-[0_8px_30px_rgba(199,157,75,0.35)] active:scale-[0.98]"
+                  className="btn-sheen group inline-flex items-center justify-center gap-2.5 rounded bg-gold px-8 py-4 text-sm font-semibold text-navy transition-all hover:bg-[#d8ac58] hover:shadow-[0_8px_30px_rgba(199,157,75,0.35)] active:scale-[0.98]"
                 >
                   {t.hero.ctaPrimary}
                   <ArrowRight
@@ -94,7 +94,7 @@ export default async function HomePage({
                 </Link>
                 <Link
                   href={hrefFor(lang, "/contact")}
-                  className="inline-flex items-center justify-center gap-2 rounded border border-gold/60 px-7 py-3.5 text-sm font-semibold text-gold transition-all hover:bg-gold hover:text-navy active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2 rounded border border-gold/60 px-8 py-4 text-sm font-semibold text-gold transition-all hover:bg-gold hover:text-navy active:scale-[0.98]"
                 >
                   {t.hero.ctaSecondary}
                 </Link>
@@ -129,20 +129,28 @@ export default async function HomePage({
             title={t.whoWeAre.title}
             titleAccent={t.whoWeAre.titleAccent}
           />
-          <Reveal className="mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            <p>{t.whoWeAre.body}</p>
+          <Reveal className="mt-6 max-w-3xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
+            <p className="dropcap">{t.whoWeAre.body}</p>
           </Reveal>
           <div className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {t.whoWeAre.pillars.map((item, i) => {
               const Icon = pillarIcons[item.icon as keyof typeof pillarIcons];
               return (
                 <Reveal key={item.title} delay={i * 0.08}>
-                  <div className="group border-t border-navy/15 pt-6 transition-colors hover:border-gold">
-                    <Icon
-                      className="h-7 w-7 text-gold transition-transform duration-300 group-hover:-translate-y-1"
-                      strokeWidth={1.25}
+                  <div className="group relative border-t border-navy/15 pt-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold">
+                    <span
                       aria-hidden
-                    />
+                      className="pointer-events-none absolute right-0 top-5 select-none font-heading text-5xl font-semibold leading-none text-outline-navy opacity-50 transition-opacity duration-300 group-hover:opacity-90"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gold/50 bg-white shadow-[inset_0_0_0_4px_#FFFFFF,0_0_0_4px_rgba(199,157,75,0.10)] transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_8px_24px_rgba(199,157,75,0.28)]">
+                      <Icon
+                        className="h-6 w-6 text-gold transition-transform duration-300 group-hover:scale-110"
+                        strokeWidth={1.25}
+                        aria-hidden
+                      />
+                    </span>
                     <h3 className="mt-5 font-heading text-xl font-semibold text-navy">
                       {item.title}
                     </h3>
@@ -186,21 +194,24 @@ export default async function HomePage({
               <Reveal key={s.slug} delay={Math.min(i * 0.04, 0.2)}>
                 <Link
                   href={hrefFor(lang, `/services#${s.slug}`)}
-                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 rounded-md border-b border-navy/10 py-6 transition-all duration-300 hover:-translate-y-1 hover:z-10 hover:scale-[1.01] hover:shadow-[0_14px_36px_rgba(13,43,31,0.16)] active:translate-y-0 active:scale-[0.995] active:shadow-none sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
+                  className="group relative z-0 grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-navy/10 py-6 pl-3 transition-all duration-300 before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:origin-top before:scale-y-0 before:bg-gold before:transition-transform before:duration-300 hover:z-10 hover:-translate-y-0.5 hover:bg-white/70 hover:before:scale-y-100 hover:shadow-[0_14px_36px_rgba(13,43,31,0.14)] active:translate-y-0 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:py-7"
                 >
-                  <span className="font-heading text-2xl font-semibold text-gold/70 transition-colors group-hover:text-gold sm:text-3xl">
+                  <span
+                    aria-hidden
+                    className="font-heading text-2xl font-semibold leading-none text-outline-gold transition-all duration-300 group-hover:tracking-wider sm:text-3xl"
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span>
                     <span className="font-heading text-lg font-semibold leading-snug text-navy sm:text-xl">
                       {s.title}
                     </span>
-                    <span className="mt-1.5 hidden max-w-2xl text-sm leading-relaxed text-muted-foreground md:block">
+                    <span className="mt-1.5 block max-w-2xl text-sm leading-relaxed text-muted-foreground md:block">
                       {s.summary}
                     </span>
                   </span>
                   <ArrowUpRight
-                    className="h-5 w-5 text-deepgold/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-deepgold"
+                    className="h-5 w-5 text-deepgold/50 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-deepgold"
                     strokeWidth={1.5}
                   />
                 </Link>
@@ -214,24 +225,33 @@ export default async function HomePage({
       <section className="grain relative overflow-hidden bg-ink-gradient">
         <div aria-hidden className="hairline-grid absolute inset-0" />
         <ContourLines className="absolute right-[-10%] top-1/2 h-[170%] w-[75%] -translate-y-1/2" opacity={0.12} />
-        <div className="relative mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div className="relative mx-auto max-w-5xl px-4 py-24 text-center sm:px-6 sm:py-32 lg:px-8">
+          <span
+            aria-hidden
+            className="quote-glyph pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 select-none font-heading text-[11rem] font-semibold text-gold/12 sm:text-[15rem]"
+          >
+            &ldquo;
+          </span>
           <Reveal>
-            <p className="font-heading text-2xl font-medium leading-[1.35] text-cream sm:text-3xl lg:text-[2.6rem] lg:leading-[1.3]">
-              <span className="text-gold">&ldquo;</span>
+            <p className="relative font-heading text-2xl font-medium leading-[1.35] text-balance text-cream sm:text-3xl lg:text-[2.6rem] lg:leading-[1.3]">
               {t.statement.segments.map((seg, i) =>
                 "em" in seg ? (
-                  <em key={i} className="text-gold">
+                  <em key={i} className="text-gold-gradient">
                     {seg.em}
                   </em>
                 ) : (
                   <span key={i}>{seg.text}</span>
                 )
               )}
-              <span className="text-gold">&rdquo;</span>
             </p>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.3em] text-cream/50">
+            <div className="mt-9 flex items-center justify-center gap-4" aria-hidden>
+              <span className="gold-rule h-px w-14" />
+              <span className="diamond h-2 w-2" />
+              <span className="gold-rule h-px w-14" style={{ transform: "scaleX(-1)" }} />
+            </div>
+            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-cream/50">
               {t.statement.attribution}
             </p>
           </Reveal>
@@ -261,7 +281,7 @@ export default async function HomePage({
               >
                 <Link
                   href={hrefFor(lang, `/sectors#${s.slug}`)}
-                  className="group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)] sm:p-8"
+                  className="corner-marks group relative block h-full overflow-hidden rounded border border-sand bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_16px_40px_rgba(13,43,31,0.12)] sm:p-8"
                 >
                   <span
                     aria-hidden
@@ -294,7 +314,11 @@ export default async function HomePage({
 
       {/* ── Stats band ───────────────────────────────────────── */}
       <section className="grain relative overflow-hidden bg-ink-gradient">
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-4 py-14 sm:grid-cols-2 sm:gap-y-12 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <ContourLines
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[150%] w-[80%] -translate-x-1/2 -translate-y-1/2"
+          opacity={0.07}
+        />
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-4 py-16 sm:grid-cols-2 sm:gap-y-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           {t.stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
@@ -305,7 +329,7 @@ export default async function HomePage({
                 <StatCounter
                   value={s.value}
                   suffix={s.suffix}
-                  className="font-heading text-4xl font-semibold text-gold sm:text-5xl lg:text-6xl"
+                  className="text-gold-gradient font-heading text-4xl font-semibold sm:text-5xl lg:text-6xl"
                 />
                 <p className="text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-cream/70 sm:mt-3 sm:text-xs">
                   {s.label}
@@ -355,13 +379,22 @@ export default async function HomePage({
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {c.partnersPage.categories.map((cat, i) => (
               <Reveal key={cat.title} delay={i * 0.06}>
-                <div className="h-full border-t border-navy/15 pt-6 transition-colors hover:border-gold">
+                <div className="group h-full border-t border-navy/15 pt-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold">
+                  <span
+                    aria-hidden
+                    className="pointer-events-none float-right select-none font-heading text-4xl font-semibold leading-none text-outline-navy opacity-40"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <h3 className="font-heading text-base font-semibold text-navy">
                     {cat.title}
                   </h3>
                   <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                     {cat.orgs.map((o) => (
-                      <li key={o}>{o}</li>
+                      <li key={o} className="flex items-baseline gap-2.5">
+                        <span aria-hidden className="diamond mt-1.5 h-1 w-1 shrink-0 opacity-70" />
+                        {o}
+                      </li>
                     ))}
                   </ul>
                 </div>
