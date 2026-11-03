@@ -250,6 +250,36 @@
   -webkit-text-stroke: 1px rgba(247, 243, 234, 0.22);
 }
 
+/* Back-to-top floating control */
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(199, 157, 75, 0.55);
+  border-radius: 9999px;
+  background: rgba(7, 28, 19, 0.92);
+  color: #C79D4B;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(3, 15, 10, 0.35);
+  transition: transform 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98), opacity 0.3s ease,
+    border-color 0.3s ease;
+}
+.back-to-top:hover {
+  transform: translateY(-3px);
+  border-color: #C79D4B;
+}
+.back-to-top[data-hidden="true"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+}
+
 /* Gold rule grows in when revealed */
 .rule-grow {
   transform-origin: left;

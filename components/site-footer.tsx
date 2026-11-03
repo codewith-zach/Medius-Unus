@@ -9,7 +9,7 @@ export function SiteFooter({ lang, content }: { lang: Lang; content: Content }) 
   return (
     <footer className="grain relative overflow-hidden bg-ink-gradient text-cream">
       <div aria-hidden className="top-gild absolute inset-x-0 top-0" />
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <LogoEmblem className="h-20 w-20" priority={false} />
           <p className="mt-5 font-heading text-2xl font-semibold tracking-[0.06em] text-cream">
@@ -104,7 +104,7 @@ export function SiteFooter({ lang, content }: { lang: Lang; content: Content }) 
       </div>
 
       <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-6 text-xs text-cream/60 sm:px-8 lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-xs text-cream/60 sm:px-6 lg:px-8">
           <p>© 2026 {content.footer.copyright}</p>
           <a
             href="#main"

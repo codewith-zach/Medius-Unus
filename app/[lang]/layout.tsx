@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { BackToTop } from "@/components/back-to-top";
 import { getContent, hrefFor, isLang, defaultLang } from "@/lib/content";
 import "@/app/globals.css";
 
@@ -90,6 +91,7 @@ export default async function RootLayout({
           {children}
         </main>
         <SiteFooter lang={lang} content={c} />
+        <BackToTop />
       </body>
     </html>
   );
