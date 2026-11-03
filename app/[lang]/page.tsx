@@ -230,6 +230,10 @@ export default async function HomePage({
 
       {/* ── Statement band ───────────────────────────────────── */}
       <section className="grain relative overflow-hidden bg-ink-gradient">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-ink via-ink/60 to-ink"
+        />
         <div aria-hidden className="hairline-grid absolute inset-0" />
         <ContourLines
           className="absolute right-[-10%] top-1/2 h-[170%] w-[75%] -translate-y-1/2"
