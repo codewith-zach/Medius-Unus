@@ -32,8 +32,8 @@ const sectorImages: Record<string, { src: string; alt: string }> = {
     alt: "Terraced open-pit mine cut into warm earth",
   },
   "banking-financial-services": {
-    src: "/images/sector-finance.jpg",
-    alt: "Financial-district towers rising above a city",
+    src: "/images/sector-gherkin.jpg",
+    alt: "The Gherkin (30 St Mary Axe) rising above the City of London",
   },
   manufacturing: {
     src: "/images/sector-manufacturing.jpg",
