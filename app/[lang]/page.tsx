@@ -282,7 +282,7 @@ export default async function HomePage({
                 >
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute right-7 top-0 translate-y-[-0.32em] select-none font-heading text-[5.5rem] font-semibold leading-none text-sand transition-colors duration-300 group-hover:text-gold/25 sm:right-8"
+                    className="pointer-events-none absolute right-6 top-4 select-none font-heading text-[4rem] font-medium leading-none text-sand transition-colors duration-300 group-hover:text-gold/25 sm:right-8 sm:top-6 sm:text-[5rem]"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
