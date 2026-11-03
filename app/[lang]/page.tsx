@@ -336,21 +336,24 @@ export default async function HomePage({
 
       {/* ── Stats band ───────────────────────────────────────── */}
       <section className="grain relative overflow-hidden bg-ink-gradient">
-        <div aria-hidden className="hairline-grid absolute inset-0" />
+        <ContourLines
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[150%] w-[80%] -translate-x-1/2 -translate-y-1/2"
+          opacity={0.07}
+        />
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-8 px-5 py-16 sm:grid-cols-2 sm:gap-y-12 sm:px-8 lg:grid-cols-4 lg:px-10">
           {t.stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div
-                className={`flex items-baseline justify-between gap-4 pb-6 sm:block sm:pb-0 lg:pl-10 ${
-                  i < t.stats.length - 1 ? "border-b border-white/10 sm:border-0" : ""
-                } ${i > 0 ? "lg:border-l lg:border-white/15" : "lg:pl-0"}`}
+                className={`flex items-baseline justify-between gap-4 border-white/10 pb-5 sm:block sm:border-0 sm:pb-0 sm:text-center lg:text-left ${
+                  i < t.stats.length - 1 ? "border-b sm:border-0" : ""
+                } ${i > 0 ? "lg:border-l lg:border-white/15 lg:pl-10" : ""}`}
               >
                 <StatCounter
                   value={s.value}
                   suffix={s.suffix}
-                  className="font-heading text-5xl font-light text-gold sm:text-6xl"
+                  className="text-gold-gradient font-heading text-4xl font-semibold sm:text-5xl lg:text-6xl"
                 />
-                <p className="text-[0.62rem] font-semibold uppercase leading-[1.8] tracking-[0.2em] text-cream/60 sm:mt-4 sm:text-[0.68rem]">
+                <p className="text-[0.7rem] font-semibold uppercase leading-relaxed tracking-[0.18em] text-cream/70 sm:mt-3 sm:text-xs">
                   {s.label}
                 </p>
               </div>

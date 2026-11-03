@@ -194,6 +194,27 @@
   height: 1px;
 }
 
+/* Shimmering gold gradient text for accent words and numerals (dark backgrounds) */
+.text-gold-gradient {
+  background: linear-gradient(
+    100deg,
+    #A87F33 0%,
+    #C79D4B 25%,
+    #F0D391 50%,
+    #C79D4B 75%,
+    #A87F33 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-shimmer 7s ease-in-out infinite;
+}
+@keyframes gold-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 /* Gold rule grows in when revealed */
 .rule-grow {
   transform-origin: left;
@@ -424,7 +445,8 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .scroll-cue::after,
-  .rule-grow {
+  .rule-grow,
+  .text-gold-gradient {
     animation: none !important;
   }
   .marquee-track {
