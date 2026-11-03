@@ -230,16 +230,10 @@ export default async function HomePage({
 
       {/* ── Statement band ───────────────────────────────────── */}
       <section className="grain relative overflow-hidden bg-ink-gradient">
-        <Image
-          src="/images/statement-city.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="img-editorial pointer-events-none object-cover opacity-[0.16]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-ink/60 to-ink"
+        <div aria-hidden className="hairline-grid absolute inset-0" />
+        <ContourLines
+          className="absolute right-[-10%] top-1/2 h-[170%] w-[75%] -translate-y-1/2"
+          opacity={0.12}
         />
         <div className="relative mx-auto max-w-5xl px-5 py-28 sm:px-8 sm:py-36 lg:px-10">
           <Reveal>
