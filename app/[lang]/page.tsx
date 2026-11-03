@@ -363,7 +363,11 @@ export default async function HomePage({
 
       {/* ── Leadership ───────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-cream">
-        <div aria-hidden className="hairline-grid-ink absolute inset-0 opacity-60" />
+        <ContourLines
+          className="pointer-events-none absolute -right-24 -top-20 h-72 w-[55%]"
+          stroke="#0C2A1E"
+          opacity={0.05}
+        />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
           <SectionHeading
             chapter="04"
