@@ -228,6 +228,16 @@
   height: 1px;
 }
 
+/* Soft radial gold halo (behind CTA emblems and artwork) */
+.gold-halo {
+  background: radial-gradient(
+    closest-side,
+    rgba(199, 157, 75, 0.22),
+    rgba(199, 157, 75, 0.07) 55%,
+    transparent 75%
+  );
+}
+
 /* Small rotated gold lozenge marker */
 .diamond {
   display: inline-block;

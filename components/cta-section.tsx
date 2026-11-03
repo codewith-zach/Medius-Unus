@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { ContourLines } from "@/components/contour-lines";
+import { LogoEmblem } from "@/components/logo";
 import { hrefFor } from "@/lib/content";
 
 export function CtaSection({
@@ -22,9 +23,20 @@ export function CtaSection({
   return (
     <section className="grain relative overflow-hidden bg-ink-gradient">
       <div aria-hidden className="hairline-grid absolute inset-0" />
+      {/* Emblem watermark centred behind the copy */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.06]"
+      >
+        <LogoEmblem className="h-[26rem] w-[26rem]" priority={false} />
+      </div>
+      <div
+        aria-hidden
+        className="gold-halo pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[44rem] -translate-x-1/2 -translate-y-1/2"
+      />
       <ContourLines
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[170%] w-[95%] -translate-x-1/2 -translate-y-1/2"
-        opacity={0.12}
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[160%] w-[90%] -translate-x-1/2 -translate-y-1/2"
+        opacity={0.08}
       />
       <div className="relative mx-auto max-w-4xl px-5 py-24 text-center sm:px-8 sm:py-32">
         <Reveal>
@@ -37,7 +49,7 @@ export function CtaSection({
             {titleAccent ? (
               <>
                 <br />
-                <em className="italic text-gold">{titleAccent}</em>
+                <em className="text-gold-gradient italic">{titleAccent}</em>
               </>
             ) : null}
           </h2>
@@ -57,7 +69,7 @@ export function CtaSection({
             </Link>
             <Link
               href={hrefFor(lang, "/contact?intent=partnership")}
-              className="btn-line-light group inline-flex items-center gap-2.5 px-8 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em]"
+              className="btn-line-light inline-flex items-center gap-2.5 px-8 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em]"
             >
               {secondary}
               <ArrowUpRight
