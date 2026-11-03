@@ -460,15 +460,15 @@ export const en = {
     {
       name: "Nordine Djeddi",
       photo: "/nordine-djeddi.jpg",
-      title: "Programme Director · Quality · Business Development",
+      title: "Programme Leadership · Quality Assurance · International Business Development",
       short:
-        "A Director of Medius Unus Nigeria Limited, Nordine Djeddi combines scientific and industrial experience with an international career in programme leadership, quality assurance and entrepreneurship. He develops international partnerships and helps structure opportunities and coordinate projects across banking, industry and energy, including oil and gas.",
+        "Director of Medius Unus Nigeria Limited, Nordine Djeddi combines programme leadership, quality assurance and entrepreneurship. He develops international partnerships and helps structure projects in Nigeria across energy, industry, natural resources, agro-industry and water management.",
       full: [
-        "A Director of Medius Unus Nigeria Limited, Nordine Djeddi combines a scientific and industrial background with an international career in programme leadership, quality assurance and business development. His training in chemistry, agri-food studies and computer engineering gives him a broad understanding of technical and operational challenges.",
-        "His international experience spans the chemical and pharmaceutical industries, IT services, banking, telecommunications and the automotive sector. His career includes experience with Elf Atochem, consulting work with Steria, CGI and Sogeti, and assignments involving BNP Paribas, Royal Bank of Canada, La Banque Postale Financement, Orange, SFR, Bouygues, Renault and Mercedes.",
-        "These experiences have developed his analytical rigour, attention to procedures and command of quality requirements in both industrial and software environments. His responsibilities have included data integrity, data centre migrations and production readiness. At BNP Paribas, he coordinated more than fifty business and technical contributors.",
-        "An entrepreneur, he has also led businesses in transport, commercial vehicle trading and real estate, building practical experience in management, client relationships and operational coordination.",
-        "At Medius Unus, he applies this experience to international partnership development, opportunity assessment and project delivery. He brings together international companies, local stakeholders and technical specialists to structure collaborations, particularly in industry and energy, including oil and gas.",
+        "Director of Medius Unus Nigeria Limited, Nordine Djeddi develops international partnerships and contributes to the structuring of projects in Nigeria. His background combines technical expertise, programme leadership and entrepreneurship, with a strong ability to bring together the commercial, operational and technological dimensions of complex projects.",
+        "Trained in chemistry, food science and computer engineering, he has worked across international environments spanning industry, telecommunications, healthcare and financial services. His career includes industrial experience with Elf Atochem, as well as consulting assignments for organisations including Cegedim, Bouygues Telecom, BNP Paribas and Royal Bank of Canada. In Luxembourg, his work on the testing and validation of trading applications also gave him a solid understanding of banking environments and financial markets.",
+        "Specialising in quality, system reliability and the management of critical projects, he has worked across IT operations, software testing and validation, data integrity and production-readiness assurance. At BNP Paribas, he coordinated more than fifty functional and technical contributors on complex projects, including data centre migrations involving the transfer of production systems supporting banking transaction flows representing several billion dollars.",
+        "His experience leading several companies further complements this background with practical expertise in management, business development and operational coordination.",
+        "At Medius Unus, he now brings together his technical and entrepreneurial experience to support international projects and partnerships across energy and industry, natural resources, agro-industry and water management. His role encompasses identifying and assessing opportunities, mobilising the right expertise and structuring the partnerships required to advance their development.",
       ],
     },
   ],
