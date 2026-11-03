@@ -425,7 +425,12 @@
   color: var(--brand-cream);
 }
 
-/* Service index rows — ink fill sweeps up on hover */
+/* Service index rows — ink fill sweeps up on hover.
+   Fill and text are coupled in one place, and the choreography only
+   exists on devices that can truly hover: on touch, browsers apply
+   :hover/:focus states inconsistently (sticky hover, tap focus), which
+   left a dark-filled row carrying dark, illegible text. Keyboard focus
+   keeps the full treatment on every device. */
 .index-row {
   position: relative;
   isolation: isolate;
@@ -440,12 +445,32 @@
   transform-origin: bottom;
   transition: transform 0.45s cubic-bezier(0.21, 0.47, 0.32, 0.98);
 }
-.index-row:hover::before,
+.index-row:active {
+  transform: translateY(1px);
+}
+
+@media (hover: hover) {
+  .index-row:hover::before {
+    transform: scaleY(1);
+  }
+  .index-row:hover .row-numeral { color: var(--brand-gold); }
+  .index-row:hover .row-title { color: var(--brand-cream); }
+  .index-row:hover .row-summary { color: rgba(247, 243, 234, 0.65); }
+  .index-row:hover .row-arrow {
+    color: var(--brand-gold);
+    transform: translate(4px, -4px);
+  }
+}
+
 .index-row:focus-visible::before {
   transform: scaleY(1);
 }
-.index-row:active {
-  transform: translateY(1px);
+.index-row:focus-visible .row-numeral { color: var(--brand-gold); }
+.index-row:focus-visible .row-title { color: var(--brand-cream); }
+.index-row:focus-visible .row-summary { color: rgba(247, 243, 234, 0.65); }
+.index-row:focus-visible .row-arrow {
+  color: var(--brand-gold);
+  transform: translate(4px, -4px);
 }
 
 /* Photography plate — offset hairline frame */

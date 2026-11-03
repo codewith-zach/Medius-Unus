@@ -204,21 +204,21 @@ export default async function HomePage({
                 <Link
                   key={s.slug}
                   href={hrefFor(lang, `/services#${s.slug}`)}
-                  className="index-row group grid grid-cols-[2.6rem_1fr_auto] items-center gap-5 border-b border-navy/15 px-3 py-6 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:px-5 sm:py-7"
+                  className="index-row grid grid-cols-[2.6rem_1fr_auto] items-center gap-5 border-b border-navy/15 px-3 py-6 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-8 sm:px-5 sm:py-7"
                 >
-                  <span className="font-heading text-xl font-light italic text-gold/70 transition-colors duration-300 group-hover:text-gold sm:text-2xl">
+                  <span className="row-numeral font-heading text-xl font-light italic text-gold/70 transition-colors duration-300 sm:text-2xl">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span>
-                    <span className="block font-heading text-lg font-medium leading-snug tracking-[-0.01em] text-navy transition-colors duration-300 group-hover:text-cream sm:text-[1.35rem]">
+                    <span className="row-title block font-heading text-lg font-medium leading-snug tracking-[-0.01em] text-navy transition-colors duration-300 sm:text-[1.35rem]">
                       {s.title}
                     </span>
-                    <span className="mt-1.5 hidden max-w-2xl text-[0.83rem] leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-cream/65 md:block">
+                    <span className="row-summary mt-1.5 hidden max-w-2xl text-[0.83rem] leading-relaxed text-muted-foreground transition-colors duration-300 md:block">
                       {s.summary}
                     </span>
                   </span>
                   <ArrowUpRight
-                    className="h-5 w-5 text-navy/40 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-gold"
+                    className="row-arrow h-5 w-5 text-navy/40 transition-all duration-300"
                     strokeWidth={1.25}
                   />
                 </Link>
