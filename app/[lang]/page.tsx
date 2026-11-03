@@ -371,7 +371,7 @@ export default async function HomePage({
             eyebrow={t.leadership.eyebrow}
             title={t.leadership.title}
           />
-          <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-12 lg:gap-20">
+          <div className="mt-16 grid gap-16 lg:grid-cols-2 lg:gap-20">
             {c.leadership.map((l, i) => (
               <LeadershipCard
                 key={l.name}

@@ -29,7 +29,7 @@ export function LeadershipCard({
   return (
     <Reveal delay={index * 0.12}>
       <article className="group relative border-t border-navy/15 pt-8">
-        <div className="flex flex-col gap-8 sm:flex-row sm:gap-10">
+        <div className="flex flex-col gap-8 min-[560px]:flex-row min-[560px]:gap-10">
           <div className="relative shrink-0">
             <div className="plate w-36 sm:w-44">
               <Image
