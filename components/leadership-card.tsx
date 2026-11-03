@@ -37,7 +37,7 @@ export function LeadershipCard({
               alt={`Portrait of ${leader.name}`}
               width={192}
               height={192}
-              className="h-20 w-20 rounded-full border border-gold/50 object-cover grayscale-[45%] transition-all duration-500 group-hover:scale-[1.04] group-hover:grayscale-0 sm:h-24 sm:w-24"
+              className="h-20 w-20 rounded-full border border-gold/50 object-cover transition-transform duration-500 group-hover:scale-[1.04] sm:h-24 sm:w-24"
             />
             <span
               aria-hidden
