@@ -215,6 +215,41 @@
   50% { background-position: 100% 50%; }
 }
 
+/* Gilded hairline across the top of a dark band */
+.top-gild {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #C79D4B66 18%,
+    #E3C078 50%,
+    #C79D4B66 82%,
+    transparent
+  );
+  height: 1px;
+}
+
+/* Small rotated gold lozenge marker */
+.diamond {
+  display: inline-block;
+  height: 0.375rem;
+  width: 0.375rem;
+  rotate: 45deg;
+  background: #C79D4B;
+}
+
+/* Oversized decorative serif glyph (ghost wordmarks, quote marks) */
+.quote-glyph {
+  font-family: var(--font-heading), serif;
+  line-height: 0.6;
+  user-select: none;
+}
+
+/* Ghost outlined cream text for cropped wordmarks */
+.text-outline-cream {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(247, 243, 234, 0.22);
+}
+
 /* Gold rule grows in when revealed */
 .rule-grow {
   transform-origin: left;

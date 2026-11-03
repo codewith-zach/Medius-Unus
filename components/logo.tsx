@@ -6,8 +6,10 @@ import Image from "next/image";
  */
 export function LogoEmblem({
   className = "h-12 w-12",
+  priority = true,
 }: {
   className?: string;
+  priority?: boolean;
 }) {
   return (
     <Image
@@ -16,7 +18,7 @@ export function LogoEmblem({
       width={870}
       height={870}
       className={className}
-      priority
+      priority={priority}
     />
   );
 }
