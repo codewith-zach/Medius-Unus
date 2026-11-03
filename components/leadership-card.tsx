@@ -24,12 +24,6 @@ export function LeadershipCard({
   return (
     <Reveal delay={index * 0.1}>
       <div className="corner-marks group relative flex h-full flex-col rounded border border-sand bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_20px_48px_rgba(12,42,30,0.12)]">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute right-6 top-4 select-none font-heading text-6xl font-semibold leading-none text-outline-navy opacity-60"
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
         <div className="flex items-center gap-6">
           <span className="relative shrink-0">
             <Image
