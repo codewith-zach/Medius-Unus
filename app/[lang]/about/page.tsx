@@ -41,11 +41,7 @@ export default async function AboutPage({ params }: { params: Promise<{ lang: st
               {t.overview.paragraphs.map((para, i) => (
                 <p
                   key={i}
-                  className={`leading-[1.85] ${
-                    i === 0
-                      ? "font-heading text-xl font-light text-navy sm:text-[1.35rem] sm:leading-[1.7]"
-                      : "text-[0.95rem] text-muted-foreground sm:text-base"
-                  }`}
+                  className="text-[0.95rem] leading-[1.85] text-muted-foreground sm:text-base"
                 >
                   {para}
                 </p>
