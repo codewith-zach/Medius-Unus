@@ -14,7 +14,7 @@ import { getContent } from "@/lib/content";
  *
  * Environment variables (see .env.example):
  *   RESEND_API_KEY  — from resend.com/api-keys
- *   ENQUIRY_TO      — destination inbox   (default: info@mediusunus.com)
+ *   ENQUIRY_TO      — destination inbox   (default: contact@mediusunus.com)
  *   ENQUIRY_FROM    — verified sender     (default: Medius Unus Website <enquiries@mediusunus.com>)
  */
 
@@ -257,7 +257,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         error:
-          "Enquiry delivery is not configured yet. Please email info@mediusunus.com directly while we complete setup.",
+          "Enquiry delivery is not configured yet. Please email contact@mediusunus.com directly while we complete setup.",
       },
       { status: 503 },
     );
@@ -265,7 +265,7 @@ export async function POST(req: Request) {
 
   const lang = d.lang ?? "en";
   const e = getContent(lang).email;
-  const to = process.env.ENQUIRY_TO ?? "info@mediusunus.com";
+  const to = process.env.ENQUIRY_TO ?? "contact@mediusunus.com";
   const from = process.env.ENQUIRY_FROM ?? `${e.senderName} <enquiries@mediusunus.com>`;
 
   const logos = await resolveLogos();
