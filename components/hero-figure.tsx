@@ -36,24 +36,24 @@ export function HeroFigure({ caption }: { caption: string }) {
         <span aria-hidden className="absolute -bottom-2 -right-2 h-4 w-4 border-b border-r border-gold" />
       </div>
 
-      {/* caption band — wide, solid ink, gold left rule; rides the photo's
-          lower edge and (lg+) bleeds past its left edge like the reference */}
-      <figcaption className="absolute -bottom-5 left-0 right-6 sm:right-10 lg:-left-8 lg:max-w-[30rem]">
-        <div className="relative bg-ink py-5 pl-7 pr-8">
+      {/* caption plate — floats on the image surface, reference-style:
+          raised above the bottom edge, at the left edge, gold left border,
+          translucent ground + blur, ✦ glyph beside the tracked label */}
+      <figcaption className="absolute bottom-10 left-0 z-[3] max-w-[280px] border-l-2 border-gold bg-ink/95 py-4 pl-5 pr-6 backdrop-blur-sm sm:bottom-12 lg:-left-3">
+        <span className="flex items-center gap-3">
           <span
             aria-hidden
-            className="absolute -bottom-2.5 -left-0 -top-2.5 w-[3px] bg-gold"
-          />
-          <span className="flex items-center gap-3">
-            <span aria-hidden className="diamond h-1.5 w-1.5" />
-            <span className="text-[0.55rem] font-semibold uppercase tracking-[0.32em] text-gold">
-              Medius Unus
-            </span>
+            className="text-[1.45rem] leading-none text-gold"
+          >
+            ✦
           </span>
-          <span className="mt-3 block font-heading text-[0.95rem] font-light italic leading-[1.55] text-cream/90">
-            {caption}
+          <span className="text-[0.55rem] font-semibold uppercase tracking-[0.32em] text-gold">
+            Medius Unus
           </span>
-        </div>
+        </span>
+        <span className="mt-3 block font-heading text-[0.95rem] font-light italic leading-[1.55] text-cream/90">
+          {caption}
+        </span>
       </figcaption>
     </figure>
   );
