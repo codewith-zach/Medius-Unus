@@ -36,9 +36,10 @@ export function HeroFigure({ caption }: { caption: string }) {
         <span aria-hidden className="absolute -bottom-2 -right-2 h-4 w-4 border-b border-r border-gold" />
       </div>
 
-      {/* caption plate — solid ink, gold left rule, generous padding */}
-      <figcaption className="absolute -bottom-6 left-6 sm:left-8">
-        <div className="relative max-w-[17rem] bg-ink py-5 pl-7 pr-8">
+      {/* caption band — wide, solid ink, gold left rule; rides the photo's
+          lower edge and (lg+) bleeds past its left edge like the reference */}
+      <figcaption className="absolute -bottom-5 left-0 right-6 sm:right-10 lg:-left-8 lg:max-w-[30rem]">
+        <div className="relative bg-ink py-5 pl-7 pr-8">
           <span
             aria-hidden
             className="absolute -bottom-2.5 -left-0 -top-2.5 w-[3px] bg-gold"
