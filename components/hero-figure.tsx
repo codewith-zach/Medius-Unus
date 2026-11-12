@@ -39,7 +39,7 @@ export function HeroFigure({ caption }: { caption: string }) {
       {/* caption plate — floats on the image surface, reference-style:
           raised above the bottom edge, at the left edge, gold left border,
           translucent ground + blur, ✦ glyph beside the tracked label */}
-      <figcaption className="absolute bottom-10 left-0 z-[3] max-w-[280px] border-l-2 border-gold bg-ink/95 py-4 pl-5 pr-6 shadow-[0_15px_40px_rgba(0,0,0,0.25)] backdrop-blur-sm sm:bottom-12 sm:-left-4 lg:-bottom-2 lg:-left-6">
+      <figcaption className="absolute bottom-10 left-0 z-[3] max-w-[280px] border-l-2 border-gold bg-navy/95 py-4 pl-5 pr-6 shadow-[0_15px_40px_rgba(0,0,0,0.25)] backdrop-blur-sm sm:-bottom-2 sm:-left-4 lg:-left-6">
         <span className="flex items-center gap-3">
           <span
             aria-hidden
